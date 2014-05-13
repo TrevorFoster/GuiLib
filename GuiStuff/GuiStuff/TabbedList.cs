@@ -1,0 +1,81 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace GameGUI{
+    public enum Orientation {
+        None,
+        Horizontal,
+        Vertical
+    }
+
+    class TabbedList : Control {
+        private Orientation orientation = Orientation.Horizontal;
+        private List<Tab> tabs;
+        private int group;
+
+        public TabbedList(Orientation orientation) : this() {
+            this.orientation = orientation;
+        }
+
+        public TabbedList() {
+            tabs = new List<Tab>();
+            ControlGroups.addGroup(new ControlGroup());
+            group = ControlGroups.groups.Count - 1;
+            moved += listMoved;
+        }
+
+        public override void initialize() {
+            foreach (Tab tab in tabs) {
+                tab.initialize();
+            }
+        }
+
+        public void addTab(Tab newTab) {
+            ControlGroups.groups[group].addControl(newTab);
+            tabs.Add(newTab);
+            changeOrientation();
+        }
+
+        protected override void subUpdate(Point menuLocation) {
+            foreach (Tab tab in tabs) {
+                tab.update(menuLocation);
+            }
+        }
+
+        public override void draw(Point menuLocation) {
+            foreach (Tab tab in tabs) {
+                tab.draw(menuLocation);
+            }
+        }
+
+        public void changeOrientation(Orientation newOri = Orientation.None) {
+            if (newOri != Orientation.None) {
+                orientation = newOri;
+            }
+
+            Point curLoc = new Point(location.X, location.Y);
+            for (int i = 0; i < tabs.Count; i++) {
+                tabs[i].location = new Point(curLoc.X, curLoc.Y);
+                tabs[i].orientation = orientation;
+
+                switch (orientation) {
+                    case Orientation.Horizontal:
+                        curLoc.X += tabs[i].size.Width;
+                        break;
+
+                    case Orientation.Vertical:
+                        curLoc.Y += tabs[i].size.Height;
+                        break;
+                }
+            }
+        }
+
+        private void listMoved(object sender, EventArgs e) {
+            changeOrientation();
+        }
+    }
+}
