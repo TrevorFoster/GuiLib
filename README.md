@@ -1,3 +1,3 @@
 GuiLib
 ======
-A monogame library for in window graphical user interfaces.
+A monogame library for in game window graphical user interfaces.
