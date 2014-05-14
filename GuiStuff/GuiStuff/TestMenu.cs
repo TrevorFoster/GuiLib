@@ -56,7 +56,7 @@ namespace GameGUI {
             controls.Add(list);
 
             TextBox textBox = new TextBox { location = new Point(450, 100) };
-            controls.Add(textBox);
+            //controls.Add(textBox);
 
             button1 = new Button { location = new Point(200, 0), size = { Width = 100, Height = 60 }, text = "Testing" };
             button1.onClick += button1_clicked;

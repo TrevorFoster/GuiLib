@@ -9,7 +9,7 @@ namespace GameGUI {
         public static Dictionary<string, Texture2D> sheets = new Dictionary<string, Texture2D>();
 
         public static void loadContent() {
-            sheets["selection001"] = GUIRoot.content.Load<Texture2D>("selection001");
+            sheets["selection001"] = GUIRoot.content.Load<Texture2D>("selection002");
         }
     }
 }
