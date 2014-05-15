@@ -38,6 +38,7 @@ namespace GameGUI {
 
         public void update() {
             foreach (Control item in controls) {
+
                 item.update(location);
             }
         }

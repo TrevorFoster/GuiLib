@@ -60,6 +60,7 @@ namespace GameGUI{
                 tabs[i].orientation = orientation;
                 tabs[i].moveContents(location);
 
+
                 switch (orientation) {
                     case Orientation.Horizontal:
                         curLoc.X += tabs[i].size.Width;

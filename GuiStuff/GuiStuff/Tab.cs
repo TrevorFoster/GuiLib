@@ -102,6 +102,7 @@ namespace GameGUI {
                 }
                 frameSet.setFrame(1);
 
+
                 eventTrigger(onChange);
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
                 frameSet.setFrame(1);

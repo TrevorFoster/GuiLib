@@ -39,6 +39,7 @@ namespace GameGUI {
             tab.setMenu(test);
             tabList.addTab(tab);
 
+
             tab = new Tab { size = { Width = 100, Height = 40 } };
             tab.text = "Tab3";
             tabList.addTab(tab);
