@@ -9,7 +9,7 @@ namespace GameGUI {
         private RadioButton rbutton;
         private RadioButton rbutton2;
 
-        public TestMenu(string name, Point location, int [] size, bool hidden)
+        public TestMenu(string name, Point location, int[] size, bool hidden)
             : base(name, location, size, hidden) {
             ControlGroups.addGroup(new ControlGroup());
             Tab tab = new Tab();
@@ -18,7 +18,7 @@ namespace GameGUI {
             tab.size.Width = 100;
             tab.size.Height = 40;
             tab.text = "Tab1";
-            Menu test = new Menu("tab 1", new Point(tab.location.X + location.X, tab.location.Y + tab.size.Height + location.Y), 
+            Menu test = new Menu("tab 1", new Point(tab.location.X + location.X, tab.location.Y + tab.size.Height + location.Y),
                 new int[] { 298, 200 }, false);
 
             button1 = new Button();
@@ -30,9 +30,8 @@ namespace GameGUI {
             button1.text = "Testing";
             test.controls.Add(button1);
 
-            TabbedList tabList = new TabbedList(Orientation.Horizontal);
+            TabbedList tabList = new TabbedList(Orientation.Vertical);
 
-            
             tabList.addTab(tab);
 
             tab = new Tab { size = { Width = 100, Height = 40 } };
@@ -95,7 +94,7 @@ namespace GameGUI {
 
             rbutton2 = new RadioButton { location = new Point(200, 200), text = "2nd group" };
             radioGroup2.addControl(rbutton2);
-            
+
             controls.Add(tip);
             controls.Add(rbutton);
             controls.Add(rbutton2);

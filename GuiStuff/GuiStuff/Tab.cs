@@ -71,6 +71,11 @@ namespace GameGUI {
             }
         }
 
+        public void moveContents(Point newPos) {
+            if (tabContents == null) return;
+            tabContents.location = new Point(newPos.X, newPos.Y);
+        }
+
         public void setMenu(Menu newMenu) {
             if (isSelected) {
                 newMenu.show();
@@ -105,7 +110,18 @@ namespace GameGUI {
             }
 
             if (isSelected && tabContents != null) {
-                tabContents.update();
+                Point contentOffs = new Point(menuLocation.X, menuLocation.Y);
+
+                switch (orientation) {
+                    case Orientation.Horizontal:
+                        contentOffs.Y += size.Height;
+                        break;
+
+                    case Orientation.Vertical:
+                        contentOffs.X += size.Width;
+                        break;
+                }
+                tabContents.update(contentOffs);
             }
         }
 
@@ -143,17 +159,18 @@ namespace GameGUI {
                 new Vector2(size.Width / 2 - Game1.font.MeasureString(text).X / 2, size.Height / 2 - Game1.font.MeasureString(text).Y / 2) + drawLoc, Color.Black);
 
             if (tabContents != null) {
-                tabContents.location = new Point((int)drawLoc.X, (int)drawLoc.Y);
-                switch (orientation) {
+                Point contentOffs = new Point(menuLocation.X, menuLocation.Y);
+
+                switch(orientation) {
                     case Orientation.Horizontal:
-                        tabContents.location.Y += size.Height;
+                        contentOffs.Y += size.Height;
                         break;
-                    
+
                     case Orientation.Vertical:
-                        tabContents.location.X += size.Width;
+                        contentOffs.X += size.Width;
                         break;
                 }
-                tabContents.draw();
+                tabContents.draw(contentOffs);
             }
         }
     }

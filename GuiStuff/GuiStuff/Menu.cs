@@ -42,6 +42,23 @@ namespace GameGUI {
             }
         }
 
+        public void update(Point offset) {
+            Point temp = new Point(location.X + offset.X, location.Y + offset.Y);
+
+            foreach (Control item in controls) {
+                item.update(temp);
+            }
+        }
+
+        public void draw(Point offset) {
+            if (hidden) return;
+            Shapes.DrawRectangle(size.Width, size.Height, new Vector2(location.X + offset.X, location.Y + offset.Y), new Color(120, 120, 120, 100), 0);
+            Point temp = new Point(location.X + offset.X, location.Y + offset.Y);
+            foreach (Control item in controls) {
+                item.draw(temp);
+            }
+        }
+
         public void draw() {
             if (hidden) return;
             Shapes.DrawRectangle(size.Width, size.Height, new Vector2(location.X, location.Y), new Color(120, 120, 120, 100), 0);

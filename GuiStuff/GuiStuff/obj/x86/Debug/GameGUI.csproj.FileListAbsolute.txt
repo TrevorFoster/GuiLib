@@ -10,16 +10,3 @@ C:\Users\Trevor\documents\visual studio 2013\Projects\GuiStuff\GuiStuff\bin\Wind
 C:\Users\Trevor\documents\visual studio 2013\Projects\GuiStuff\GuiStuff\obj\x86\Debug\GameGUI.csprojResolveAssemblyReference.cache
 C:\Users\Trevor\documents\visual studio 2013\Projects\GuiStuff\GuiStuff\obj\x86\Debug\GuiStuff.exe
 C:\Users\Trevor\documents\visual studio 2013\Projects\GuiStuff\GuiStuff\obj\x86\Debug\GuiStuff.pdb
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\Content\selection001.png
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\Content\Font.xnb
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\SDL.dll
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\GuiStuff.exe
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\GuiStuff.pdb
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\Lidgren.Network.dll
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\MonoGame.Framework.dll
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\OpenTK.dll
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\Tao.Sdl.dll
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\obj\x86\Debug\GameGUI.csprojResolveAssemblyReference.cache
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\obj\x86\Debug\GuiStuff.exe
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\obj\x86\Debug\GuiStuff.pdb
-C:\Users\Trevor\Documents\Git\GuiLib\GuiStuff\GuiStuff\bin\WindowsGL\Debug\Content\selection002.png

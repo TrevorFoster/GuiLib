@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace GameGUI{
     public enum Orientation {
@@ -61,6 +58,7 @@ namespace GameGUI{
             for (int i = 0; i < tabs.Count; i++) {
                 tabs[i].location = new Point(curLoc.X, curLoc.Y);
                 tabs[i].orientation = orientation;
+                tabs[i].moveContents(location);
 
                 switch (orientation) {
                     case Orientation.Horizontal:
