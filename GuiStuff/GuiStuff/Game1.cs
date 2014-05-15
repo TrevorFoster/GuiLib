@@ -20,12 +20,14 @@ namespace GameGUI {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
+            this.IsMouseVisible = true;
             Content.RootDirectory = "Content";
             main = new TestMenu("test", new Point(20, 20), new int[2] { 600, 500 }, false);
         }
 
         protected override void Initialize() {
             base.Initialize();
+            
             GUIRoot.initialize(GraphicsDevice, Content);
             GUIRoot.menuHandler.addMenu(main);
         }
