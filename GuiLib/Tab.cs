@@ -156,8 +156,8 @@ namespace GuiLib {
             //GUI.spriteBatch.Draw(bottomLeft.currentFrame(), new Vector2(buttonRect.Left, buttonRect.Bottom - bottomLeft.frameHeight), Color.White);
             //GUI.spriteBatch.Draw(bottomRight.currentFrame(), new Vector2(buttonRect.Right - bottomRight.frameWidth, buttonRect.Bottom - bottomRight.frameHeight), Color.White);
 
-            GUIRoot.spriteBatch.DrawString(Game1.font, text,
-                new Vector2(size.Width / 2 - Game1.font.MeasureString(text).X / 2, size.Height / 2 - Game1.font.MeasureString(text).Y / 2) + drawLoc, Color.Black);
+            GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text,
+                new Vector2(size.Width / 2 - GUIResources.fonts["font"].MeasureString(text).X / 2, size.Height / 2 - GUIResources.fonts["font"].MeasureString(text).Y / 2) + drawLoc, Color.Black);
 
             if (tabContents != null) {
                 Point contentOffs = new Point(menuLocation.X, menuLocation.Y);

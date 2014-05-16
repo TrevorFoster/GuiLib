@@ -54,7 +54,7 @@ namespace GuiLib {
         public override void draw(Point menuLocation) {
             Shapes.DrawRectangle(size.Width, size.Height, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.White, 0);
             if (text != null) {
-                GUIRoot.spriteBatch.DrawString(Game1.font, text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
+                GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
             }
         }
     }

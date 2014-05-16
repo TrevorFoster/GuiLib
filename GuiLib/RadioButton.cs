@@ -26,7 +26,7 @@ namespace GuiLib {
 
         protected override void subUpdate(Point menuLocation) {
             Rectangle buttonRect = new Rectangle(location.X + menuLocation.X, location.Y + menuLocation.Y, controlSize.Width, controlSize.Height);
-            textSize = new Size((int)Game1.font.MeasureString(text).X, (int)Game1.font.MeasureString(text).Y);
+            textSize = new Size((int)GUIResources.fonts["font"].MeasureString(text).X, (int)GUIResources.fonts["font"].MeasureString(text).Y);
             size = new Size(textSize.Width + controlSize.Width, controlSize.Height);
 
             if (InputHandler.leftClickRelease()
@@ -54,7 +54,7 @@ namespace GuiLib {
             Vector2 drawLoc = new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y);
             GUIRoot.spriteBatch.Draw(buttonStates.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
                 new Vector2((float)controlSize.Width / (float)buttonStates.frameWidth, (float)controlSize.Height / (float)buttonStates.frameHeight), SpriteEffects.None, 0);
-            GUIRoot.spriteBatch.DrawString(Game1.font, text,
+            GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text,
                 new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc,
                 Color.Black);
         }

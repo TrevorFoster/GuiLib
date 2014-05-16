@@ -16,6 +16,7 @@ namespace GuiLib {
             Shapes.LoadContent();
 
             menuHandler = new MenuHandler();
+            GUIResources.loadFont("font");
         }
 
         public static void update() {

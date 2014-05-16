@@ -23,7 +23,8 @@ namespace GuiLib {
 
         protected override void subUpdate(Point menuLocation) {
             Rectangle buttonRect = new Rectangle(location.X + menuLocation.X, location.Y + menuLocation.Y, size.Width, size.Height);
-            textSize = new Size((int)Game1.font.MeasureString(text).X, (int)Game1.font.MeasureString(text).Y);
+            Vector2 measure = GUIResources.fonts["font"].MeasureString(text);
+            textSize = new Size((int)measure.X, (int)measure.Y);
             size = new Size(textSize.Width + controlSize.Width, controlSize.Height);
 
             if (InputHandler.leftClickRelease()
@@ -54,7 +55,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.Draw(boxStates.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
                 new Vector2(controlSize.Width / (float)boxStates.frameWidth, controlSize.Height / (float)boxStates.frameHeight), SpriteEffects.None, 0);
             // draw the text for the check box
-            GUIRoot.spriteBatch.DrawString(Game1.font, text,
+            GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text,
                 new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc, Color.Black);
         }
     }
