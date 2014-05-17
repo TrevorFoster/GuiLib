@@ -15,9 +15,7 @@ namespace GuiLib {
         private Size itemBoxSize;
         private Size buttonSize;
 
-        private Animation left;
-        private Animation right;
-        private Animation middle;
+        private Animation left, right, middle;
 
         private Animation buttonStates;
 
@@ -47,22 +45,22 @@ namespace GuiLib {
             buttonStates.loadSheet(GUIResources.sheets["selection001"], new Rectangle(103, 2, 48, 48));
         }
 
-        protected override void subUpdate(Point menuLocation)
+        protected override void subUpdate(Vector2 menuLocation)
         {
             if (!InputHandler.leftClickRelease()) return;
 
             if (!isDropOpen) {
-                Rectangle buttonRect = new Rectangle(location.X + menuLocation.X + itemBoxSize.Width, location.Y + menuLocation.Y, buttonSize.Width, buttonSize.Height);
+                Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X + itemBoxSize.Width), (int)(location.Y + menuLocation.Y), buttonSize.Width, buttonSize.Height);
                 if (buttonRect.Contains(InputHandler.initialClick) && buttonRect.Contains(InputHandler.releaseClick)) {
                     isDropOpen = true;
                     eventTrigger(dropOpen);
                 }
             } else {
-                Point startLoc = new Point(location.X + menuLocation.X, location.Y + menuLocation.Y);
-                Rectangle itemBox = new Rectangle(startLoc.X, startLoc.Y, itemBoxSize.Width, itemBoxSize.Height);
+                Vector2 startLoc = new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y);
+                Rectangle itemBox = new Rectangle((int)(startLoc.X), (int)(startLoc.Y), itemBoxSize.Width, itemBoxSize.Height);
 
                 for (int i = 0; i < items.Count; i++) {
-                    itemBox.Y = startLoc.Y + (i + 1) * itemBoxSize.Height;
+                    itemBox.Y = (int)(startLoc.Y + (i + 1) * itemBoxSize.Height);
 
                     if (itemBox.Contains(InputHandler.initialClick) && itemBox.Contains(InputHandler.releaseClick)) {
                         selectedIndex = i;
@@ -76,7 +74,7 @@ namespace GuiLib {
             }
         }
 
-        public override void draw(Point menuLocation) {
+        public override void draw(Vector2 menuLocation) {
             Vector2 drawloc = new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y);
 
             GUIRoot.spriteBatch.Draw(left.currentFrame(), drawloc, null, Color.White, 0f, Vector2.Zero,
@@ -86,7 +84,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.Draw(right.currentFrame(), drawloc + new Vector2(itemBoxSize.Width - right.frameWidth, 0), null, Color.White, 0f, Vector2.Zero,
                 new Vector2(1f, (float)itemBoxSize.Height / right.frameHeight), SpriteEffects.None, 0);
 
-            GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text, drawloc + new Vector2(left.frameWidth, 0), Color.Black);
+            GUIRoot.spriteBatch.DrawString(Game1.font, text, drawloc + new Vector2(left.frameWidth, 0), Color.Black);
             GUIRoot.spriteBatch.Draw(buttonStates.currentFrame(), drawloc + new Vector2(itemBoxSize.Width, 0), null, Color.White, 0f, Vector2.Zero,
                 new Vector2((float)buttonSize.Width / buttonStates.frameWidth, (float)buttonSize.Height / buttonStates.frameHeight), SpriteEffects.None, 0);
 
@@ -99,7 +97,7 @@ namespace GuiLib {
                     new Vector2((float)(itemBoxSize.Width - right.frameWidth) / middle.frameWidth, (float)itemBoxSize.Height / middle.frameHeight), SpriteEffects.None, 0);
                 GUIRoot.spriteBatch.Draw(right.currentFrame(), drawloc + new Vector2(itemBoxSize.Width - right.frameWidth, (i + 1) * itemBoxSize.Height), null, Color.White, 0f, Vector2.Zero,
                     new Vector2(1f, (float)itemBoxSize.Height / right.frameHeight), SpriteEffects.None, 0);
-                GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], items[i], drawloc + new Vector2(left.frameWidth, (i + 1) * itemBoxSize.Height), Color.Black);
+                GUIRoot.spriteBatch.DrawString(Game1.font, items[i], drawloc + new Vector2(left.frameWidth, (i + 1) * itemBoxSize.Height), Color.Black);
 
             }
         }

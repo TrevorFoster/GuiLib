@@ -18,7 +18,7 @@ namespace GuiLib {
             hoverTime = 500;
         }
 
-        protected override void subUpdate(Point menuLocation) {
+        protected override void subUpdate(Vector2 menuLocation) {
             if (hovering && !drawTip) {
                 if (timeHovered >= hoverTime) {
                     tipLocation = new Vector2(InputHandler.mouseState.X, InputHandler.mouseState.Y + 20);
@@ -41,13 +41,13 @@ namespace GuiLib {
             timeHovered = 0;
         }
 
-        public override void draw(Point menuLocation) {
+        public override void draw(Vector2 menuLocation) {
             // Make sure the tooltip should be drawn
             if (!drawTip) return;
 
-            Shapes.DrawRectangle(GUIResources.fonts["font"].MeasureString(text).X, GUIResources.fonts["font"].MeasureString(text).Y, tipLocation,
+            Shapes.DrawRectangle(Game1.font.MeasureString(text).X, Game1.font.MeasureString(text).Y, tipLocation,
                 new Color(100, 100, 100, 100), 0);
-            GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text, tipLocation, Color.Black);
+            GUIRoot.spriteBatch.DrawString(Game1.font, text, tipLocation, Color.Black);
         }
     }
 }

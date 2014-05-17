@@ -13,8 +13,8 @@ namespace GuiLib {
             size = new Size(150, 30);
         }
 
-        protected override void subUpdate(Point menuLocation) {
-            Rectangle boxRect = new Rectangle(location.X + menuLocation.X, location.Y + menuLocation.Y, size.Width, size.Height);
+        protected override void subUpdate(Vector2 menuLocation) {
+            Rectangle boxRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
             //controlSize = new Size(boxStates.frameWidth, boxStates.frameHeight);
             if (InputHandler.leftClickRelease()) {
                 if (boxRect.Contains(InputHandler.mouseRect)) {
@@ -51,10 +51,11 @@ namespace GuiLib {
             }
         }
 
-        public override void draw(Point menuLocation) {
+        public override void draw(Vector2 menuLocation) {
+
             Shapes.DrawRectangle(size.Width, size.Height, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.White, 0);
             if (text != null) {
-                GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
+                GUIRoot.spriteBatch.DrawString(Game1.font, text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
             }
         }
     }

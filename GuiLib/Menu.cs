@@ -5,14 +5,14 @@ namespace GuiLib {
     class Menu {
         public List<Control> controls = new List<Control>();
 
-        public Point location;
+        public Vector2 location;
         public Size size;
 
         public string title;
         private bool hidden;
         public bool initialized;
 
-        public Menu(string title, Point location, int [] size, bool hidden) {
+        public Menu(string title, Vector2 location, int [] size, bool hidden) {
             this.title = title;
 
             this.location = location;
@@ -29,7 +29,12 @@ namespace GuiLib {
             hidden = true;
         }
 
+        public virtual void setLayout() {
+
+        }
+
         public void intialize() {
+            setLayout();
             foreach (Control item in controls) {
                 item.initialize();
             }
@@ -38,23 +43,22 @@ namespace GuiLib {
 
         public void update() {
             foreach (Control item in controls) {
-
                 item.update(location);
             }
         }
 
-        public void update(Point offset) {
-            Point temp = new Point(location.X + offset.X, location.Y + offset.Y);
+        public void update(Vector2 offset) {
+            Vector2 totOffs = location + offset;
 
             foreach (Control item in controls) {
-                item.update(temp);
+                item.update(totOffs);
             }
         }
 
-        public void draw(Point offset) {
+        public void draw(Vector2 offset) {
             if (hidden) return;
             Shapes.DrawRectangle(size.Width, size.Height, new Vector2(location.X + offset.X, location.Y + offset.Y), new Color(120, 120, 120, 100), 0);
-            Point temp = new Point(location.X + offset.X, location.Y + offset.Y);
+            Vector2 temp = new Vector2(location.X + offset.X, location.Y + offset.Y);
             foreach (Control item in controls) {
                 item.draw(temp);
             }

@@ -21,9 +21,10 @@ namespace GuiLib {
         public Orientation orientation = Orientation.Horizontal;
         public bool isSelected = false;
 
-        public Tab() {
+        public Tab() : base() {
+            resized += resize;
             text = "";
-            size = new Size(60, 30);
+            controlSize = new Size(60, 30);
 
             frameSet = new AnimationSet();
             middle = new Animation(new int[] { 2, 1 });
@@ -37,17 +38,6 @@ namespace GuiLib {
             right = new Animation(new int[] { 2, 1 });
             bottom = new Animation(new int[] { 2, 1 });
             top = new Animation(new int[] { 2, 1 });
-
-            frameSet.animations.AddRange(new List<Animation> { 
-                middle, 
-                topLeft, 
-                topRight, 
-                bottomLeft, 
-                bottomRight, 
-                left, 
-                right, 
-                bottom, 
-                top });
         }
 
         public override void initialize() {
@@ -71,9 +61,13 @@ namespace GuiLib {
             }
         }
 
-        public void moveContents(Point newPos) {
+        private void resize(object sender, EventArgs e){
+            size = new Size(controlSize.Width, controlSize.Height);
+        }
+
+        public void moveContents(Vector2 newPos) {
             if (tabContents == null) return;
-            tabContents.location = new Point(newPos.X, newPos.Y);
+            tabContents.location = new Vector2(newPos.X, newPos.Y);
         }
 
         public void setMenu(Menu newMenu) {
@@ -85,8 +79,8 @@ namespace GuiLib {
             tabContents = newMenu;   
         }
 
-        protected override void subUpdate(Point menuLocation) {
-            buttonRect = new Rectangle(location.X + menuLocation.X, location.Y + menuLocation.Y, size.Width, size.Height);
+        protected override void subUpdate(Vector2 menuLocation) {
+            buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
 
             if (InputHandler.leftClickRelease()
                 && buttonRect.Contains(InputHandler.initialClick)
@@ -100,18 +94,18 @@ namespace GuiLib {
                 if (groupIndex != -1) {
                     ControlGroups.groups[groupIndex].changeSelected(this);
                 }
-                frameSet.setFrame(1);
+                frameSet.setFrames(1);
 
 
                 eventTrigger(onChange);
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
-                frameSet.setFrame(1);
+                frameSet.setFrames(1);
             } else if (!isSelected) {
-                frameSet.setFrame(0);
+                frameSet.setFrames(0);
             }
 
             if (isSelected && tabContents != null) {
-                Point contentOffs = new Point(menuLocation.X, menuLocation.Y);
+                Vector2 contentOffs = new Vector2(menuLocation.X, menuLocation.Y);
 
                 switch (orientation) {
                     case Orientation.Horizontal:
@@ -132,12 +126,12 @@ namespace GuiLib {
             isSelected = false;
             if (tabContents != null) tabContents.hide();
 
-            frameSet.setFrame(0);
+            frameSet.setFrames(0);
             eventTrigger(onChange);
         }
 
-        public override void draw(Point menuLocation) {
-            Vector2 drawLoc = new Vector2(location.X, location.Y) + new Vector2(menuLocation.X, menuLocation.Y);
+        public override void draw(Vector2 menuLocation) {
+            Vector2 drawLoc = location + menuLocation;
 
             GUIRoot.spriteBatch.Draw(middle.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
                 new Vector2((float)size.Width / (float)middle.frameWidth, (float)size.Height / (float)middle.frameHeight), SpriteEffects.None, 0);
@@ -152,15 +146,15 @@ namespace GuiLib {
               //  new Vector2((float)size.Width / ((float)bottom.frameWidth), 1f), SpriteEffects.None, 0);
 
             GUIRoot.spriteBatch.Draw(topLeft.currentFrame(), drawLoc, Color.White);
-            GUIRoot.spriteBatch.Draw(topRight.currentFrame(), new Vector2(buttonRect.Right - topRight.frameWidth, buttonRect.Top), Color.White);
+            GUIRoot.spriteBatch.Draw(topRight.currentFrame(), new Vector2(drawLoc.X + size.Width - topRight.frameWidth, drawLoc.Y), Color.White);
             //GUI.spriteBatch.Draw(bottomLeft.currentFrame(), new Vector2(buttonRect.Left, buttonRect.Bottom - bottomLeft.frameHeight), Color.White);
             //GUI.spriteBatch.Draw(bottomRight.currentFrame(), new Vector2(buttonRect.Right - bottomRight.frameWidth, buttonRect.Bottom - bottomRight.frameHeight), Color.White);
 
-            GUIRoot.spriteBatch.DrawString(GUIResources.fonts["font"], text,
-                new Vector2(size.Width / 2 - GUIResources.fonts["font"].MeasureString(text).X / 2, size.Height / 2 - GUIResources.fonts["font"].MeasureString(text).Y / 2) + drawLoc, Color.Black);
+            GUIRoot.spriteBatch.DrawString(Game1.font, text,
+                new Vector2(size.Width / 2 - Game1.font.MeasureString(text).X / 2, size.Height / 2 - Game1.font.MeasureString(text).Y / 2) + drawLoc, Color.Black);
 
             if (tabContents != null) {
-                Point contentOffs = new Point(menuLocation.X, menuLocation.Y);
+                Vector2 contentOffs = new Vector2(menuLocation.X, menuLocation.Y);
 
                 switch(orientation) {
                     case Orientation.Horizontal:

@@ -1,23 +1,42 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using System.ComponentModel;
 
 namespace GuiLib {
 
     class Control {
-        public Point location { 
-            get { 
-                return Location; 
-            }
+        private Vector2 Location;
+
+        public Vector2 location {
+            get { return Location; }
             set { 
                 Location = value;
                 eventTrigger(moved); 
             } 
         }
-        protected Point Location;
+        
         public Size size;
-        protected Size textSize;
-        protected Size controlSize;
-        public string text;
+        public Size textSize;
+
+        private Size ControlSize;
+        public Size controlSize {
+            get { return ControlSize; }
+            set {
+                ControlSize = value;
+                eventTrigger(resized);
+            }
+        }
+
+        private string Text;
+        public string text {
+            get { return Text; }
+            set { 
+                Text = value;
+                if (Text != null && Game1.font != null) {
+                    textSize = new Size((int)Game1.font.MeasureString(Text).X, (int)Game1.font.MeasureString(Text).Y);
+                }
+            }
+        }
         
         public int groupIndex = -1;
 
@@ -28,18 +47,27 @@ namespace GuiLib {
         public event EventHandler mouseOff = null;
 
         protected event EventHandler moved = null;
+        public event EventHandler resized = null;
 
         public virtual void initialize() { }
-        protected virtual void subUpdate(Point menuLocation) { }
-        public virtual void draw(Point menuLocation) { }
+        protected virtual void subUpdate(Vector2 menuLocation) { }
+        public virtual void draw(Vector2 menuLocation) { }
         public virtual void deselect() { }
 
         public Control() {
+            text = "";
             size = new Size();
-            location = new Point();
+            controlSize = new Size();
+            textSize = new Size();
+            location = new Vector2();
+            controlSize.sizeChanged += resizeDispatcher;
         }
 
-        public void update(Point menuLocation) {
+        private void resizeDispatcher(object sender, PropertyChangedEventArgs e) {
+            eventTrigger(resized);
+        }
+
+        public void update(Vector2 menuLocation) {
             if (mouseOver != null) {
                 checkMouseOver(menuLocation);
                 checkMouseOff(menuLocation);
@@ -47,19 +75,19 @@ namespace GuiLib {
             subUpdate(menuLocation);
         }
 
-        private void checkMouseOver(Point menuLocation) {
+        private void checkMouseOver(Vector2 menuLocation) {
             if (mouseOnLast) return;
 
-            if (new Rectangle(location.X + menuLocation.X, location.Y + menuLocation.Y, size.Width, size.Height).Contains(InputHandler.mouseRect)) {
+            if (new Rectangle((int)(location.X + menuLocation.X),(int)(location.Y + menuLocation.Y), size.Width, size.Height).Contains(InputHandler.mouseRect)) {
                 eventTrigger(mouseOver);
                 mouseOnLast = true;
             }
         }
 
-        private void checkMouseOff(Point menuLocation) {
+        private void checkMouseOff(Vector2 menuLocation) {
             if (!mouseOnLast) return;
 
-            if (!(new Rectangle(location.X + menuLocation.X, location.Y + menuLocation.Y, size.Width, size.Height).Contains(InputHandler.mouseRect))) {
+            if (!(new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height).Contains(InputHandler.mouseRect))) {
                 eventTrigger(mouseOff);
                 mouseOnLast = false;
             }

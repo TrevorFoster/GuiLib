@@ -1,18 +1,40 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace GuiLib {
     class Animation {
-        public int frame = 0;
-        private readonly int totalFrames;
         public int frameWidth, frameHeight;
         private readonly Size dimensions;
-        public List<Texture2D> frames = new List<Texture2D>();
+
+        public List<Texture2D> frames;
+        public int frame = 0;
+
+        public Vector2 offset;
+        private Vector2 scale;
+
+        private float deltaTime;
+        public float interval;
 
         public Animation(int[] size) {
+            frames = new List<Texture2D>();
             dimensions = new Size(size[0], size[1]);
-            totalFrames = dimensions.Width * dimensions.Height;
+
+            offset = Vector2.Zero;
+            scale = Vector2.One;
+        }
+
+        public Animation(int[] size, Vector2 offset) {
+            frames = new List<Texture2D>();
+            dimensions = new Size(size[0], size[1]);
+
+            this.offset = offset;
+            scale = Vector2.One;
+        }
+
+        public void updateScale(Vector2 newSize) {
+            scale = new Vector2(newSize.X / ((frameWidth == 0) ? 1 : frameWidth), newSize.Y / ((frameHeight == 0) ? 1 : frameHeight));
         }
 
         public Texture2D currentFrame() {
@@ -20,10 +42,31 @@ namespace GuiLib {
         }
 
         public Texture2D getFrame(int frameIndex) {
-            if (frameIndex < totalFrames - 1 && frameIndex >= 0) {
+            if (frameIndex < frames.Count - 1 && frameIndex >= 0) {
                 return frames[frameIndex];
             }
             return null;
+        }
+
+        public void update() {
+            if (deltaTime < interval) {
+                deltaTime += Game1.time.ElapsedGameTime.Milliseconds / 1000f;
+            } else {
+                nextFrame();
+                deltaTime = 0;
+            }
+        }
+
+        private void nextFrame() {
+            if (frame < frames.Count) {
+                frame++;
+            } else {
+                frame = 0;
+            }
+        }
+
+        public void draw(Vector2 origin) {
+            GUIRoot.spriteBatch.Draw(currentFrame(), origin + offset, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
         }
 
         public void loadSheet(Texture2D texture, Rectangle source) {

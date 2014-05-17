@@ -22,11 +22,11 @@ namespace GuiLib {
             blankTexture.SetData(new[] { Color.White });
         }
 
-        public static void DrawLineSegment(this SpriteBatch spriteBatch, Vector2 point1, Vector2 point2, Color color, float lineWidth) {
-            float angle = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
-            float length = Vector2.Distance(point1, point2);
+        public static void DrawLineSegment(this SpriteBatch spriteBatch, Vector2 Vector21, Vector2 Vector22, Color color, float lineWidth) {
+            float angle = (float)Math.Atan2(Vector22.Y - Vector21.Y, Vector22.X - Vector21.X);
+            float length = Vector2.Distance(Vector21, Vector22);
 
-            spriteBatch.Draw(blankTexture, point1, null, color, angle, Vector2.Zero, new Vector2(length, lineWidth), SpriteEffects.None, 0);
+            spriteBatch.Draw(blankTexture, Vector21, null, color, angle, Vector2.Zero, new Vector2(length, lineWidth), SpriteEffects.None, 0);
         }
 
         public static void DrawPolygon(List<Vector2> vertex, Color color, float lineWidth) {

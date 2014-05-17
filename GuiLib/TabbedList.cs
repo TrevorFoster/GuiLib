@@ -37,13 +37,13 @@ namespace GuiLib{
             changeOrientation();
         }
 
-        protected override void subUpdate(Point menuLocation) {
+        protected override void subUpdate(Vector2 menuLocation) {
             foreach (Tab tab in tabs) {
                 tab.update(menuLocation);
             }
         }
 
-        public override void draw(Point menuLocation) {
+        public override void draw(Vector2 menuLocation) {
             foreach (Tab tab in tabs) {
                 tab.draw(menuLocation);
             }
@@ -54,9 +54,9 @@ namespace GuiLib{
                 orientation = newOri;
             }
 
-            Point curLoc = new Point(location.X, location.Y);
+            Vector2 curLoc = new Vector2(location.X, location.Y);
             for (int i = 0; i < tabs.Count; i++) {
-                tabs[i].location = new Point(curLoc.X, curLoc.Y);
+                tabs[i].location = new Vector2(curLoc.X, curLoc.Y);
                 tabs[i].orientation = orientation;
                 tabs[i].moveContents(location);
 

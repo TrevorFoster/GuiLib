@@ -13,6 +13,7 @@ namespace GuiLib {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
         TestMenu main;
+        public static SpriteFont font;
         public static GameTime time;
 
         public Game1() {
@@ -22,7 +23,7 @@ namespace GuiLib {
             this.IsMouseVisible = true;
             
             Content.RootDirectory = "Content";
-            main = new TestMenu("test", new Point(20, 20), new int[2] { 600, 500 }, false);
+            main = new TestMenu("test", new Vector2(20, 20), new int[2] { 600, 500 }, false);
         }
 
         protected override void Initialize() {
@@ -33,7 +34,7 @@ namespace GuiLib {
         }
 
         protected override void LoadContent() {
-
+            font = Content.Load<SpriteFont>("Font");
         }
 
         protected override void UnloadContent() {

@@ -1,18 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace GuiLib {
     class Size {
-        public int Width;
-        public int Height;
+
+        private int width;
+        public int Width { 
+            get { return width; } 
+            set {
+                width = value;
+                onPropertyChange("Width");
+            } 
+        }
+
+        private int height;
+        public int Height { 
+            get { return height; } 
+            set { 
+                height = value;
+                onPropertyChange("Height");
+            } 
+        }
+        
+        public event PropertyChangedEventHandler sizeChanged;
 
         public Size() : this(0, 0) { }
 
         public Size(int width, int height) {
             Width = width;
             Height = height;
+        }
+
+        protected virtual void onPropertyChange(string propertyName) {
+            PropertyChangedEventHandler handler = sizeChanged;
+            if (handler != null) {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         // arithmetic operators
