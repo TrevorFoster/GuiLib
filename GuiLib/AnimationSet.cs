@@ -12,6 +12,7 @@ namespace GuiLib {
 
         public AnimationSet() {
             animations = new List<Animation>();
+            origin = Vector2.Zero;
         }
 
         public void update() {

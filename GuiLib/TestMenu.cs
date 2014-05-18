@@ -18,7 +18,6 @@ namespace GuiLib {
         }
 
         public override void setLayout(){
-            ControlGroups.addGroup(new ControlGroup());
             Tab tab = new Tab();
             tab.location = new Vector2(420, 200);
             tab.size.Width = 100;
@@ -81,9 +80,6 @@ namespace GuiLib {
             controls.Add(check2);
             ControlGroup radioGroup1 = new ControlGroup();
             ControlGroup radioGroup2 = new ControlGroup();
-
-            ControlGroups.addGroup(radioGroup1);
-            ControlGroups.addGroup(radioGroup2);
 
             rbutton = new RadioButton { location = new Vector2(50, 150), text = "1st group" };
             radioGroup1.addControl(rbutton);

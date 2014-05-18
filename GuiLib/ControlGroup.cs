@@ -1,32 +1,26 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
 
 namespace GuiLib {
     class ControlGroup {
-        public int selfIndex;
-        private int selected;
-        private List<Control> groupControls = new List<Control>();
+        private Control selected = null;
 
-        public void addControl(Control control) {
-            if (control == null)
-                return;
-            control.groupIndex = selfIndex;
-            groupControls.Add(control);
+        public void addControl(Control toAdd) {
+            if (toAdd == null) return;
+
+            toAdd.selectedChange += changeSelected;
         }
 
-        public void changeSelected(Control newSelected) {
-            int lastSelected = selected;
-            int i = 0;
+        private void changeSelected(object newSelected, EventArgs e) {
 
-            foreach (Control current in groupControls) {
-                if (current.Equals(newSelected)) {
-                    selected = i;
-                    break;
-                }
-                i++;
-            }
-            if (lastSelected != -1 && lastSelected != selected) {
-                groupControls[lastSelected].deselect();
+            if (newSelected == null || !(newSelected is Control)) return;
+
+            Control control = (Control)newSelected;
+            if (selected == null) {
+                selected = control;
+            } else if (!selected.Equals(control)) {
+                selected.deselect();
+                selected = control;
             }
         }
     }

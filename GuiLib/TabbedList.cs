@@ -12,7 +12,7 @@ namespace GuiLib{
     class TabbedList : Control {
         private Orientation orientation = Orientation.Horizontal;
         private List<Tab> tabs;
-        private int group;
+        private ControlGroup tabGroup;
 
         public TabbedList(Orientation orientation) : this() {
             this.orientation = orientation;
@@ -20,8 +20,7 @@ namespace GuiLib{
 
         public TabbedList() {
             tabs = new List<Tab>();
-            ControlGroups.addGroup(new ControlGroup());
-            group = ControlGroups.groups.Count - 1;
+            tabGroup = new ControlGroup();
             moved += listMoved;
         }
 
@@ -32,7 +31,7 @@ namespace GuiLib{
         }
 
         public void addTab(Tab newTab) {
-            ControlGroups.groups[group].addControl(newTab);
+            tabGroup.addControl(newTab);
             tabs.Add(newTab);
             changeOrientation();
         }

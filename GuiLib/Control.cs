@@ -37,8 +37,8 @@ namespace GuiLib {
                 }
             }
         }
-        
-        public int groupIndex = -1;
+
+        public event EventHandler selectedChange = null;
 
         private bool mouseOnLast;
 
@@ -73,6 +73,10 @@ namespace GuiLib {
                 checkMouseOff(menuLocation);
             }
             subUpdate(menuLocation);
+        }
+
+        protected void selectedHasChanged() {
+            eventTrigger(selectedChange);
         }
 
         private void checkMouseOver(Vector2 menuLocation) {

@@ -33,9 +33,7 @@ namespace GuiLib {
 
                 isSelected = true;
                 buttonStates.frame = 1;
-                if (groupIndex != -1) {
-                    ControlGroups.groups[groupIndex].changeSelected(this);
-                }
+                selectedHasChanged();
                 eventTrigger(onChange);
             }
         }

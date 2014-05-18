@@ -91,9 +91,7 @@ namespace GuiLib {
                     tabContents.show();
                 }
 
-                if (groupIndex != -1) {
-                    ControlGroups.groups[groupIndex].changeSelected(this);
-                }
+                selectedHasChanged();
                 frameSet.setFrames(1);
 
 

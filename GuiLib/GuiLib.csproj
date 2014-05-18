@@ -41,7 +41,6 @@
     <Compile Include="CheckBox.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ControlGroup.cs" />
-    <Compile Include="ControlGroups.cs" />
     <Compile Include="DropDown.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GUIResources.cs" />
