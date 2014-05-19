@@ -23,10 +23,15 @@ namespace GuiLib {
             }
         }
 
-        public void render() {
+        public void render(bool startBatch) {
             int newWidth = 0, newHeight = 0;
-            Console.WriteLine("hi");
+            bool needsRender = false;
+
             foreach (Animation anim in animations) {
+                if (anim.needsRender()) {
+                    needsRender = true;
+                }
+
                 int right = (int)(anim.offset.X + anim.frameWidth);
                 int bottom = (int)(anim.offset.Y + anim.frameHeight);
 
@@ -42,12 +47,17 @@ namespace GuiLib {
                 rendered = new RenderTarget2D(GUIRoot.graphicsDevice, newWidth, newHeight);
                 renderedWidth = newWidth;
                 renderedHeight = newHeight;
+                needsRender = true;
             }
-            GUIRoot.graphicsDevice.SetRenderTarget(rendered);
+            if (!needsRender) return;
 
-            GUIRoot.spriteBatch.Begin();
+            GUIRoot.graphicsDevice.SetRenderTarget(rendered);
+            GUIRoot.graphicsDevice.Clear(Color.Transparent);
+            if(startBatch)
+                GUIRoot.spriteBatch.Begin();
             draw(Vector2.Zero);
-            GUIRoot.spriteBatch.End();
+            if(startBatch)
+                GUIRoot.spriteBatch.End();
 
             GUIRoot.graphicsDevice.SetRenderTarget(null);
         }

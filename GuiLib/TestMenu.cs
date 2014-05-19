@@ -44,7 +44,6 @@ namespace GuiLib {
             tab.setMenu(test);
             tabList.addTab(tab);
 
-
             tab = new Tab { size = { Width = 120, Height = 30 } };
             tab.text = "Tab3";
             tabList.addTab(tab);

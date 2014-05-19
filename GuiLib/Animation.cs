@@ -10,10 +10,12 @@ namespace GuiLib {
 
         public List<Texture2D> frames;
         public int frame = 0;
+        private int lastFrame = -1;
 
         public Vector2 offset;
         private Vector2 scale;
 
+        public bool automated = false;
         private float deltaTime;
         public float interval;
 
@@ -48,7 +50,14 @@ namespace GuiLib {
             return null;
         }
 
+        public bool needsRender() {
+            return frame != lastFrame;
+        }
+
         public void update() {
+            lastFrame = frame;
+            if (!automated) return;
+
             if (deltaTime < interval) {
                 deltaTime += Game1.time.ElapsedGameTime.Milliseconds / 1000f;
             } else {

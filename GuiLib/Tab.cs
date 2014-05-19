@@ -28,30 +28,30 @@ namespace GuiLib {
             controlSize = new Size(60, 30);
 
             frameSet = new AnimationSet();
-            middle = new Animation(1, 1);
+            middle = new Animation(2, 1);
 
-            topLeft = new Animation(1, 1);
-            topRight = new Animation(1, 1);
+            topLeft = new Animation(2, 1);
+            topRight = new Animation(2, 1);
 
-            left = new Animation(1, 1);
-            right = new Animation(1, 1);
-            top = new Animation(1, 1);
+            left = new Animation(2, 1);
+            right = new Animation(2, 1);
+            top = new Animation(2, 1);
 
             frameSet.animations.AddRange(new List<Animation> { middle, topLeft, topRight, left, right, top });
         }
 
         public override void initialize() {
             //loading the middle portion sprites
-            middle.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 181, 48, 48));
+            middle.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 181, 96, 48));
 
             // loading corner sprites
-            topLeft.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 102, 8, 8));
-            topRight.loadSheet(GUIResources.sheets["selection001"], new Rectangle(165, 102, 8, 8));
+            topLeft.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 102, 16, 8));
+            topRight.loadSheet(GUIResources.sheets["selection001"], new Rectangle(177, 102, 16, 8));
 
             // loading edge sprites
-            left.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 132, 8, 48));
-            right.loadSheet(GUIResources.sheets["selection001"], new Rectangle(165, 132, 16, 48));
-            top.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 112, 48, 8));
+            left.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 132, 16, 48));
+            right.loadSheet(GUIResources.sheets["selection001"], new Rectangle(173, 132, 32, 48));
+            top.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 112, 96, 8));
 
             if (tabContents != null) {
                 tabContents.intialize();
@@ -95,9 +95,7 @@ namespace GuiLib {
         protected override void subUpdate(Vector2 menuLocation) {
             buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
 
-            if (InputHandler.leftClickRelease()
-                && buttonRect.Contains(InputHandler.initialClick)
-                && buttonRect.Contains(InputHandler.releaseClick)) {
+            if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.initialClick)) {
 
                 isSelected = true;
                 if (tabContents != null) {
@@ -105,13 +103,15 @@ namespace GuiLib {
                 }
 
                 selectedHasChanged();
-                frameSet.setFrames(1);
+                frameSet.setFrames(0);
+                frameSet.render(true);
                 eventTrigger(onChange);
 
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
-                frameSet.setFrames(1);
-            } else if (!isSelected) {
                 frameSet.setFrames(0);
+            } else if (!isSelected) {
+                frameSet.setFrames(1);
+                
             }
 
             if (isSelected && tabContents != null) {
@@ -136,31 +136,17 @@ namespace GuiLib {
             isSelected = false;
             if (tabContents != null) tabContents.hide();
 
-            frameSet.setFrames(0);
+            frameSet.setFrames(1);
+            frameSet.render(true);
             eventTrigger(onChange);
         }
 
         public override void draw(Vector2 menuLocation) {
             Vector2 drawLoc = location + menuLocation;
 
-            /*GUIRoot.spriteBatch.Draw(middle.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
-                new Vector2((float)size.Width / (float)middle.frameWidth, (float)size.Height / (float)middle.frameHeight), SpriteEffects.None, 0);
-
-            GUIRoot.spriteBatch.Draw(left.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
-                new Vector2(1f, (float)size.Height / (float)left.frameHeight), SpriteEffects.None, 0);
-            GUIRoot.spriteBatch.Draw(right.currentFrame(), drawLoc + new Vector2(size.Width - right.frameWidth, 0), null, Color.White, 0f, Vector2.Zero,
-                new Vector2(1f, (float)size.Height / (float)right.frameHeight), SpriteEffects.None, 0);
-            GUIRoot.spriteBatch.Draw(top.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
-                new Vector2((float)size.Width / ((float)top.frameWidth), 1f), SpriteEffects.None, 0);
-            //Game1.spriteBatch.Draw(bottom.currentFrame(), drawLoc + new Vector2(0, size.Height - 8), null, Color.White, 0f, Vector2.Zero,
-            //  new Vector2((float)size.Width / ((float)bottom.frameWidth), 1f), SpriteEffects.None, 0);
-
-            GUIRoot.spriteBatch.Draw(topLeft.currentFrame(), drawLoc, Color.White);
-            GUIRoot.spriteBatch.Draw(topRight.currentFrame(), new Vector2(drawLoc.X + size.Width - topRight.frameWidth, drawLoc.Y), Color.White);
-            //GUI.spriteBatch.Draw(bottomLeft.currentFrame(), new Vector2(buttonRect.Left, buttonRect.Bottom - bottomLeft.frameHeight), Color.White);
-            //GUI.spriteBatch.Draw(bottomRight.currentFrame(), new Vector2(buttonRect.Right - bottomRight.frameWidth, buttonRect.Bottom - bottomRight.frameHeight), Color.White);
-            */
-            frameSet.draw(drawLoc);
+            
+            if(frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
+            //frameSet.draw(drawLoc);
 
             GUIRoot.spriteBatch.DrawString(Game1.font, text,
                 new Vector2(size.Width / 2 - Game1.font.MeasureString(text).X / 2, size.Height / 2 - Game1.font.MeasureString(text).Y / 2) + drawLoc, Color.Black);
