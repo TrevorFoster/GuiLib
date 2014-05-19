@@ -44,9 +44,12 @@ namespace GuiLib {
         }
 
         public override void draw(Vector2 menuLocation) {
-            foreach (Tab tab in tabs) {
-                tab.draw(menuLocation);
+            int selectedInd = 0;
+            for (int i = tabs.Count - 1; i >= 0; i--) {
+                if (!tabs[i].isSelected) tabs[i].draw(menuLocation);
+                else selectedInd = i;
             }
+            tabs[selectedInd].draw(menuLocation);
         }
 
         public void changeOrientation(Orientation newOri = Orientation.None) {
@@ -63,7 +66,7 @@ namespace GuiLib {
 
                 switch (orientation) {
                     case Orientation.Horizontal:
-                        curLoc.X += tabs[i].size.Width;
+                        curLoc.X += tabs[i].size.Width - 10;
                         break;
 
                     case Orientation.Vertical:

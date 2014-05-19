@@ -34,18 +34,18 @@ namespace GuiLib {
 
             tabList = new TabbedList(Orientation.Horizontal);
 
-            tab = new Tab { size = { Width = 120, Height = 40 } };
+            tab = new Tab { size = { Width = 120, Height = 30 } };
             tab.text = "Tab1";
             tab.setMenu(new Menu("tab 1", Vector2.Zero, new int[] { 360, 200 }, false));
             tabList.addTab(tab);
 
-            tab = new Tab { size = { Width = 120, Height = 40 } };
+            tab = new Tab { size = { Width = 120, Height = 30 } };
             tab.text = "Tab2";
             tab.setMenu(test);
             tabList.addTab(tab);
 
 
-            tab = new Tab { size = { Width = 120, Height = 40 } };
+            tab = new Tab { size = { Width = 120, Height = 30 } };
             tab.text = "Tab3";
             tabList.addTab(tab);
 
