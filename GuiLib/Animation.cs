@@ -17,17 +17,17 @@ namespace GuiLib {
         private float deltaTime;
         public float interval;
 
-        public Animation(int[] size) {
+        public Animation(int dimW, int dimY) {
             frames = new List<Texture2D>();
-            dimensions = new Size(size[0], size[1]);
+            dimensions = new Size(dimW, dimY);
 
             offset = Vector2.Zero;
             scale = Vector2.One;
         }
 
-        public Animation(int[] size, Vector2 offset) {
+        public Animation(int dimW, int dimY, Vector2 offset) {
             frames = new List<Texture2D>();
-            dimensions = new Size(size[0], size[1]);
+            dimensions = new Size(dimW, dimY);
 
             this.offset = offset;
             scale = Vector2.One;

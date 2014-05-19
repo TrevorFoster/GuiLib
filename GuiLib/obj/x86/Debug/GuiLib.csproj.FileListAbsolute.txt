@@ -54,13 +54,9 @@ C:\Users\Trevor\Desktop\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.Direct2D1.xml
 C:\Users\Trevor\Desktop\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.XInput.xml
 C:\Users\Trevor\Desktop\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\Trevor\Desktop\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.Direct3D9.xml
-C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\obj\x86\Debug\GuiLib.exe
-C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\obj\x86\Debug\GuiLib.pdb
-C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\obj\x86\Debug\GuiLib.csprojResolveAssemblyReference.cache
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\Content\selection002.png
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\Content\Font.xnb
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\Content\Test.spritefont
-C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\GuiLib.exe
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\GuiLib.pdb
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\MonoGame.Framework.dll
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.MediaFoundation.dll
@@ -82,3 +78,7 @@ C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.Direct2D1.
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.XInput.xml
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\obj\x86\Debug\GuiLib.csprojResolveAssemblyReference.cache
+C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\obj\x86\Debug\GuiLib.pdb
+C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\bin\Windows\Debug\GuiLib.exe
+C:\Users\Trevor\Documents\Git\GuiLib\GuiLib\obj\x86\Debug\GuiLib.exe

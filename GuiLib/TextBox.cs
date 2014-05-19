@@ -15,7 +15,7 @@ namespace GuiLib {
 
         protected override void subUpdate(Vector2 menuLocation) {
             Rectangle boxRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
-            //controlSize = new Size(boxStates.frameWidth, boxStates.frameHeight);
+
             if (InputHandler.leftClickRelease()) {
                 if (boxRect.Contains(InputHandler.mouseRect)) {
                     isSelected = true;

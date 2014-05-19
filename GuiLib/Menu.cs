@@ -42,12 +42,16 @@ namespace GuiLib {
         }
 
         public void update() {
+            if (hidden) return;
+
             foreach (Control item in controls) {
                 item.update(location);
             }
         }
 
         public void update(Vector2 offset) {
+            if (hidden) return;
+
             Vector2 totOffs = location + offset;
 
             foreach (Control item in controls) {

@@ -28,7 +28,6 @@ namespace GuiLib {
 
         protected override void Initialize() {
             base.Initialize();
-            
             GUIRoot.initialize(GraphicsDevice, Content);
             GUIRoot.menuHandler.addMenu(main);
         }
@@ -43,7 +42,7 @@ namespace GuiLib {
 
 
         protected override void Update(GameTime gameTime) {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || InputHandler.keyPressed(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             time = gameTime;
             InputHandler.update();

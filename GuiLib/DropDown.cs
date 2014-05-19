@@ -31,10 +31,10 @@ namespace GuiLib {
             buttonSize = new Size(24, 24);
             size = itemBoxSize + buttonSize;
 
-            left = new Animation(new int[2] { 1, 1 });
-            right = new Animation(new int[2] { 1, 1 });
-            middle = new Animation(new int[2] { 1, 1 });
-            buttonStates = new Animation(new int[2] { 1, 1 });
+            left = new Animation(1, 1);
+            right = new Animation(1, 1);
+            middle = new Animation(1, 1);
+            buttonStates = new Animation(1, 1);
         }
 
         public override void initialize() {

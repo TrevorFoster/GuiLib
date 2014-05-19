@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace GuiLib{
+namespace GuiLib {
     public enum Orientation {
         None,
         Horizontal,
@@ -14,7 +14,8 @@ namespace GuiLib{
         private List<Tab> tabs;
         private ControlGroup tabGroup;
 
-        public TabbedList(Orientation orientation) : this() {
+        public TabbedList(Orientation orientation)
+            : this() {
             this.orientation = orientation;
         }
 

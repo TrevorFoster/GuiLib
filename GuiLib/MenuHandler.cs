@@ -5,7 +5,11 @@ using System.Text;
 
 namespace GuiLib {
     class MenuHandler {
-        private List<Menu> menus = new List<Menu>();
+        private List<Menu> menus;
+
+        public MenuHandler() {
+            menus = new List<Menu>();
+        }
 
         public void addMenu(Menu newMenu) {
             if (newMenu == null) return;

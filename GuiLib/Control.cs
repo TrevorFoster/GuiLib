@@ -9,12 +9,12 @@ namespace GuiLib {
 
         public Vector2 location {
             get { return Location; }
-            set { 
+            set {
                 Location = value;
-                eventTrigger(moved); 
-            } 
+                eventTrigger(moved);
+            }
         }
-        
+
         public Size size;
         public Size textSize;
 
@@ -30,7 +30,7 @@ namespace GuiLib {
         private string Text;
         public string text {
             get { return Text; }
-            set { 
+            set {
                 Text = value;
                 if (Text != null && Game1.font != null) {
                     textSize = new Size((int)Game1.font.MeasureString(Text).X, (int)Game1.font.MeasureString(Text).Y);
@@ -82,7 +82,7 @@ namespace GuiLib {
         private void checkMouseOver(Vector2 menuLocation) {
             if (mouseOnLast) return;
 
-            if (new Rectangle((int)(location.X + menuLocation.X),(int)(location.Y + menuLocation.Y), size.Width, size.Height).Contains(InputHandler.mouseRect)) {
+            if (new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height).Contains(InputHandler.mouseRect)) {
                 eventTrigger(mouseOver);
                 mouseOnLast = true;
             }

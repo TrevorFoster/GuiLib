@@ -8,23 +8,23 @@ namespace GuiLib {
     class Size {
 
         private int width;
-        public int Width { 
-            get { return width; } 
+        public int Width {
+            get { return width; }
             set {
                 width = value;
                 onPropertyChange("Width");
-            } 
+            }
         }
 
         private int height;
-        public int Height { 
-            get { return height; } 
-            set { 
+        public int Height {
+            get { return height; }
+            set {
                 height = value;
                 onPropertyChange("Height");
-            } 
+            }
         }
-        
+
         public event PropertyChangedEventHandler sizeChanged;
 
         public Size() : this(0, 0) { }
@@ -58,7 +58,7 @@ namespace GuiLib {
             Size newSize = new Size();
             newSize.Width = (size2.Width != 0) ? size1.Width / size2.Width : 0;
             newSize.Height = (size2.Height != 0) ? size1.Height / size2.Height : 0;
-            
+
             return newSize;
         }
 

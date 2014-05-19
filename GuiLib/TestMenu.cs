@@ -12,19 +12,15 @@ namespace GuiLib {
         private TabbedList tabList;
         private DropDown list;
 
-        
+
         public TestMenu(string name, Vector2 location, int[] size, bool hidden)
             : base(name, location, size, hidden) {
         }
 
-        public override void setLayout(){
-            Tab tab = new Tab();
-            tab.location = new Vector2(420, 200);
-            tab.size.Width = 100;
-            tab.size.Height = 40;
-            tab.text = "Tab1";
-            Menu test = new Menu("tab 1", new Vector2(tab.location.X + location.X, tab.location.Y + tab.size.Height + location.Y),
-                new int[] { 298, 200 }, false);
+        public override void setLayout() {
+            Tab tab;
+            
+            Menu test = new Menu("tab 1", Vector2.Zero, new int[] { 360, 200 }, false);
 
             button1 = new Button();
             button1.onClick += button1_clicked;
@@ -38,16 +34,18 @@ namespace GuiLib {
 
             tabList = new TabbedList(Orientation.Horizontal);
 
-            tab.setMenu(new Menu("tab 1", Vector2.Zero, new int[] { 298, 200 }, false));
+            tab = new Tab { size = { Width = 120, Height = 40 } };
+            tab.text = "Tab1";
+            tab.setMenu(new Menu("tab 1", Vector2.Zero, new int[] { 360, 200 }, false));
             tabList.addTab(tab);
 
-            tab = new Tab { size = { Width = 100, Height = 40 } };
+            tab = new Tab { size = { Width = 120, Height = 40 } };
             tab.text = "Tab2";
             tab.setMenu(test);
             tabList.addTab(tab);
 
 
-            tab = new Tab { size = { Width = 100, Height = 40 } };
+            tab = new Tab { size = { Width = 120, Height = 40 } };
             tab.text = "Tab3";
             tabList.addTab(tab);
 
@@ -89,7 +87,7 @@ namespace GuiLib {
             controls.Add(rbutton);
             controls.Add(rbutton2);
 
-            Label label = new Label { location = new Vector2(400, 300), text = "Testing the label" };
+            Label label = new Label { location = new Vector2(400, 250), text = "Testing the label" };
 
             ToolTip tip = new ToolTip();
             tip.setToolTip(label, "I am a tool tip");

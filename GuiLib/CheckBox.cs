@@ -14,7 +14,7 @@ namespace GuiLib {
             resized += resize;
             text = "";
             controlSize = new Size(24, 24);
-            boxStates = new Animation(new [] { 2, 1 });
+            boxStates = new Animation(2, 1);
         }
 
         public override void initialize() {

@@ -24,17 +24,17 @@ namespace GuiLib {
 
             frameSet = new AnimationSet();
 
-            middle = new Animation(new int[] { 2, 1 });
+            middle = new Animation(2, 1);
 
-            topLeft = new Animation(new int[] { 2, 1 });
-            topRight = new Animation(new int[] { 2, 1 });
-            bottomLeft = new Animation(new int[] { 2, 1 });
-            bottomRight = new Animation(new int[] { 2, 1 });
+            topLeft = new Animation(2, 1);
+            topRight = new Animation(2, 1);
+            bottomLeft = new Animation(2, 1);
+            bottomRight = new Animation(2, 1);
 
-            left = new Animation(new int[] { 2, 1 });
-            right = new Animation(new int[] { 2, 1 });
-            bottom = new Animation(new int[] { 2, 1 });
-            top = new Animation(new int[] { 2, 1 });
+            left = new Animation(2, 1);
+            right = new Animation(2, 1);
+            bottom = new Animation(2, 1);
+            top = new Animation(2, 1);
 
             frameSet.animations.AddRange(new List<Animation> { middle, left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight });
         }
@@ -88,14 +88,17 @@ namespace GuiLib {
                 eventTrigger(onClick);
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
                 frameSet.setFrames(1);
+                //frameSet.render();
             } else {
                 frameSet.setFrames(0);
+                
             }
         }
 
         public override void draw(Vector2 menuLocation) {
             Vector2 drawLoc = location + menuLocation;
 
+            //if (frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
             frameSet.draw(drawLoc);
 
             GUIRoot.spriteBatch.DrawString(Game1.font, text,

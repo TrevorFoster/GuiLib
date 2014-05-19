@@ -17,7 +17,7 @@ namespace GuiLib {
             textSize = new Size();
             controlSize = new Size(24, 24);
 
-            buttonStates = new Animation(new int[2] { 2, 1 });
+            buttonStates = new Animation(2, 1);
         }
 
         public override void initialize() {
@@ -27,10 +27,7 @@ namespace GuiLib {
         protected override void subUpdate(Vector2 menuLocation) {
             Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), controlSize.Width, controlSize.Height);
 
-            if (InputHandler.leftClickRelease()
-                && buttonRect.Contains(InputHandler.initialClick)
-                && buttonRect.Contains(InputHandler.releaseClick)) {
-
+            if (InputHandler.leftClickRelease() && buttonRect.Contains(InputHandler.initialClick)) {
                 isSelected = true;
                 buttonStates.frame = 1;
                 selectedHasChanged();
