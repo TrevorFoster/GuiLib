@@ -23,7 +23,7 @@ namespace GuiLib {
         public Tab()
             : base() {
             resized += resize;
-            text = "";
+
             controlSize = new Size(60, 30);
 
             frameSet = new AnimationSet();
@@ -49,7 +49,7 @@ namespace GuiLib {
 
             // loading edge sprites
             left.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 132, 16, 48));
-            right.loadSheet(GUIResources.sheets["selection001"], new Rectangle(173, 132, 32, 48));
+            right.loadSheet(GUIResources.sheets["selection001"], new Rectangle(173, 132, 16, 48));
             top.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 112, 96, 8));
 
             if (tabContents != null) {

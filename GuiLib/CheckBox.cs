@@ -10,9 +10,10 @@ namespace GuiLib {
 
         public bool isSelected = false;
 
-        public CheckBox() {
+        public CheckBox()
+            : base() {
             resized += resize;
-            text = "";
+
             controlSize = new Size(24, 24);
             boxStates = new Animation(2, 1);
         }

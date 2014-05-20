@@ -23,8 +23,8 @@ namespace GuiLib {
         public bool isDropOpen = false;
         public int selectedIndex = -1;
 
-        public DropDown() {
-            text = "";
+        public DropDown()
+            : base() {
             items = new List<string>();
 
             itemBoxSize = new Size(200, 24);
@@ -45,8 +45,7 @@ namespace GuiLib {
             buttonStates.loadSheet(GUIResources.sheets["selection001"], new Rectangle(103, 2, 48, 48));
         }
 
-        protected override void subUpdate(Vector2 menuLocation)
-        {
+        protected override void subUpdate(Vector2 menuLocation) {
             if (!InputHandler.leftClickRelease()) return;
 
             if (!isDropOpen) {

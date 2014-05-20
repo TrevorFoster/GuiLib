@@ -60,6 +60,7 @@ namespace GuiLib {
             controlSize = new Size();
             textSize = new Size();
             location = new Vector2();
+
             controlSize.sizeChanged += resizeDispatcher;
         }
 
