@@ -45,6 +45,7 @@
     <Compile Include="Control.cs" />
     <Compile Include="ControlGroup.cs" />
     <Compile Include="DropDown.cs" />
+    <Compile Include="FontManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GUIResources.cs" />
     <Compile Include="GUIRoot.cs" />
@@ -71,7 +72,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\selection001.png" />
     <Content Include="Content\selection002.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Content\Font.xnb">
+    <Content Include="Content\Verdana_12.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Test.spritefont">

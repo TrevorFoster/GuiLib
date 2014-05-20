@@ -45,9 +45,9 @@ namespace GuiLib {
             // Make sure the tooltip should be drawn
             if (!drawTip) return;
 
-            Shapes.DrawRectangle(Game1.font.MeasureString(text).X, Game1.font.MeasureString(text).Y, tipLocation,
+            Shapes.DrawRectangle(FontManager.fonts[Font.Verdana].MeasureString(text).X, FontManager.fonts[Font.Verdana].MeasureString(text).Y, tipLocation,
                 new Color(100, 100, 100, 100), 0);
-            GUIRoot.spriteBatch.DrawString(Game1.font, text, tipLocation, Color.Black);
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, tipLocation, Color.Black);
         }
     }
 }

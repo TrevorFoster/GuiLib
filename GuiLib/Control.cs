@@ -32,8 +32,8 @@ namespace GuiLib {
             get { return Text; }
             set {
                 Text = value;
-                if (Text != null && Game1.font != null) {
-                    textSize = new Size((int)Game1.font.MeasureString(Text).X, (int)Game1.font.MeasureString(Text).Y);
+                if (Text != null && FontManager.fonts[Font.Verdana] != null) {
+                    textSize = new Size((int)FontManager.fonts[Font.Verdana].MeasureString(Text).X, (int)FontManager.fonts[Font.Verdana].MeasureString(Text).Y);
                 }
             }
         }

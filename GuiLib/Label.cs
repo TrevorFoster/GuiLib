@@ -4,12 +4,12 @@ namespace GuiLib {
     class Label : Control {
 
         protected override void subUpdate(Vector2 menuLocation) {
-            Vector2 textSize = Game1.font.MeasureString(text);
+            Vector2 textSize = FontManager.fonts[Font.Verdana].MeasureString(text);
             size = new Size((int)textSize.X, (int)textSize.Y);
         }
 
         public override void draw(Vector2 menuLocation) {
-            GUIRoot.spriteBatch.DrawString(Game1.font, text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
         }
     }
 }

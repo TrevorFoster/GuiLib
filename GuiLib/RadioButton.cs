@@ -21,7 +21,7 @@ namespace GuiLib {
         }
 
         public override void initialize() {
-            buttonStates.loadSheet(GUIResources.sheets["selection001"], new Rectangle(2, 52, 98, 48));
+            buttonStates.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(2, 52, 98, 48));
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
@@ -51,7 +51,7 @@ namespace GuiLib {
             Vector2 drawLoc = location + menuLocation;
             GUIRoot.spriteBatch.Draw(buttonStates.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
                 new Vector2((float)controlSize.Width / (float)buttonStates.frameWidth, (float)controlSize.Height / (float)buttonStates.frameHeight), SpriteEffects.None, 0);
-            GUIRoot.spriteBatch.DrawString(Game1.font, text,
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc,
                 Color.Black);
         }

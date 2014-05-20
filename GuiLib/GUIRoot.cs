@@ -14,6 +14,7 @@ namespace GuiLib {
             GUIRoot.content = content;
             spriteBatch = new SpriteBatch(graphicsDevice);
             GUIResources.loadContent();
+            FontManager.loadFonts();
             Shapes.LoadContent();
 
             menuHandler = new MenuHandler();

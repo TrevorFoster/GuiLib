@@ -41,19 +41,19 @@ namespace GuiLib {
 
         public override void initialize() {
             //loading the middle portion sprites
-            middle.loadSheet(GUIResources.sheets["selection001"], new Rectangle(3, 181, 96, 48));
+            middle.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 181, 96, 48));
 
             // loading corner sprites
-            topLeft.loadSheet(GUIResources.sheets["selection001"], new Rectangle(3, 102, 16, 8));
-            topRight.loadSheet(GUIResources.sheets["selection001"], new Rectangle(25, 102, 16, 8));
-            bottomLeft.loadSheet(GUIResources.sheets["selection001"], new Rectangle(45, 102, 16, 8));
-            bottomRight.loadSheet(GUIResources.sheets["selection001"], new Rectangle(67, 102, 16, 8));
+            topLeft.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 102, 16, 8));
+            topRight.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(25, 102, 16, 8));
+            bottomLeft.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(45, 102, 16, 8));
+            bottomRight.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(67, 102, 16, 8));
 
             // loading edge sprites
-            left.loadSheet(GUIResources.sheets["selection001"], new Rectangle(3, 132, 16, 48));
-            right.loadSheet(GUIResources.sheets["selection001"], new Rectangle(23, 132, 16, 48));
-            top.loadSheet(GUIResources.sheets["selection001"], new Rectangle(3, 112, 96, 8));
-            bottom.loadSheet(GUIResources.sheets["selection001"], new Rectangle(3, 121, 96, 8));
+            left.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 132, 16, 48));
+            right.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(23, 132, 16, 48));
+            top.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 112, 96, 8));
+            bottom.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 121, 96, 8));
             sizeStuff();
         }
 
@@ -101,7 +101,7 @@ namespace GuiLib {
             //if (frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
             frameSet.draw(drawLoc);
 
-            GUIRoot.spriteBatch.DrawString(Game1.font, text,
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(size.Width / 2 - textSize.Width / 2, size.Height / 2 - textSize.Height / 2) + drawLoc,
                 Color.Black);
         }

@@ -56,13 +56,29 @@ namespace GuiLib {
             if (newOri != Orientation.None) {
                 orientation = newOri;
             }
+            int maxHeight = 0;
+            int maxWidth = 0;
+
+            foreach (Tab tab in tabs) {
+                switch (orientation) {
+                    case Orientation.Horizontal:
+                        if (tab.size.Height > maxHeight) 
+                            maxHeight = tab.size.Height;
+                        break;
+                    case Orientation.Vertical:
+                        if (tab.size.Width > maxWidth) 
+                            maxWidth = tab.size.Width;
+                        break;
+                }
+            }
 
             Vector2 curLoc = new Vector2(location.X, location.Y);
             for (int i = 0; i < tabs.Count; i++) {
-                tabs[i].location = new Vector2(curLoc.X, curLoc.Y);
+                int offX = (maxWidth == 0) ? 0 : maxWidth - tabs[i].size.Width;
+                int offY = (maxHeight == 0) ? 0 : maxHeight - tabs[i].size.Height;
+                tabs[i].location = new Vector2(curLoc.X + offX, curLoc.Y + offY);
                 tabs[i].orientation = orientation;
-                tabs[i].moveContents(location);
-
+                tabs[i].moveContents(location + new Vector2(offX, offY));
 
                 switch (orientation) {
                     case Orientation.Horizontal:

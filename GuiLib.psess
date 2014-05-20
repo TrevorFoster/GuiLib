@@ -26,7 +26,6 @@
     </PdhSettings>
   </Options>
   <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
-  <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
   <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
   <PreinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
@@ -34,47 +33,4 @@
   <PostinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
   </PostinstrumentEvent>
-  <Binaries>
-    <ProjBinary>
-      <Path>GuiLib\obj\x86\Debug\GuiLib.exe</Path>
-      <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
-      <Instrument>true</Instrument>
-      <Sample>true</Sample>
-      <ExternalWebsite>false</ExternalWebsite>
-      <InteractionProfilingEnabled>false</InteractionProfilingEnabled>
-      <IsLocalJavascript>false</IsLocalJavascript>
-      <IsWindowsStoreApp>false</IsWindowsStoreApp>
-      <IsWWA>false</IsWWA>
-      <LaunchProject>true</LaunchProject>
-      <OverrideProjectSettings>false</OverrideProjectSettings>
-      <LaunchMethod>Executable</LaunchMethod>
-      <ExecutablePath>GuiLib\bin\Windows\Debug\GuiLib.exe</ExecutablePath>
-      <StartupDirectory>GuiLib\bin\Windows\Debug\</StartupDirectory>
-      <Arguments>
-      </Arguments>
-      <NetAppHost>IIS</NetAppHost>
-      <NetBrowser>InternetExplorer</NetBrowser>
-      <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
-      <JScriptProfilingEnabled>false</JScriptProfilingEnabled>
-      <PreinstrumentEvent>
-        <InstrEventExclude>false</InstrEventExclude>
-      </PreinstrumentEvent>
-      <PostinstrumentEvent>
-        <InstrEventExclude>false</InstrEventExclude>
-      </PostinstrumentEvent>
-      <ProjRef>{4F826413-930D-43F0-BFBC-0FC5A1618E84}|GuiLib\GuiLib.csproj</ProjRef>
-      <ProjPath>GuiLib\GuiLib.csproj</ProjPath>
-      <ProjName>GuiLib</ProjName>
-    </ProjBinary>
-  </Binaries>
-  <Reports>
-    <Report>
-      <Path>GuiLib140519.vsp</Path>
-    </Report>
-  </Reports>
-  <Launches>
-    <ProjBinary>
-      <Path>:PB:{4F826413-930D-43F0-BFBC-0FC5A1618E84}|GuiLib\GuiLib.csproj</Path>
-    </ProjBinary>
-  </Launches>
 </VSPerformanceSession>

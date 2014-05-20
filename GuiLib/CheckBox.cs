@@ -19,7 +19,7 @@ namespace GuiLib {
         }
 
         public override void initialize() {
-            boxStates.loadSheet(GUIResources.sheets["selection001"], new Rectangle(2, 2, 98, 48));
+            boxStates.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(2, 2, 98, 48));
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
@@ -57,7 +57,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.Draw(boxStates.currentFrame(), drawLoc, null, Color.White, 0f, Vector2.Zero,
                 new Vector2(controlSize.Width / (float)boxStates.frameWidth, controlSize.Height / (float)boxStates.frameHeight), SpriteEffects.None, 0);
             // draw the text for the check box
-            GUIRoot.spriteBatch.DrawString(Game1.font, text,
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc, Color.Black);
         }
     }

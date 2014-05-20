@@ -38,11 +38,11 @@ namespace GuiLib {
         }
 
         public override void initialize() {
-            left.loadSheet(GUIResources.sheets["selection001"], new Rectangle(152, 2, 8, 48));
-            right.loadSheet(GUIResources.sheets["selection001"], new Rectangle(194, 2, 8, 48));
-            middle.loadSheet(GUIResources.sheets["selection001"], new Rectangle(161, 2, 32, 48));
+            left.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(152, 2, 8, 48));
+            right.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(194, 2, 8, 48));
+            middle.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(161, 2, 32, 48));
 
-            buttonStates.loadSheet(GUIResources.sheets["selection001"], new Rectangle(103, 2, 48, 48));
+            buttonStates.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(103, 2, 48, 48));
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
@@ -83,7 +83,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.Draw(right.currentFrame(), drawloc + new Vector2(itemBoxSize.Width - right.frameWidth, 0), null, Color.White, 0f, Vector2.Zero,
                 new Vector2(1f, (float)itemBoxSize.Height / right.frameHeight), SpriteEffects.None, 0);
 
-            GUIRoot.spriteBatch.DrawString(Game1.font, text, drawloc + new Vector2(left.frameWidth, 0), Color.Black);
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, drawloc + new Vector2(left.frameWidth, 0), Color.Black);
             GUIRoot.spriteBatch.Draw(buttonStates.currentFrame(), drawloc + new Vector2(itemBoxSize.Width, 0), null, Color.White, 0f, Vector2.Zero,
                 new Vector2((float)buttonSize.Width / buttonStates.frameWidth, (float)buttonSize.Height / buttonStates.frameHeight), SpriteEffects.None, 0);
 
@@ -96,7 +96,7 @@ namespace GuiLib {
                     new Vector2((float)(itemBoxSize.Width - right.frameWidth) / middle.frameWidth, (float)itemBoxSize.Height / middle.frameHeight), SpriteEffects.None, 0);
                 GUIRoot.spriteBatch.Draw(right.currentFrame(), drawloc + new Vector2(itemBoxSize.Width - right.frameWidth, (i + 1) * itemBoxSize.Height), null, Color.White, 0f, Vector2.Zero,
                     new Vector2(1f, (float)itemBoxSize.Height / right.frameHeight), SpriteEffects.None, 0);
-                GUIRoot.spriteBatch.DrawString(Game1.font, items[i], drawloc + new Vector2(left.frameWidth, (i + 1) * itemBoxSize.Height), Color.Black);
+                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], items[i], drawloc + new Vector2(left.frameWidth, (i + 1) * itemBoxSize.Height), Color.Black);
 
             }
         }

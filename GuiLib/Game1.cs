@@ -13,7 +13,6 @@ namespace GuiLib {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
         TestMenu main;
-        public static SpriteFont font;
         public static GameTime time;
 
         public Game1() {
@@ -33,7 +32,7 @@ namespace GuiLib {
         }
 
         protected override void LoadContent() {
-            font = Content.Load<SpriteFont>("Font");
+            
         }
 
         protected override void UnloadContent() {

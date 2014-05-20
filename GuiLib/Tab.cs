@@ -41,16 +41,16 @@ namespace GuiLib {
 
         public override void initialize() {
             //loading the middle portion sprites
-            middle.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 181, 96, 48));
+            middle.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(156, 181, 96, 48));
 
             // loading corner sprites
-            topLeft.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 102, 16, 8));
-            topRight.loadSheet(GUIResources.sheets["selection001"], new Rectangle(177, 102, 16, 8));
+            topLeft.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(156, 102, 16, 8));
+            topRight.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(177, 102, 16, 8));
 
             // loading edge sprites
-            left.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 132, 16, 48));
-            right.loadSheet(GUIResources.sheets["selection001"], new Rectangle(173, 132, 16, 48));
-            top.loadSheet(GUIResources.sheets["selection001"], new Rectangle(156, 112, 96, 8));
+            left.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(156, 132, 16, 48));
+            right.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(173, 132, 16, 48));
+            top.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(156, 112, 96, 8));
 
             if (tabContents != null) {
                 tabContents.intialize();
@@ -147,8 +147,8 @@ namespace GuiLib {
             if(frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
             //frameSet.draw(drawLoc);
 
-            GUIRoot.spriteBatch.DrawString(Game1.font, text,
-                new Vector2(size.Width / 2 - Game1.font.MeasureString(text).X / 2, size.Height / 2 - Game1.font.MeasureString(text).Y / 2) + drawLoc, Color.Black);
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
+                new Vector2(size.Width / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).X / 2, size.Height / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).Y / 2) + drawLoc, Color.Black);
 
             if (tabContents != null) {
                 Vector2 contentOffs = new Vector2(menuLocation.X, menuLocation.Y);
