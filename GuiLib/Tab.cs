@@ -22,8 +22,6 @@ namespace GuiLib {
 
         public Tab()
             : base() {
-            resized += resize;
-
             controlSize = new Size(60, 30);
 
             frameSet = new AnimationSet();
@@ -58,8 +56,10 @@ namespace GuiLib {
             sizeStuff();
         }
 
-        private void resize(object sender, EventArgs e) {
-            size = new Size(controlSize.Width, controlSize.Height);
+        protected override void setSize(int Width, int Height) {
+            size = new Size(Width, Height);
+            controlSize = new Size(size.Width, size.Height);
+            sizeStuff();
         }
 
         private void sizeStuff() {
@@ -103,7 +103,7 @@ namespace GuiLib {
 
                 selectedHasChanged();
                 frameSet.setFrames(0);
-                frameSet.render(true);
+                //frameSet.render(true);
                 eventTrigger(onChange);
 
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
@@ -136,7 +136,7 @@ namespace GuiLib {
             if (tabContents != null) tabContents.hide();
 
             frameSet.setFrames(1);
-            frameSet.render(true);
+            //frameSet.render(true);
             eventTrigger(onChange);
         }
 
@@ -144,8 +144,8 @@ namespace GuiLib {
             Vector2 drawLoc = location + menuLocation;
 
             
-            if(frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
-            //frameSet.draw(drawLoc);
+            //if(frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
+            frameSet.draw(drawLoc);
 
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(size.Width / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).X / 2, size.Height / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).Y / 2) + drawLoc, Color.Black);

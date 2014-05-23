@@ -73,6 +73,13 @@ namespace GuiLib {
             }
         }
 
+        protected override void setSize(int Width, int Height) {
+            size = new Size(Width + buttonSize.Width, Height);
+            itemBoxSize = new Size(Width, size.Height);
+            buttonSize = new Size(buttonSize.Width, size.Height);
+
+        }
+
         public override void draw(Vector2 menuLocation) {
             Vector2 drawloc = new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y);
 

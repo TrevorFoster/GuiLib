@@ -1,11 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace GuiLib {
     class Label : Control {
 
-        protected override void subUpdate(Vector2 menuLocation) {
-            Vector2 textSize = FontManager.fonts[Font.Verdana].MeasureString(text);
-            size = new Size((int)textSize.X, (int)textSize.Y);
+        public Label()
+            : base() {
+        }
+
+        protected override void setSize(int Width, int Height) {
+            size = new Size(textSize.Width, textSize.Height);
         }
 
         public override void draw(Vector2 menuLocation) {

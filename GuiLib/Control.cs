@@ -6,24 +6,11 @@ namespace GuiLib {
 
     class Control {
         private Vector2 Location;
-
         public Vector2 location {
             get { return Location; }
             set {
                 Location = value;
                 eventTrigger(moved);
-            }
-        }
-
-        public Size size;
-        public Size textSize;
-
-        private Size ControlSize;
-        public Size controlSize {
-            get { return ControlSize; }
-            set {
-                ControlSize = value;
-                eventTrigger(resized);
             }
         }
 
@@ -33,10 +20,21 @@ namespace GuiLib {
             set {
                 Text = value;
                 if (Text != null && FontManager.fonts[Font.Verdana] != null) {
-                    textSize = new Size((int)FontManager.fonts[Font.Verdana].MeasureString(Text).X, (int)FontManager.fonts[Font.Verdana].MeasureString(Text).Y);
+                    Vector2 measure = FontManager.fonts[Font.Verdana].MeasureString(Text);
+                    textSize = new Size((int)measure.X, (int)measure.Y);
                 }
             }
         }
+
+        private Size Size;
+        public Size size {
+            get { return Size; }
+            protected set {
+                Size = value;
+            }
+        }
+        protected Size textSize;
+        protected Size controlSize;
 
         public event EventHandler selectedChange = null;
 
@@ -60,12 +58,15 @@ namespace GuiLib {
             controlSize = new Size();
             textSize = new Size();
             location = new Vector2();
-
-            controlSize.sizeChanged += resizeDispatcher;
         }
 
-        private void resizeDispatcher(object sender, PropertyChangedEventArgs e) {
+        public void resize(int Width, int Height) {
+            setSize(Width, Height);
             eventTrigger(resized);
+        }
+
+        protected virtual void setSize(int Width, int Height) {
+            size = new Size(Width, Height);
         }
 
         public void update(Vector2 menuLocation) {
@@ -98,7 +99,7 @@ namespace GuiLib {
             }
         }
 
-        protected virtual void eventTrigger(EventHandler handler) {
+        protected void eventTrigger(EventHandler handler) {
             // make sure a callback function has been assigned
             if (handler == null) return;
 

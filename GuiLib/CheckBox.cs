@@ -12,7 +12,6 @@ namespace GuiLib {
 
         public CheckBox()
             : base() {
-            resized += resize;
 
             controlSize = new Size(24, 24);
             boxStates = new Animation(2, 1);
@@ -20,6 +19,7 @@ namespace GuiLib {
 
         public override void initialize() {
             boxStates.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(2, 2, 98, 48));
+            size = new Size(controlSize.Width, controlSize.Height);
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
@@ -35,8 +35,9 @@ namespace GuiLib {
             }
         }
 
-        private void resize(object sender, EventArgs e) {
-            size = new Size(controlSize.Width + textSize.Width, (int)Math.Max(controlSize.Height, textSize.Height));
+        protected override void setSize(int Width, int Height) {
+            size = new Size(Width + textSize.Width, (int)Math.Max(Height, textSize.Height));
+            controlSize = new Size(size.Width, size.Height);
         }
 
         public override void deselect() {

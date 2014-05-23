@@ -19,9 +19,8 @@ namespace GuiLib {
 
         private Rectangle buttonRect;
 
-        public Button() : base() {
-            resized += resize;
-
+        public Button()
+            : base() {
             frameSet = new AnimationSet();
 
             middle = new Animation(2, 1);
@@ -57,8 +56,9 @@ namespace GuiLib {
             sizeStuff();
         }
 
-        private void resize(object sender, EventArgs e) {
-            size = new Size(controlSize.Width, controlSize.Height);
+        protected override void setSize(int Width, int Height) {
+            size = new Size(Width, Height);
+            controlSize = new Size(size.Width, size.Height);
             sizeStuff();
         }
 
@@ -81,8 +81,8 @@ namespace GuiLib {
         protected override void subUpdate(Vector2 menuLocation) {
             buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
 
-            if (InputHandler.leftClickRelease() 
-                && buttonRect.Contains(InputHandler.initialClick) 
+            if (InputHandler.leftClickRelease()
+                && buttonRect.Contains(InputHandler.initialClick)
                 && buttonRect.Contains(InputHandler.releaseClick)) {
 
                 eventTrigger(onClick);
@@ -91,7 +91,7 @@ namespace GuiLib {
                 //frameSet.render();
             } else {
                 frameSet.setFrames(0);
-                
+
             }
         }
 

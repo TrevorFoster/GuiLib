@@ -26,25 +26,27 @@ namespace GuiLib {
             button1.onClick += button1_clicked;
 
             button1.location = new Vector2(10, 10);
-            button1.controlSize.Width = 80;
-            button1.controlSize.Height = 40;
+            button1.resize(80, 40);
 
             button1.text = "Testing";
             test.controls.Add(button1);
 
             tabList = new TabbedList(Orientation.Horizontal);
 
-            tab = new Tab { size = { Width = 120, Height = 30 } };
+            tab = new Tab();
+            tab.resize(120, 30);
             tab.text = "Tab1";
             tab.setMenu(new Menu("tab 1", Vector2.Zero, new int[] { 360, 200 }, false));
             tabList.addTab(tab);
 
-            tab = new Tab { size = { Width = 120, Height = 40 } };
+            tab = new Tab();
+            tab.resize(120, 30);
             tab.text = "Tab2";
             tab.setMenu(test);
             tabList.addTab(tab);
 
-            tab = new Tab { size = { Width = 120, Height = 48 } };
+            tab = new Tab();
+            tab.resize(120, 30);
             tab.text = "Tab3";
             tabList.addTab(tab);
 
@@ -62,7 +64,8 @@ namespace GuiLib {
             TextBox textBox = new TextBox { location = new Vector2(450, 100) };
             //controls.Add(textBox);
 
-            button1 = new Button { location = new Vector2(200, 0), controlSize = { Width = 100, Height = 60 }, text = "Testing" };
+            button1 = new Button { location = new Vector2(200, 0), text = "Testing" };
+            button1.resize(90, 40);
             button1.onClick += button1_clicked;
 
             controls.Add(button1);
