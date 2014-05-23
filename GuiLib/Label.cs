@@ -6,9 +6,14 @@ namespace GuiLib {
 
         public Label()
             : base() {
+                size = new Size(textSize.Width, textSize.Height);
         }
 
         protected override void setSize(int Width, int Height) {
+            size = new Size(textSize.Width, textSize.Height);
+        }
+
+        protected override void updateSize() {
             size = new Size(textSize.Width, textSize.Height);
         }
 

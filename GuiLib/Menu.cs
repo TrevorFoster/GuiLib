@@ -12,7 +12,7 @@ namespace GuiLib {
 
         public string title;
         private bool hidden = false;
-        public bool bordered = true;
+        public bool bordered = false;
         public bool initialized;
 
         public Menu() : this("", Vector2.Zero, 10, 10) {

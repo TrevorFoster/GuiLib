@@ -22,6 +22,7 @@ namespace GuiLib {
                 if (Text != null && FontManager.fonts[Font.Verdana] != null) {
                     Vector2 measure = FontManager.fonts[Font.Verdana].MeasureString(Text);
                     textSize = new Size((int)measure.X, (int)measure.Y);
+                    updateSize();
                 }
             }
         }
@@ -68,6 +69,10 @@ namespace GuiLib {
 
         protected virtual void setSize(int Width, int Height) {
             size = new Size(Width, Height);
+        }
+
+        protected virtual void updateSize() {
+
         }
 
         public void update(Vector2 menuLocation) {

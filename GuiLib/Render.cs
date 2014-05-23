@@ -8,6 +8,7 @@ namespace GuiLib {
     class Render {
         public delegate void RenderStrategy();
         private RenderStrategy renderStrategy;
+        public event EventHandler needsRender;
 
         public Render() {
 
@@ -15,7 +16,6 @@ namespace GuiLib {
 
         public void setStrategy(Delegate strategy){
             renderStrategy = (RenderStrategy)strategy;
-            renderStrategy();
         }
     }
 }

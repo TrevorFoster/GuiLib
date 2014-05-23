@@ -14,7 +14,6 @@ namespace GuiLib {
         GraphicsDeviceManager graphics;
         TestMenu main;
         public static GameTime time;
-        Render test;
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -24,12 +23,6 @@ namespace GuiLib {
             
             Content.RootDirectory = "Content";
             main = new TestMenu("test", new Vector2(20, 20), 600, 500);
-            test = new Render();
-            test.setStrategy((Render.RenderStrategy)t);
-        }
-
-        private void t() {
-            Console.WriteLine("hello");
         }
 
         protected override void Initialize() {

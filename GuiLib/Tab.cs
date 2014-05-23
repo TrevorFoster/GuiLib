@@ -93,7 +93,7 @@ namespace GuiLib {
 
         protected override void subUpdate(Vector2 menuLocation) {
             buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
-
+            frameSet.update();
             if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.initialClick)) {
 
                 isSelected = true;
@@ -109,7 +109,7 @@ namespace GuiLib {
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
                 frameSet.setFrames(0);
             } else if (!isSelected) {
-                frameSet.setFrames(1);
+                //frameSet.setFrames(1);
                 
             }
 
