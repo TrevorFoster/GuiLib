@@ -33,6 +33,7 @@ namespace GuiLib {
                 Size = value;
             }
         }
+        
         protected Size textSize;
         protected Size controlSize;
 

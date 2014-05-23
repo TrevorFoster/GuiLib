@@ -13,14 +13,14 @@ namespace GuiLib {
         private DropDown list;
 
 
-        public TestMenu(string name, Vector2 location, int[] size, bool hidden)
-            : base(name, location, size, hidden) {
+        public TestMenu(string name, Vector2 location, int width, int height)
+            : base(name, location, width, height) {
         }
 
         public override void setLayout() {
             Tab tab;
             
-            Menu test = new Menu("tab 1", Vector2.Zero, new int[] { 360, 200 }, false);
+            Menu test = new Menu("tab 1", Vector2.Zero, 360, 200);
 
             button1 = new Button();
             button1.onClick += button1_clicked;
@@ -36,7 +36,7 @@ namespace GuiLib {
             tab = new Tab();
             tab.resize(120, 30);
             tab.text = "Tab1";
-            tab.setMenu(new Menu("tab 1", Vector2.Zero, new int[] { 360, 200 }, false));
+            tab.setMenu(new Menu("tab 1", Vector2.Zero, 360, 200));
             tabList.addTab(tab);
 
             tab = new Tab();
