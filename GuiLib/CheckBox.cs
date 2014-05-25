@@ -8,10 +8,7 @@ namespace GuiLib {
 
         private Animation boxStates;
 
-        public bool isSelected = false;
-
-        public CheckBox()
-            : base() {
+        public CheckBox() {
 
             controlSize = new Size(24, 24);
             boxStates = new Animation(2, 1);

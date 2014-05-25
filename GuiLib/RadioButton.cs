@@ -9,8 +9,6 @@ namespace GuiLib {
 
         private Animation buttonStates;
 
-        public bool isSelected;
-
         public RadioButton() {
             resized += resize;
             text = "";

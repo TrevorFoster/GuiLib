@@ -17,11 +17,8 @@ namespace GuiLib {
         // edges
         private Animation left, right, top;
 
-        public Orientation orientation = Orientation.Horizontal;
-        public bool isSelected = false;
-
-        public Tab()
-            : base() {
+        public Tab() {
+            orientation = Orientation.Horizontal;
             controlSize = new Size(60, 30);
 
             frameSet = new AnimationSet();
@@ -49,6 +46,7 @@ namespace GuiLib {
             left.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(156, 132, 16, 48));
             right.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(173, 132, 16, 48));
             top.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(156, 112, 96, 8));
+            frameSet.setFrames(1);
 
             if (tabContents != null) {
                 tabContents.intialize();
@@ -74,7 +72,7 @@ namespace GuiLib {
             left.offset = new Vector2(0, topLeft.frameHeight);
             right.offset = new Vector2(size.Width - right.frameWidth, topRight.frameHeight);
             middle.offset = new Vector2(left.frameWidth, top.frameHeight);
-            
+
         }
 
         public void moveContents(Vector2 newPos) {
@@ -110,7 +108,7 @@ namespace GuiLib {
                 frameSet.setFrames(0);
             } else if (!isSelected) {
                 //frameSet.setFrames(1);
-                
+
             }
 
             if (isSelected && tabContents != null) {
@@ -143,7 +141,7 @@ namespace GuiLib {
         public override void draw(Vector2 menuLocation) {
             Vector2 drawLoc = location + menuLocation;
 
-            
+
             //if(frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
             frameSet.draw(drawLoc);
 

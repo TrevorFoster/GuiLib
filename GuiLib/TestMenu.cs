@@ -9,7 +9,7 @@ namespace GuiLib {
         private CheckBox check2;
         private RadioButton rbutton;
         private RadioButton rbutton2;
-        private TabbedList tabList;
+        private ControlList tabList;
         private DropDown list;
 
 
@@ -19,7 +19,7 @@ namespace GuiLib {
 
         public override void setLayout() {
             Tab tab;
-            
+
             Menu test = new Menu("tab 1", Vector2.Zero, 360, 200);
 
             button1 = new Button();
@@ -31,7 +31,7 @@ namespace GuiLib {
             button1.text = "Testing";
             test.controls.Add(button1);
 
-            tabList = new TabbedList(Orientation.Horizontal);
+            tabList = new ControlList(Orientation.Horizontal);
 
             tab = new Tab();
             tab.resize(120, 30);

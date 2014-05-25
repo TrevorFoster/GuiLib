@@ -9,47 +9,48 @@ namespace GuiLib {
         Vertical
     }
 
-    class TabbedList : Control {
-        private Orientation orientation = Orientation.Horizontal;
-        private List<Tab> tabs;
+    class ControlList : Control {
+        private List<Control> controls;
         private ControlGroup tabGroup;
 
-        public TabbedList(Orientation orientation)
+        public ControlList(Orientation orientation)
             : this() {
             this.orientation = orientation;
         }
 
-        public TabbedList() {
-            tabs = new List<Tab>();
+        public ControlList() {
+            controls = new List<Control>();
             tabGroup = new ControlGroup();
             moved += listMoved;
         }
 
         public override void initialize() {
-            foreach (Tab tab in tabs) {
+            foreach (Tab tab in controls) {
                 tab.initialize();
             }
         }
 
         public void addTab(Tab newTab) {
             tabGroup.addControl(newTab);
-            tabs.Add(newTab);
+            controls.Add(newTab);
             changeOrientation();
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
-            foreach (Tab tab in tabs) {
+            foreach (Tab tab in controls) {
                 tab.update(menuLocation);
             }
         }
 
         public override void draw(Vector2 menuLocation) {
             int selectedInd = 0;
-            for (int i = tabs.Count - 1; i >= 0; i--) {
-                if (!tabs[i].isSelected) tabs[i].draw(menuLocation);
-                else selectedInd = i;
+            for (int i = controls.Count - 1; i >= 0; i--) {
+                if (!controls[i].isSelected) 
+                    controls[i].draw(menuLocation);
+                else
+                    selectedInd = i;
             }
-            tabs[selectedInd].draw(menuLocation);
+            controls[selectedInd].draw(menuLocation);
         }
 
         public void changeOrientation(Orientation newOri = Orientation.None) {
@@ -59,34 +60,35 @@ namespace GuiLib {
             int maxHeight = 0;
             int maxWidth = 0;
 
-            foreach (Tab tab in tabs) {
+            foreach (Tab tab in controls) {
                 switch (orientation) {
                     case Orientation.Horizontal:
-                        if (tab.size.Height > maxHeight) 
+                        if (tab.size.Height > maxHeight)
                             maxHeight = tab.size.Height;
                         break;
                     case Orientation.Vertical:
-                        if (tab.size.Width > maxWidth) 
+                        if (tab.size.Width > maxWidth)
                             maxWidth = tab.size.Width;
                         break;
                 }
             }
 
             Vector2 curLoc = new Vector2(location.X, location.Y);
-            for (int i = 0; i < tabs.Count; i++) {
-                int offX = (maxWidth == 0) ? 0 : maxWidth - tabs[i].size.Width;
-                int offY = (maxHeight == 0) ? 0 : maxHeight - tabs[i].size.Height;
-                tabs[i].location = new Vector2(curLoc.X + offX, curLoc.Y + offY);
-                tabs[i].orientation = orientation;
-                tabs[i].moveContents(location + new Vector2(offX, offY));
+            for (int i = 0; i < controls.Count; i++) {
+                int offX = (maxWidth == 0) ? 0 : maxWidth - controls[i].size.Width;
+                int offY = (maxHeight == 0) ? 0 : maxHeight - controls[i].size.Height;
+                controls[i].location = new Vector2(curLoc.X + offX, curLoc.Y + offY);
+                controls[i].orientation = orientation;
+                if(controls[i] is Tab)
+                    ((Tab)controls[i]).moveContents(location + new Vector2(offX, offY));
 
                 switch (orientation) {
                     case Orientation.Horizontal:
-                        curLoc.X += tabs[i].size.Width - 10;
+                        curLoc.X += controls[i].size.Width - 10;
                         break;
 
                     case Orientation.Vertical:
-                        curLoc.Y += tabs[i].size.Height;
+                        curLoc.Y += controls[i].size.Height;
                         break;
                 }
             }

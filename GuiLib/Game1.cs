@@ -20,7 +20,7 @@ namespace GuiLib {
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
             this.IsMouseVisible = true;
-            
+
             Content.RootDirectory = "Content";
             main = new TestMenu("test", new Vector2(20, 20), 600, 500);
         }
@@ -32,11 +32,11 @@ namespace GuiLib {
         }
 
         protected override void LoadContent() {
-            
+
         }
 
         protected override void UnloadContent() {
-            
+
         }
 
 

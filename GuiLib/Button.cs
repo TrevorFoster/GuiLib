@@ -19,8 +19,7 @@ namespace GuiLib {
 
         private Rectangle buttonRect;
 
-        public Button()
-            : base() {
+        public Button() {
             frameSet = new AnimationSet();
 
             middle = new Animation(2, 1);

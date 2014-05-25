@@ -4,9 +4,8 @@ using System;
 namespace GuiLib {
     class Label : Control {
 
-        public Label()
-            : base() {
-                size = new Size(textSize.Width, textSize.Height);
+        public Label() {
+            size = new Size(textSize.Width, textSize.Height);
         }
 
         protected override void setSize(int Width, int Height) {

@@ -5,10 +5,8 @@ namespace GuiLib {
     class TextBox : Control {
         private Animation boxStates;
         private int cursor;
-        public bool isSelected;
 
         public TextBox() {
-            text = "";
             cursor = 0;
             size = new Size(150, 30);
         }
@@ -36,7 +34,8 @@ namespace GuiLib {
                 } else {
                     foreach (Keys key in InputHandler.previousKeys) {
                         if (InputHandler.keyTyped(key)) {
-                            if ((int)key >= 32 && (int)key <= 128) {
+                            int keyI = (int)key;
+                            if (keyI >= 32 && keyI <= 128) {
                                 char character = (char)(int)key;
                                 if (text == "" || cursor == text.Length) {
                                     text += character;

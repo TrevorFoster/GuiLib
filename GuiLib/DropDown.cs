@@ -23,8 +23,7 @@ namespace GuiLib {
         public bool isDropOpen = false;
         public int selectedIndex = -1;
 
-        public DropDown()
-            : base() {
+        public DropDown() {
             items = new List<string>();
 
             itemBoxSize = new Size(200, 24);
@@ -55,11 +54,11 @@ namespace GuiLib {
                     eventTrigger(dropOpen);
                 }
             } else {
-                Vector2 startLoc = new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y);
+                Vector2 startLoc = location + menuLocation;
                 Rectangle itemBox = new Rectangle((int)(startLoc.X), (int)(startLoc.Y), itemBoxSize.Width, itemBoxSize.Height);
 
                 for (int i = 0; i < items.Count; i++) {
-                    itemBox.Y = (int)(startLoc.Y + (i + 1) * itemBoxSize.Height);
+                    itemBox.Y += itemBoxSize.Height;
 
                     if (itemBox.Contains(InputHandler.initialClick) && itemBox.Contains(InputHandler.releaseClick)) {
                         selectedIndex = i;

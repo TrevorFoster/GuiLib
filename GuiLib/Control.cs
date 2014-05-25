@@ -34,12 +34,14 @@ namespace GuiLib {
                 Size = value;
             }
         }
-        
+
         protected Size textSize;
         protected Size controlSize;
 
         public event EventHandler selectedChange = null;
 
+        public Orientation orientation;
+        public bool isSelected = false;
         private bool mouseOnLast;
 
         // Mutual event triggers
@@ -54,12 +56,14 @@ namespace GuiLib {
         public virtual void draw(Vector2 menuLocation) { }
         public virtual void deselect() { }
 
-        public Control() {
+        // Base constructor
+        public Control()
+            : base() {
             text = "";
+            location = new Vector2();
             size = new Size();
             controlSize = new Size();
             textSize = new Size();
-            location = new Vector2();
         }
 
         public void resize(int Width, int Height) {

@@ -42,7 +42,7 @@ namespace GuiLib {
                     newHeight = bottom;
                 }
             }
-            
+
             if (rendered == null || (newWidth != renderedWidth && newHeight != renderedHeight)) {
                 rendered = new RenderTarget2D(GUIRoot.graphicsDevice, newWidth, newHeight);
                 renderedWidth = newWidth;
@@ -53,10 +53,10 @@ namespace GuiLib {
 
             GUIRoot.graphicsDevice.SetRenderTarget(rendered);
             GUIRoot.graphicsDevice.Clear(Color.Transparent);
-            if(startBatch)
+            if (startBatch)
                 GUIRoot.spriteBatch.Begin();
             draw(Vector2.Zero);
-            if(startBatch)
+            if (startBatch)
                 GUIRoot.spriteBatch.End();
 
             GUIRoot.graphicsDevice.SetRenderTarget(null);

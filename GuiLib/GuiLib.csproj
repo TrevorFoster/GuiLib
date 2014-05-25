@@ -60,7 +60,7 @@
     <Compile Include="Shapes.cs" />
     <Compile Include="Size.cs" />
     <Compile Include="Tab.cs" />
-    <Compile Include="TabbedList.cs" />
+    <Compile Include="ControlList.cs" />
     <Compile Include="TestMenu.cs" />
     <Compile Include="TextBox.cs" />
     <Compile Include="ToolTip.cs" />

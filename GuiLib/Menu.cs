@@ -15,7 +15,8 @@ namespace GuiLib {
         public bool bordered = false;
         public bool initialized;
 
-        public Menu() : this("", Vector2.Zero, 10, 10) {
+        public Menu()
+            : this("", Vector2.Zero, 10, 10) {
 
         }
 
