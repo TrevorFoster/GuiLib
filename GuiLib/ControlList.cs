@@ -12,6 +12,7 @@ namespace GuiLib {
     class ControlList : Control {
         private List<Control> controls;
         private ControlGroup controlGroup;
+        private Orientation orientation = Orientation.Horizontal;
 
         public ControlList(Orientation orientation)
             : this() {
@@ -43,14 +44,20 @@ namespace GuiLib {
         }
 
         public override void draw(Vector2 menuLocation) {
-            int selectedInd = 0;
+            int selectedInd = -1;
             for (int i = controls.Count - 1; i >= 0; i--) {
-                if (!controls[i].isSelected) 
+                if (controls[i] is Tab) {
+                    Tab tab = (Tab)controls[i];
+                    if (!tab.isSelected)
+                        tab.draw(menuLocation);
+                    else
+                        selectedInd = i;
+                } else {
                     controls[i].draw(menuLocation);
-                else
-                    selectedInd = i;
+                }
             }
-            controls[selectedInd].draw(menuLocation);
+            if (selectedInd != -1)
+                controls[selectedInd].draw(menuLocation);
         }
 
         public void changeOrientation(Orientation newOri = Orientation.None) {
@@ -77,14 +84,18 @@ namespace GuiLib {
             for (int i = 0; i < controls.Count; i++) {
                 int offX = (maxWidth == 0) ? 0 : maxWidth - controls[i].size.Width;
                 int offY = (maxHeight == 0) ? 0 : maxHeight - controls[i].size.Height;
+                int xOff = 0;
                 controls[i].location = new Vector2(curLoc.X + offX, curLoc.Y + offY);
-                controls[i].orientation = orientation;
-                if(controls[i] is Tab)
-                    ((Tab)controls[i]).moveContents(location + new Vector2(offX, offY));
+                if (controls[i] is Tab) {
+                    Tab tab = (Tab)controls[i];
+                    tab.orientation = orientation;
+                    tab.moveContents(location + new Vector2(offX, offY));
+                    xOff = 10;
+                }
 
                 switch (orientation) {
                     case Orientation.Horizontal:
-                        curLoc.X += controls[i].size.Width - ((controls[i] is Tab) ? 10 : 0);
+                        curLoc.X += controls[i].size.Width - xOff;
                         break;
 
                     case Orientation.Vertical:

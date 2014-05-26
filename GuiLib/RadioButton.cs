@@ -6,8 +6,9 @@ namespace GuiLib {
 
     class RadioButton : Control {
         public event EventHandler onChange;
-
         private Animation buttonStates;
+
+        public bool isSelected = false;
 
         public RadioButton() {
             resized += resize;

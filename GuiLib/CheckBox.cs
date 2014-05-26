@@ -5,8 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GuiLib {
     class CheckBox : Control {
         public event EventHandler onChange;
-
         private Animation boxStates;
+
+        public bool isSelected = false;
 
         public CheckBox() {
 

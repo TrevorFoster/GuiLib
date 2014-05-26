@@ -40,8 +40,6 @@ namespace GuiLib {
 
         public event EventHandler selectedChange = null;
 
-        public Orientation orientation;
-        public bool isSelected = false;
         private bool mouseOnLast;
 
         // Mutual event triggers

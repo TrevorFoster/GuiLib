@@ -8,6 +8,8 @@ namespace GuiLib {
 
         private Menu tabContents;
         private Rectangle buttonRect;
+        public bool isSelected = false;
+        public Orientation orientation = Orientation.Horizontal;
 
         private AnimationSet frameSet;
         // middle
