@@ -31,24 +31,35 @@ namespace GuiLib {
             button1.text = "Testing";
             test.controls.Add(button1);
 
+            ControlList buttonList = new ControlList(Orientation.Horizontal);
+
+            buttonList.location = new Vector2(300, 200);
+            
+            buttonList.addControl(new Button("Test", Vector2.Zero, new Size(50, 30)));
+            buttonList.addControl(new Button());
+            buttonList.addControl(new Button());
+            buttonList.addControl(new Button());
+
+            controls.Add(buttonList);
+
             tabList = new ControlList(Orientation.Horizontal);
 
             tab = new Tab();
             tab.resize(120, 30);
             tab.text = "Tab1";
             tab.setMenu(new Menu("tab 1", Vector2.Zero, 360, 200));
-            tabList.addTab(tab);
+            tabList.addControl(tab);
 
             tab = new Tab();
             tab.resize(120, 30);
             tab.text = "Tab2";
             tab.setMenu(test);
-            tabList.addTab(tab);
+            tabList.addControl(tab);
 
             tab = new Tab();
             tab.resize(120, 30);
             tab.text = "Tab3";
-            tabList.addTab(tab);
+            tabList.addControl(tab);
 
             tabList.location = new Vector2(100, 300);
             controls.Add(tabList);

@@ -11,7 +11,7 @@ namespace GuiLib {
         private AnimationSet frameSet;
 
         // middle
-        private readonly Animation middle;
+        private Animation middle;
         // corners
         private Animation topLeft, topRight, bottomLeft, bottomRight;
         // edges
@@ -19,7 +19,17 @@ namespace GuiLib {
 
         private Rectangle buttonRect;
 
+        public Button(string text, Vector2 location, Size size)
+            : base(text, location, size) {
+
+        }
+
         public Button() {
+            this.resize(80, 50);
+            
+        }
+
+        public override void initialize() {
             frameSet = new AnimationSet();
 
             middle = new Animation(2, 1);
@@ -35,9 +45,7 @@ namespace GuiLib {
             top = new Animation(2, 1);
 
             frameSet.animations.AddRange(new List<Animation> { middle, left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight });
-        }
 
-        public override void initialize() {
             //loading the middle portion sprites
             middle.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 181, 96, 48));
 
@@ -53,12 +61,14 @@ namespace GuiLib {
             top.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 112, 96, 8));
             bottom.loadSheet(GUIResources.sheets[Sheet.MainSheet], new Rectangle(3, 121, 96, 8));
             sizeStuff();
+            base.initialize();
         }
 
         protected override void setSize(int Width, int Height) {
             size = new Size(Width, Height);
             controlSize = new Size(size.Width, size.Height);
-            sizeStuff();
+            if (initialized)
+                sizeStuff();
         }
 
         private void sizeStuff() {

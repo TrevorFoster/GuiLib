@@ -50,8 +50,9 @@ namespace GuiLib {
 
         protected event EventHandler moved = null;
         public event EventHandler resized = null;
+        protected bool initialized = false;
 
-        public virtual void initialize() { }
+        public virtual void initialize() { initialized = true; }
         protected virtual void subUpdate(Vector2 menuLocation) { }
         public virtual void draw(Vector2 menuLocation) { }
         public virtual void deselect() { }
@@ -64,6 +65,12 @@ namespace GuiLib {
             size = new Size();
             controlSize = new Size();
             textSize = new Size();
+        }
+
+        public Control(string text, Vector2 location, Size size) {
+            this.text = text;
+            this.location = new Vector2(location.X, location.Y);
+            this.size = size.Clone();
         }
 
         public void resize(int Width, int Height) {

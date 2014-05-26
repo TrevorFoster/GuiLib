@@ -11,7 +11,7 @@ namespace GuiLib {
 
     class ControlList : Control {
         private List<Control> controls;
-        private ControlGroup tabGroup;
+        private ControlGroup controlGroup;
 
         public ControlList(Orientation orientation)
             : this() {
@@ -20,25 +20,25 @@ namespace GuiLib {
 
         public ControlList() {
             controls = new List<Control>();
-            tabGroup = new ControlGroup();
+            controlGroup = new ControlGroup();
             moved += listMoved;
         }
 
         public override void initialize() {
-            foreach (Tab tab in controls) {
-                tab.initialize();
+            foreach (Control control in controls) {
+                control.initialize();
             }
         }
 
-        public void addTab(Tab newTab) {
-            tabGroup.addControl(newTab);
-            controls.Add(newTab);
+        public void addControl(Control newcontrol) {
+            controlGroup.addControl(newcontrol);
+            controls.Add(newcontrol);
             changeOrientation();
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
-            foreach (Tab tab in controls) {
-                tab.update(menuLocation);
+            foreach (Control control in controls) {
+                control.update(menuLocation);
             }
         }
 
@@ -60,15 +60,15 @@ namespace GuiLib {
             int maxHeight = 0;
             int maxWidth = 0;
 
-            foreach (Tab tab in controls) {
+            foreach (Control control in controls) {
                 switch (orientation) {
                     case Orientation.Horizontal:
-                        if (tab.size.Height > maxHeight)
-                            maxHeight = tab.size.Height;
+                        if (control.size.Height > maxHeight)
+                            maxHeight = control.size.Height;
                         break;
                     case Orientation.Vertical:
-                        if (tab.size.Width > maxWidth)
-                            maxWidth = tab.size.Width;
+                        if (control.size.Width > maxWidth)
+                            maxWidth = control.size.Width;
                         break;
                 }
             }
@@ -84,7 +84,7 @@ namespace GuiLib {
 
                 switch (orientation) {
                     case Orientation.Horizontal:
-                        curLoc.X += controls[i].size.Width - 10;
+                        curLoc.X += controls[i].size.Width - ((controls[i] is Tab) ? 10 : 0);
                         break;
 
                     case Orientation.Vertical:

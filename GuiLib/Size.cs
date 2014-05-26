@@ -17,6 +17,10 @@ namespace GuiLib {
             Height = height;
         }
 
+        public Size Clone() {
+            return new Size(this.Width, this.Height);
+        }
+
         // arithmetic operators
         public static Size operator +(Size size1, Size size2) {
             return new Size(size1.Width + size2.Width, size1.Height + size2.Height);

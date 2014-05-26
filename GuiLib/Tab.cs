@@ -81,11 +81,11 @@ namespace GuiLib {
         }
 
         public void setMenu(Menu newMenu) {
-            if (isSelected) {
+            if (isSelected)
                 newMenu.show();
-            } else {
+            else
                 newMenu.hide();
-            }
+
             tabContents = newMenu;
         }
 
@@ -93,7 +93,6 @@ namespace GuiLib {
             buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
             frameSet.update();
             if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.initialClick)) {
-
                 isSelected = true;
                 if (tabContents != null) {
                     tabContents.show();
@@ -101,14 +100,9 @@ namespace GuiLib {
 
                 selectedHasChanged();
                 frameSet.setFrames(0);
-                //frameSet.render(true);
                 eventTrigger(onChange);
-
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
                 frameSet.setFrames(0);
-            } else if (!isSelected) {
-                //frameSet.setFrames(1);
-
             }
 
             if (isSelected && tabContents != null) {
