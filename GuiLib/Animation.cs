@@ -8,7 +8,7 @@ namespace GuiLib {
         public int frameWidth, frameHeight;
         private readonly Size dimensions;
 
-        public List<Texture2D> frames;
+        public List<Rectangle> frames;
         public int frame = 0;
         private int lastFrame = -1;
 
@@ -18,23 +18,32 @@ namespace GuiLib {
         public bool automated = false;
         private float deltaTime;
         public float interval = 1.0f;
+        private Sheet sheet;
 
         
-        public Animation(int dimW, int dimY) {
-            frames = new List<Texture2D>();
+        public Animation(int dimW, int dimY, Sheet sheet) {
+            frames = new List<Rectangle>();
             dimensions = new Size(dimW, dimY);
 
             offset = Vector2.Zero;
             scale = Vector2.One;
         }
 
-        public Animation(int dimW, int dimY, Vector2 offset) {
-            frames = new List<Texture2D>();
+        public Animation(int dimW, int dimY, Sheet sheet, Vector2 offset) {
+            frames = new List<Rectangle>();
             dimensions = new Size(dimW, dimY);
+            this.sheet = sheet;
 
             this.offset = offset;
             scale = Vector2.One;
         }
+
+        /*public Animation Copy() {
+            Animation copy = new Animation(this.dimensions.Width, this.dimensions.Height, sheet, this.offset);
+            copy.frame = this.frame;
+            copy.frameWidth = this.frameWidth;
+            copy.frameHeight = this.frameHeight;
+        }*/
 
         /// <summary>
         /// Changes the scale of this animation to the new
@@ -49,20 +58,8 @@ namespace GuiLib {
         /// Returns the animation's current frame.
         /// </summary>
         /// <returns>Current frame</returns>
-        public Texture2D currentFrame() {
+        public Rectangle currentFrame() {
             return frames[frame];
-        }
-
-        /// <summary>
-        /// Returns the animation's frame at the given index.
-        /// </summary>
-        /// <param name="frameIndex">The index of the frame.</param>
-        /// <returns>A single single frame requested.</returns>
-        public Texture2D getFrame(int frameIndex) {
-            if (frameIndex < frames.Count - 1 && frameIndex >= 0) {
-                return frames[frameIndex];
-            }
-            return null;
         }
 
         public bool needsRender() {
@@ -100,7 +97,7 @@ namespace GuiLib {
         /// </summary>
         /// <param name="origin">The origin to draw the animation offset from.</param>
         public void draw(Vector2 origin) {
-            GUIRoot.spriteBatch.Draw(currentFrame(), origin + offset, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
+            GUIRoot.spriteBatch.Draw(GUIResources.sheets[sheet], origin + offset, currentFrame(), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
         }
 
         /// <summary>
@@ -108,26 +105,29 @@ namespace GuiLib {
         /// </summary>
         /// <param name="texture">The sheet to extract the sprite from</param>
         /// <param name="source">Where to extract the sprite from</param>
-        public void loadSheet(Texture2D texture, Rectangle source) {
-            Color[] pixels = new Color[texture.Width * texture.Height];
-            texture.GetData(pixels);
+        public void loadSheet(Rectangle source) {
 
             frameWidth = source.Width / dimensions.Width;
             frameHeight = source.Height / dimensions.Height;
-
-            for (int y = source.Top; y < source.Bottom; y += frameHeight) {
-                for (int x = source.Left; x < source.Right; x += frameWidth) {
-                    Texture2D frameTexture = new Texture2D(GUIRoot.graphicsDevice, frameWidth, frameHeight);
-                    Color[] framePixels = new Color[frameWidth * frameHeight];
-                    for (int j = 0; j < frameWidth; j++) {
-                        for (int k = 0; k < frameHeight; k++) {
-                            framePixels[j + k * frameWidth] = pixels[(x + j) + (y + k) * texture.Width];
-                        }
-                    }
-                    frameTexture.SetData(framePixels);
-                    frames.Add(frameTexture);
+            for (int y = 0; y < dimensions.Height; y++) {
+                for (int x = 0; x < dimensions.Width; x++) {
+                    frames.Add(new Rectangle(source.Left + x * frameWidth, source.Top + y * frameHeight, frameWidth, frameHeight));
                 }
             }
+            /*
+                for (int y = source.Top; y < source.Bottom; y += frameHeight) {
+                    for (int x = source.Left; x < source.Right; x += frameWidth) {
+                        Texture2D frameTexture = new Texture2D(GUIRoot.graphicsDevice, frameWidth, frameHeight);
+                        Color[] framePixels = new Color[frameWidth * frameHeight];
+                        for (int j = 0; j < frameWidth; j++) {
+                            for (int k = 0; k < frameHeight; k++) {
+                                framePixels[j + k * frameWidth] = pixels[(x + j) + (y + k) * texture.Width];
+                            }
+                        }
+                        frameTexture.SetData(framePixels);
+                        frames.Add(frameTexture);
+                    }
+                }*/
         }
     }
 }

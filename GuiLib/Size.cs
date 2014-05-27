@@ -7,8 +7,24 @@ using System.Text;
 namespace GuiLib {
     class Size {
 
-        public int Width;
-        public int Height;
+        private int width;
+        public int Width {
+            get { return width; }
+            set {
+                width = value;
+                onFieldChange("w");
+            }
+        }
+        private int height;
+        public int Height {
+            get { return height; }
+            set {
+                height = value;
+                onFieldChange("h");
+            }
+        }
+
+        public event PropertyChangedEventHandler fieldChanged = null;
 
         public Size() : this(0, 0) { }
 
@@ -16,6 +32,13 @@ namespace GuiLib {
             Width = width;
             Height = height;
         }
+
+        protected virtual void onFieldChange(string fieldName) {
+            PropertyChangedEventHandler handler = fieldChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(fieldName));
+        }
+
 
         public Size Clone() {
             return new Size(this.Width, this.Height);

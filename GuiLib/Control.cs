@@ -26,12 +26,12 @@ namespace GuiLib {
                 }
             }
         }
+        protected Size realSize;
 
-        private Size Size;
         public Size size {
-            get { return Size; }
-            protected set {
-                Size = value;
+            get { return realSize; }
+            set {
+                resize(value.Width, value.Height);
             }
         }
 
@@ -47,7 +47,6 @@ namespace GuiLib {
         public event EventHandler mouseOff = null;
 
         protected event EventHandler moved = null;
-        public event EventHandler resized = null;
         protected bool initialized = false;
 
         public virtual void initialize() { initialized = true; }
@@ -60,24 +59,29 @@ namespace GuiLib {
             : base() {
             text = "";
             location = new Vector2();
-            size = new Size();
+            realSize = new Size();
             controlSize = new Size();
             textSize = new Size();
+
+            size.fieldChanged += resize;
         }
 
         public Control(string text, Vector2 location, Size size) {
             this.text = text;
             this.location = new Vector2(location.X, location.Y);
-            this.size = size.Clone();
+            this.realSize = size.Clone();
+        }
+
+        protected void resize(object sender, PropertyChangedEventArgs e) {
+            setSize(size.Width, size.Height);
         }
 
         public void resize(int Width, int Height) {
             setSize(Width, Height);
-            eventTrigger(resized);
         }
 
         protected virtual void setSize(int Width, int Height) {
-            size = new Size(Width, Height);
+            realSize = new Size(Width, Height);
         }
 
         protected virtual void updateSize() {
@@ -99,7 +103,7 @@ namespace GuiLib {
         private void checkMouseOver(Vector2 menuLocation) {
             if (mouseOnLast) return;
 
-            if (new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height).Contains(InputHandler.mouseRect)) {
+            if (new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect)) {
                 eventTrigger(mouseOver);
                 mouseOnLast = true;
             }
@@ -108,7 +112,7 @@ namespace GuiLib {
         private void checkMouseOff(Vector2 menuLocation) {
             if (!mouseOnLast) return;
 
-            if (!(new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height).Contains(InputHandler.mouseRect))) {
+            if (!(new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect))) {
                 eventTrigger(mouseOff);
                 mouseOnLast = false;
             }

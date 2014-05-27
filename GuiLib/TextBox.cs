@@ -10,11 +10,11 @@ namespace GuiLib {
 
         public TextBox() {
             cursor = 0;
-            size = new Size(150, 30);
+            realSize = new Size(150, 30);
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
-            Rectangle boxRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), size.Width, size.Height);
+            Rectangle boxRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
 
             if (InputHandler.leftClickRelease()) {
                 if (boxRect.Contains(InputHandler.mouseRect)) {
@@ -54,7 +54,7 @@ namespace GuiLib {
 
         public override void draw(Vector2 menuLocation) {
 
-            Shapes.DrawRectangle(size.Width, size.Height, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.White, 0);
+            Shapes.DrawRectangle(realSize.Width, realSize.Height, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.White, 0);
             if (text != null) {
                 GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
             }

@@ -45,7 +45,8 @@ namespace GuiLib {
             tabList = new ControlList(Orientation.Horizontal);
 
             tab = new Tab();
-            tab.resize(120, 30);
+            tab.size.Width = 120;
+            tab.size.Height = 30;
             tab.text = "Tab1";
             tab.setMenu(new Menu("tab 1", Vector2.Zero, 360, 200));
             tabList.addControl(tab);
