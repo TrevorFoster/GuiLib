@@ -38,13 +38,6 @@ namespace GuiLib {
             scale = Vector2.One;
         }
 
-        /*public Animation Copy() {
-            Animation copy = new Animation(this.dimensions.Width, this.dimensions.Height, sheet, this.offset);
-            copy.frame = this.frame;
-            copy.frameWidth = this.frameWidth;
-            copy.frameHeight = this.frameHeight;
-        }*/
-
         /// <summary>
         /// Changes the scale of this animation to the new
         /// scale passed.
@@ -114,20 +107,6 @@ namespace GuiLib {
                     frames.Add(new Rectangle(source.Left + x * frameWidth, source.Top + y * frameHeight, frameWidth, frameHeight));
                 }
             }
-            /*
-                for (int y = source.Top; y < source.Bottom; y += frameHeight) {
-                    for (int x = source.Left; x < source.Right; x += frameWidth) {
-                        Texture2D frameTexture = new Texture2D(GUIRoot.graphicsDevice, frameWidth, frameHeight);
-                        Color[] framePixels = new Color[frameWidth * frameHeight];
-                        for (int j = 0; j < frameWidth; j++) {
-                            for (int k = 0; k < frameHeight; k++) {
-                                framePixels[j + k * frameWidth] = pixels[(x + j) + (y + k) * texture.Width];
-                            }
-                        }
-                        frameTexture.SetData(framePixels);
-                        frames.Add(frameTexture);
-                    }
-                }*/
         }
     }
 }

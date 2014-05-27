@@ -31,7 +31,9 @@ namespace GuiLib {
         public Size size {
             get { return realSize; }
             set {
-                resize(value.Width, value.Height);
+                if (!(this is Label)) {
+                    resize(value.Width, value.Height);
+                }
             }
         }
 
