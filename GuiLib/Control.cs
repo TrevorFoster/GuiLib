@@ -19,11 +19,7 @@ namespace GuiLib {
             get { return Text; }
             set {
                 Text = value;
-                if (Text != null && FontManager.fonts[Font.Verdana] != null) {
-                    Vector2 measure = FontManager.fonts[Font.Verdana].MeasureString(Text);
-                    textSize = new Size((int)measure.X, (int)measure.Y);
-                    eventTrigger(onSizeChanged);
-                }
+                measureText();
             }
         }
 
@@ -32,7 +28,7 @@ namespace GuiLib {
             get { return realSize; }
             set {
                 if (!(this is Label)) {
-                    resize(value.Width, value.Height);
+                    setSize(value.Width, value.Height);
                     eventTrigger(onSizeChanged);
                 }
             }
@@ -43,7 +39,7 @@ namespace GuiLib {
 
         public event EventHandler selectedChange = null;
 
-        private bool mouseOnLast;
+        public bool hovering;
 
         // Mutual event triggers
         public event EventHandler mouseOver = null;
@@ -78,16 +74,25 @@ namespace GuiLib {
         public Control(string text, Vector2 location, Size size) {
             this.text = text;
             this.location = new Vector2(location.X, location.Y);
-            this.realSize = size.Clone();
+            realSize = size;
+            controlSize = new Size();
+            textSize = new Size();
+            measureText();
+            setSize(realSize.Width, realSize.Height);
+
+            onSizeChanged += sizeChanged;
+            onLocationChanged += locationChanged;
         }
 
-        public void resize(int Width, int Height) {
-            setSize(Width, Height);
+        private void measureText() {
+            if (Text != null && FontManager.fonts[Font.Verdana] != null) {
+                Vector2 measure = FontManager.fonts[Font.Verdana].MeasureString(Text);
+                textSize = new Size((int)measure.X, (int)measure.Y);
+                eventTrigger(onSizeChanged);
+            }
         }
 
-        protected virtual void setSize(int Width, int Height) {
-            realSize = new Size(Width, Height);
-        }
+        protected virtual void setSize(int Width, int Height) { }
 
         public void update(Vector2 menuLocation) {
             if (mouseOver != null) {
@@ -102,20 +107,20 @@ namespace GuiLib {
         }
 
         private void checkMouseOver(Vector2 menuLocation) {
-            if (mouseOnLast) return;
+            if (hovering) return;
 
             if (new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect)) {
                 eventTrigger(mouseOver);
-                mouseOnLast = true;
+                hovering = true;
             }
         }
 
         private void checkMouseOff(Vector2 menuLocation) {
-            if (!mouseOnLast) return;
+            if (!hovering) return;
 
             if (!(new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect))) {
                 eventTrigger(mouseOff);
-                mouseOnLast = false;
+                hovering = false;
             }
         }
 

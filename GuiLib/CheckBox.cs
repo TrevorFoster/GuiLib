@@ -17,7 +17,7 @@ namespace GuiLib {
 
         public override void initialize() {
             boxStates.loadSheet(new Rectangle(2, 2, 98, 48));
-            realSize = new Size(controlSize.Width, controlSize.Height);
+            realSize = new Size(controlSize.Width + textSize.Width, controlSize.Height);
             boxStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
         }
 

@@ -43,6 +43,47 @@ namespace GuiLib {
         }
 
         public override void draw(Vector2 menuLocation) {
+            
+            int maxHeight = 0;
+            int maxWidth = 0;
+
+            foreach (Control control in controls) {
+                switch (orientation) {
+                    case Orientation.Horizontal:
+                        if (control.size.Height > maxHeight)
+                            maxHeight = control.size.Height;
+                        break;
+                    case Orientation.Vertical:
+                        if (control.size.Width > maxWidth)
+                            maxWidth = control.size.Width;
+                        break;
+                }
+            }
+
+            Vector2 curLoc = new Vector2(location.X, location.Y);
+            for (int i = 0; i < controls.Count; i++) {
+                int offX = (maxWidth <= 0) ? 0 : maxWidth - controls[i].size.Width;
+                int offY = (maxHeight <= 0) ? 0 : maxHeight - controls[i].size.Height;
+                int xOff = 0;
+                controls[i].location = new Vector2(curLoc.X + offX, curLoc.Y + offY);
+                if (controls[i] is Tab) {
+                    Tab tab = (Tab)controls[i];
+                    tab.orientation = orientation;
+                    tab.moveContents(location + new Vector2(offX, offY));
+                    xOff = 10;
+                }
+
+                switch (orientation) {
+                    case Orientation.Horizontal:
+                        curLoc.X += controls[i].size.Width - xOff;
+                        break;
+
+                    case Orientation.Vertical:
+                        curLoc.Y += controls[i].size.Height;
+                        break;
+                }
+            }
+
             int selectedInd = -1;
             for (int i = controls.Count - 1; i >= 0; i--) {
                 if (controls[i] is Tab) {
@@ -64,46 +105,6 @@ namespace GuiLib {
                 orientation = newOri;
             }
             if (controls == null) return;
-
-            int maxHeight = 0;
-            int maxWidth = 0;
-
-            foreach (Control control in controls) {
-                switch (orientation) {
-                    case Orientation.Horizontal:
-                        if (control.size.Height > maxHeight)
-                            maxHeight = control.size.Height;
-                        break;
-                    case Orientation.Vertical:
-                        if (control.size.Width > maxWidth)
-                            maxWidth = control.size.Width;
-                        break;
-                }
-            }
-
-            Vector2 curLoc = new Vector2(location.X, location.Y);
-            for (int i = 0; i < controls.Count; i++) {
-                int offX = (maxWidth == 0) ? 0 : maxWidth - controls[i].size.Width;
-                int offY = (maxHeight == 0) ? 0 : maxHeight - controls[i].size.Height;
-                int xOff = 0;
-                controls[i].location = new Vector2(curLoc.X + offX, curLoc.Y + offY);
-                if (controls[i] is Tab) {
-                    Tab tab = (Tab)controls[i];
-                    tab.orientation = orientation;
-                    tab.moveContents(location + new Vector2(offX, offY));
-                    xOff = 10;
-                }
-
-                switch (orientation) {
-                    case Orientation.Horizontal:
-                        curLoc.X += controls[i].size.Width - xOff;
-                        break;
-
-                    case Orientation.Vertical:
-                        curLoc.Y += controls[i].size.Height;
-                        break;
-                }
-            }
         }
 
         protected override void locationChanged(object sender, EventArgs e) {

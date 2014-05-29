@@ -12,16 +12,14 @@ namespace GuiLib {
 
         public RadioButton() {
             text = "";
-            textSize = new Size();
-            controlSize = new Size(24, 24);
-            realSize = new Size(24, 24);
 
             buttonStates = new Animation(2, 1, Sheet.MainSheet);
+            setSize(24, 24);
         }
 
         public override void initialize() {
             buttonStates.loadSheet(new Rectangle(2, 52, 98, 48));
-            buttonStates.updateScale(new Vector2(realSize.Width, realSize.Height));
+            buttonStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
@@ -35,9 +33,14 @@ namespace GuiLib {
             }
         }
 
+        protected override void sizeChanged(object sender, EventArgs e) {
+            realSize = new Size(realSize.Width + textSize.Width, (int)Math.Max(realSize.Height, textSize.Height));
+        }
+
         protected override void setSize(int Width, int Height){
             controlSize = new Size(Width, Height);
             realSize = new Size(Width + textSize.Width, (int)Math.Max(Height, textSize.Height));
+
             buttonStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
         }
 

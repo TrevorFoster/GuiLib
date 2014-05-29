@@ -21,15 +21,24 @@ namespace GuiLib {
 
         public Button(string text, Vector2 location, Size size)
             : base(text, location, size) {
+            frameSet = new AnimationSet();
 
+            middle = new Animation(2, 1, Sheet.MainSheet);
+
+            topLeft = new Animation(2, 1, Sheet.MainSheet);
+            topRight = new Animation(2, 1, Sheet.MainSheet);
+            bottomLeft = new Animation(2, 1, Sheet.MainSheet);
+            bottomRight = new Animation(2, 1, Sheet.MainSheet);
+
+            left = new Animation(2, 1, Sheet.MainSheet);
+            right = new Animation(2, 1, Sheet.MainSheet);
+            bottom = new Animation(2, 1, Sheet.MainSheet);
+            top = new Animation(2, 1, Sheet.MainSheet);
+
+            frameSet.animations.AddRange(new List<Animation> { middle, left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight });
         }
 
         public Button() {
-            this.resize(80, 50);
-            
-        }
-
-        public override void initialize() {
             frameSet = new AnimationSet();
 
             middle = new Animation(2, 1, Sheet.MainSheet);
@@ -46,6 +55,10 @@ namespace GuiLib {
 
             frameSet.animations.AddRange(new List<Animation> { middle, left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight });
 
+            this.setSize(80, 30);
+        }
+
+        public override void initialize() {
             //loading the middle portion sprites
             middle.loadSheet(new Rectangle(3, 181, 96, 48));
 
@@ -60,14 +73,21 @@ namespace GuiLib {
             right.loadSheet(new Rectangle(23, 132, 16, 48));
             top.loadSheet(new Rectangle(3, 112, 96, 8));
             bottom.loadSheet(new Rectangle(3, 121, 96, 8));
+
             sizeStuff();
+
             base.initialize();
+        }
+
+        protected override void sizeChanged(object sender, EventArgs e) {
+            sizeStuff();
         }
 
         protected override void setSize(int Width, int Height) {
             realSize = new Size(Width, Height);
-            controlSize = new Size(realSize.Width, realSize.Height);
-            if (initialized)
+            controlSize = realSize;
+            
+            if(initialized)
                 sizeStuff();
         }
 

@@ -5,7 +5,6 @@ namespace GuiLib {
     class ToolTip : Control {
         private Vector2 tipLocation;
         private bool drawTip;
-        private bool hovering;
 
         public int hoverTime;
         private int timeHovered;
@@ -32,12 +31,12 @@ namespace GuiLib {
         // Callback function to turn drawing of the tool tip on
         private void mousedOver(object sender, EventArgs e) {
             hovering = true;
+            drawTip = true;
         }
 
         // Callback function to turn the tool tip drawing off
         private void mousedOff(object sender, EventArgs e) {
             drawTip = false;
-            hovering = false;
             timeHovered = 0;
         }
 
