@@ -8,9 +8,8 @@ namespace GuiLib {
             realSize = new Size(textSize.Width, textSize.Height);
         }
 
-        protected override void updateSize() {
+        protected override void sizeChanged(object sender, EventArgs e) {
             realSize = new Size(textSize.Width, textSize.Height);
-            
         }
 
         public override void draw(Vector2 menuLocation) {

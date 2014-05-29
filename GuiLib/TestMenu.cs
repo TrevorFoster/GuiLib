@@ -19,14 +19,13 @@ namespace GuiLib {
 
         public override void setLayout() {
             Tab tab;
-
             Menu test = new Menu("tab 1", Vector2.Zero, 360, 200);
 
             button1 = new Button();
             button1.onClick += button1_clicked;
 
             button1.location = new Vector2(10, 10);
-            button1.resize(80, 40);
+            button1.size = new Size(80, 40);
 
             button1.text = "Testing";
             test.controls.Add(button1);
@@ -45,20 +44,19 @@ namespace GuiLib {
             tabList = new ControlList(Orientation.Horizontal);
 
             tab = new Tab();
-            tab.size.Width = 120;
-            tab.size.Height = 30;
+            tab.size = new Size(120, 30);
             tab.text = "Tab1";
             tab.setMenu(new Menu("tab 1", Vector2.Zero, 360, 200));
             tabList.addControl(tab);
 
             tab = new Tab();
-            tab.resize(120, 30);
+            tab.size = new Size(120, 30);
             tab.text = "Tab2";
             tab.setMenu(test);
             tabList.addControl(tab);
 
             tab = new Tab();
-            tab.resize(120, 30);
+            tab.size = new Size(120, 30);
             tab.text = "Tab3";
             tabList.addControl(tab);
 
@@ -110,6 +108,7 @@ namespace GuiLib {
             radioGroup2.addControl(rbutton);
 
             rbutton2 = new RadioButton { location = new Vector2(200, 200), text = "2nd group" };
+            rbutton2.location = new Vector2(200, 200);
             radioGroup2.addControl(rbutton2);
 
             controls.Add(tip);

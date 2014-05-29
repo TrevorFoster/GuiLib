@@ -22,7 +22,6 @@ namespace GuiLib {
         public ControlList() {
             controls = new List<Control>();
             controlGroup = new ControlGroup();
-            moved += listMoved;
         }
 
         public override void initialize() {
@@ -64,6 +63,8 @@ namespace GuiLib {
             if (newOri != Orientation.None) {
                 orientation = newOri;
             }
+            if (controls == null) return;
+
             int maxHeight = 0;
             int maxWidth = 0;
 
@@ -105,7 +106,7 @@ namespace GuiLib {
             }
         }
 
-        private void listMoved(object sender, EventArgs e) {
+        protected override void locationChanged(object sender, EventArgs e) {
             changeOrientation();
         }
     }

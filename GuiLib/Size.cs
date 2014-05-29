@@ -5,40 +5,27 @@ using System.Linq;
 using System.Text;
 
 namespace GuiLib {
-    class Size {
-
+    public struct Size {
         private int width;
         public int Width {
             get { return width; }
-            set {
-                width = value;
-                onFieldChange("w");
-            }
+            set { width = value; }
         }
+
         private int height;
         public int Height {
             get { return height; }
-            set {
-                height = value;
-                onFieldChange("h");
-            }
+            set { height = value; }
         }
 
-        public event PropertyChangedEventHandler fieldChanged = null;
+        public static Size Zero = new Size(0, 0);
 
-        public Size() : this(0, 0) { }
-
-        public Size(int width, int height) {
-            Width = width;
-            Height = height;
+        public Size(int Width, int Height) {
+            width = 0;
+            height = 0;
+            this.Width = Width;
+            this.Height = Height;
         }
-
-        protected virtual void onFieldChange(string fieldName) {
-            PropertyChangedEventHandler handler = fieldChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(fieldName));
-        }
-
 
         public Size Clone() {
             return new Size(this.Width, this.Height);

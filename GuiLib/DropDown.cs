@@ -15,8 +15,8 @@ namespace GuiLib {
         private Size itemBoxSize;
         private Size buttonSize;
 
+        private AnimationSet itemBoxAnimation;
         private Animation left, right, middle;
-
         private Animation buttonStates;
 
         public List<string> items;
@@ -30,9 +30,12 @@ namespace GuiLib {
             buttonSize = new Size(24, 24);
             realSize = itemBoxSize + buttonSize;
 
+            itemBoxAnimation = new AnimationSet();
             left = new Animation(1, 1, Sheet.MainSheet);
             right = new Animation(1, 1, Sheet.MainSheet);
             middle = new Animation(1, 1, Sheet.MainSheet);
+            itemBoxAnimation.animations.AddRange(new List<Animation> { left, right, middle });
+
             buttonStates = new Animation(1, 1, Sheet.MainSheet);
         }
 
@@ -42,6 +45,7 @@ namespace GuiLib {
             middle.loadSheet(new Rectangle(161, 2, 32, 48));
 
             buttonStates.loadSheet(new Rectangle(103, 2, 48, 48));
+            sizeStuff();
         }
 
         protected override void subUpdate(Vector2 menuLocation) {
@@ -72,38 +76,43 @@ namespace GuiLib {
             }
         }
 
+        private void sizeStuff() {
+            middle.updateScale(new Vector2(itemBoxSize.Width - right.frameWidth * 2, itemBoxSize.Height));
+
+            left.updateScale(new Vector2(left.frameWidth, itemBoxSize.Height));
+            right.updateScale(new Vector2(right.frameWidth, itemBoxSize.Height));
+
+            right.offset = new Vector2(itemBoxSize.Width - right.frameWidth, 0);
+            middle.offset = new Vector2(left.frameWidth, 0);
+
+            buttonStates.updateScale(new Vector2(buttonSize.Width, buttonSize.Height));
+        }
+
         protected override void setSize(int Width, int Height) {
             realSize = new Size(Width + buttonSize.Width, Height);
             itemBoxSize = new Size(Width, realSize.Height);
             buttonSize = new Size(buttonSize.Width, realSize.Height);
 
+            sizeStuff();
         }
 
         public override void draw(Vector2 menuLocation) {
             Vector2 drawloc = new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y);
 
-            /*GUIRoot.spriteBatch.Draw(left.currentFrame(), drawloc, null, Color.White, 0f, Vector2.Zero,
-                new Vector2(1f, (float)itemBoxSize.Height / left.frameHeight), SpriteEffects.None, 0);
-            GUIRoot.spriteBatch.Draw(middle.currentFrame(), drawloc + new Vector2(left.frameWidth, 0), null, Color.White, 0f, Vector2.Zero,
-                new Vector2((float)(itemBoxSize.Width - right.frameWidth) / middle.frameWidth, (float)itemBoxSize.Height / middle.frameHeight), SpriteEffects.None, 0);
-            GUIRoot.spriteBatch.Draw(right.currentFrame(), drawloc + new Vector2(itemBoxSize.Width - right.frameWidth, 0), null, Color.White, 0f, Vector2.Zero,
-                new Vector2(1f, (float)itemBoxSize.Height / right.frameHeight), SpriteEffects.None, 0);
 
+            buttonStates.draw(drawloc + new Vector2(itemBoxSize.Width, 0));
+            itemBoxAnimation.draw(drawloc);
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, drawloc + new Vector2(left.frameWidth, 0), Color.Black);
-            GUIRoot.spriteBatch.Draw(buttonStates.currentFrame(), drawloc + new Vector2(itemBoxSize.Width, 0), null, Color.White, 0f, Vector2.Zero,
-                new Vector2((float)buttonSize.Width / buttonStates.frameWidth, (float)buttonSize.Height / buttonStates.frameHeight), SpriteEffects.None, 0);
 
             if (!isDropOpen) return;
 
+            Vector2 boxLoc = new Vector2(0, 0);
             for (int i = 0; i < items.Count; i++) {
-                GUIRoot.spriteBatch.Draw(left.currentFrame(), drawloc + new Vector2(0, (i + 1) * itemBoxSize.Height), null, Color.White, 0f, Vector2.Zero,
-                    new Vector2(1f, (float)itemBoxSize.Height / left.frameHeight), SpriteEffects.None, 0);
-                GUIRoot.spriteBatch.Draw(middle.currentFrame(), drawloc + new Vector2(left.frameWidth, (i + 1) * itemBoxSize.Height), null, Color.White, 0f, Vector2.Zero,
-                    new Vector2((float)(itemBoxSize.Width - right.frameWidth) / middle.frameWidth, (float)itemBoxSize.Height / middle.frameHeight), SpriteEffects.None, 0);
-                GUIRoot.spriteBatch.Draw(right.currentFrame(), drawloc + new Vector2(itemBoxSize.Width - right.frameWidth, (i + 1) * itemBoxSize.Height), null, Color.White, 0f, Vector2.Zero,
-                    new Vector2(1f, (float)itemBoxSize.Height / right.frameHeight), SpriteEffects.None, 0);
-                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], items[i], drawloc + new Vector2(left.frameWidth, (i + 1) * itemBoxSize.Height), Color.Black);*/
+                boxLoc.Y += itemBoxSize.Height;
 
+                itemBoxAnimation.draw(drawloc + boxLoc);
+                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], items[i], drawloc + boxLoc + new Vector2(left.frameWidth, 0), Color.Black);
             }
         }
     }
+}
