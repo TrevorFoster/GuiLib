@@ -15,7 +15,12 @@ namespace GuiLib {
             Label temp;
 
             list = new ControlList(Orientation.Vertical);
+            list.location = new Vector2(100, 100);
             temp = new Label { text = "Unchecked" };
+            temp.mouseOver += changeState;
+            temp.mouseOff += changeState;
+            list.addControl(temp);
+            temp = new Label { text = "Checked" };
             temp.mouseOver += changeState;
             temp.mouseOff += changeState;
             list.addControl(temp);
@@ -23,11 +28,7 @@ namespace GuiLib {
             temp.mouseOver += changeState;
             temp.mouseOff += changeState;
             list.addControl(temp);
-            temp = new Label { text = "Unchecked" };
-            temp.mouseOver += changeState;
-            temp.mouseOff += changeState;
-            list.addControl(temp);
-            temp = new Label { text = "Unchecked" };
+            temp = new Label { text = "Checjoiosdifiofiosdfjio" };
             temp.mouseOver += changeState;
             temp.mouseOff += changeState;
             list.addControl(temp);

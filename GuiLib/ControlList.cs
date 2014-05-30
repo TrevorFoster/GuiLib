@@ -9,10 +9,16 @@ namespace GuiLib {
         Vertical
     }
 
+    public enum Justification {
+        Left,
+        Right
+    }
+
     class ControlList : Control {
         private List<Control> controls;
         private ControlGroup controlGroup;
         private Orientation orientation = Orientation.Horizontal;
+        private Justification justification = Justification.Right;
 
         public ControlList(Orientation orientation)
             : this() {
@@ -65,6 +71,17 @@ namespace GuiLib {
                 int offX = (maxWidth <= 0) ? 0 : maxWidth - controls[i].size.Width;
                 int offY = (maxHeight <= 0) ? 0 : maxHeight - controls[i].size.Height;
                 int xOff = 0;
+                if (orientation == Orientation.Vertical) {
+                    switch (justification) {
+                        case Justification.Left:
+                            offX = 0;
+                            offY = 0;
+                            break;
+                        
+                        case Justification.Right:
+                            break;
+                    }
+                }
                 controls[i].location = new Vector2(curLoc.X + offX, curLoc.Y + offY);
                 if (controls[i] is Tab) {
                     Tab tab = (Tab)controls[i];
