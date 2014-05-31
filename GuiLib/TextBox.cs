@@ -17,11 +17,7 @@ namespace GuiLib {
             Rectangle boxRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
 
             if (InputHandler.leftClickRelease()) {
-                if (boxRect.Contains(InputHandler.mouseRect)) {
-                    isSelected = true;
-                } else {
-                    isSelected = false;
-                }
+                isSelected = hovering ? true : false;
             }
 
             if (isSelected) {
@@ -34,7 +30,7 @@ namespace GuiLib {
                         cursor++;
                     }
                 } else {
-                    foreach (Keys key in InputHandler.previousKeys) {
+                    foreach (Keys key in InputHandler.keysLastFrame) {
                         if (InputHandler.keyTyped(key)) {
                             int keyI = (int)key;
                             if (keyI >= 32 && keyI <= 128) {

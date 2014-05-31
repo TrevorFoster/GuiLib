@@ -110,16 +110,15 @@ namespace GuiLib {
         }
 
         public override void update(Vector2 menuLocation) {
-            buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
-
-            if (InputHandler.leftClickRelease()
-                && buttonRect.Contains(InputHandler.initialClick)
-                && buttonRect.Contains(InputHandler.releaseClick)) {
-
-                eventTrigger(onClick);
+            if (hovering) {
+                if (InputHandler.leftClickRelease() && hovering) {
+                    eventTrigger(onClick);
+                    frameSet.setFrames(0);
+                } else if (InputHandler.leftPressed() && hovering) {
+                    frameSet.setFrames(1);
+                }
+            } else if (middle.frame != 0) {
                 frameSet.setFrames(0);
-            } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
-                frameSet.setFrames(1);
             }
             base.update(menuLocation);
         }

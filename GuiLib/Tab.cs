@@ -92,19 +92,17 @@ namespace GuiLib {
         }
 
         public override void update(Vector2 menuLocation) {
-            buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
-            frameSet.update();
-            if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.initialClick)) {
-                isSelected = true;
-                if (tabContents != null) {
-                    tabContents.show();
-                }
+            if (hovering && InputHandler.leftPressed()) {
+                    isSelected = true;
+                    if (tabContents != null) {
+                        tabContents.show();
+                    }
 
-                selectedHasChanged();
-                frameSet.setFrames(0);
-                eventTrigger(onChange);
-            } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
-                frameSet.setFrames(0);
+                    selectedHasChanged();
+                    frameSet.setFrames(0);
+                    eventTrigger(onChange);
+            } else {
+                frameSet.setFrames(1);
             }
 
             if (isSelected && tabContents != null) {
@@ -131,15 +129,12 @@ namespace GuiLib {
             if (tabContents != null) tabContents.hide();
 
             frameSet.setFrames(1);
-            //frameSet.render(true);
             eventTrigger(onChange);
         }
 
         public override void draw(Vector2 menuLocation) {
             Vector2 drawLoc = location + menuLocation;
 
-
-            //if(frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
             frameSet.draw(drawLoc);
 
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,

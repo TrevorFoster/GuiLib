@@ -24,10 +24,7 @@ namespace GuiLib {
         public override void update(Vector2 menuLocation) {
             Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
 
-            if (InputHandler.leftClickRelease()
-                && buttonRect.Contains(InputHandler.initialClick)
-                && buttonRect.Contains(InputHandler.releaseClick)) {
-
+            if (InputHandler.leftClickRelease() && hovering) {
                 isSelected = !isSelected;
                 boxStates.frame = isSelected ? 1 : 0;
                 eventTrigger(onChange);

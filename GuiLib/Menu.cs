@@ -14,6 +14,7 @@ namespace GuiLib {
         private bool hidden = false;
         public bool bordered = false;
         public bool initialized;
+        private int layers;
 
         public Menu()
             : this("", Vector2.Zero, 10, 10) {
@@ -41,7 +42,35 @@ namespace GuiLib {
 
         }
 
+        public void addToFront(Control control) {
+            if (!control.initialized) {
+                control.initialize();
+            }
+            controls.Insert(0, control);
+            layers++;
+        }
+
+        public void addToBack(Control control) {
+            if (!control.initialized) {
+                control.initialize();
+            }
+            controls.Add(control);
+            layers++;
+        }
+
+        public void insertToLayer(int layer, Control control) {
+            if (!control.initialized) {
+                control.initialize();
+            }
+            if (layer < 0 || layer > layers - 1) {
+                layer = layers - 1;
+            }
+            controls.Insert(layer, control);
+            layers++;
+        }
+
         public void intialize() {
+            layers = controls.Count;
             setLayout();
             foreach (Control item in controls) {
                 item.initialize();
@@ -51,9 +80,8 @@ namespace GuiLib {
 
         public void update() {
             if (hidden) return;
-
-            foreach (Control item in controls) {
-                item.update(location);
+            for (int i = 0; i < layers; i++) {
+                controls[i].update(location);
             }
         }
 
@@ -78,8 +106,8 @@ namespace GuiLib {
                 Shapes.DrawRectangle(10, size.Height, drawLoc + new Vector2(size.Width, 0), Color.White, 0);
             }
             Vector2 temp = new Vector2(location.X + offset.X, location.Y + offset.Y);
-            foreach (Control item in controls) {
-                item.draw(temp);
+            for (int i = layers - 1; i >= 0; i--) {
+                controls[i].draw(temp);
             }
         }
 
@@ -92,8 +120,8 @@ namespace GuiLib {
                 Shapes.DrawRectangle(10, size.Height, new Vector2(location.X - 10, location.Y), Color.White, 0);
                 Shapes.DrawRectangle(10, size.Height, new Vector2(location.X + size.Width, location.Y), Color.White, 0);
             }
-            foreach (Control item in controls) {
-                item.draw(location);
+            for (int i = layers - 1; i >= 0; i--) {
+                controls[i].draw(location);
             }
         }
     }

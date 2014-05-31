@@ -9,12 +9,12 @@ namespace GuiLib {
         public static Rectangle releaseClick = new Rectangle(-1, -1, 1, 1);
         public static Rectangle mouseRect = new Rectangle(-1, -1, 1, 1);
         public static MouseState mouseState;
-        public static MouseState lastMouseState;
+        public static MouseState mouseLastFrame;
         public static Keys[] pressedKeys;
-        public static Keys[] previousKeys;
+        public static Keys[] keysLastFrame;
 
         public static void update() {
-            lastMouseState = mouseState;
+            mouseLastFrame = mouseState;
             mouseState = Mouse.GetState();
 
             mouseRect.X = mouseState.X;
@@ -27,13 +27,15 @@ namespace GuiLib {
                 releaseClick.X = mouseState.X;
                 releaseClick.Y = mouseState.Y;
             }
-            previousKeys = pressedKeys;
+            keysLastFrame = null;
+            keysLastFrame = pressedKeys;
+            pressedKeys = null;
             pressedKeys = Keyboard.GetState().GetPressedKeys();
         }
 
         public static bool keyTyped(Keys key) {
-            if (pressedKeys == null || previousKeys == null) return false;
-            return !pressedKeys.Contains(key) && previousKeys.Contains(key);
+            if (pressedKeys == null || keysLastFrame == null) return false;
+            return !pressedKeys.Contains(key) && keysLastFrame.Contains(key);
         }
 
         public static bool keyPressed(Keys key) {
@@ -47,7 +49,7 @@ namespace GuiLib {
 
         public static bool leftClickRelease(){
             return mouseState.LeftButton == ButtonState.Released &&
-                lastMouseState.LeftButton == ButtonState.Pressed;
+                mouseLastFrame.LeftButton == ButtonState.Pressed;
         }
     }
 }

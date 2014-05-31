@@ -8,6 +8,7 @@ namespace GuiLib {
         private ControlList list;
         private Label label;
         private DropDown dropdown;
+        private int count = 0;
 
 
         public TestMenu(string name, Vector2 location, int width, int height)
@@ -23,13 +24,16 @@ namespace GuiLib {
             Button submit = new Button { text = "Ok" };
             submit.onClick += buttonClick;
             list.addControl(submit);
-            label = new Label();
+            label = new Label { text = "Clicks: " + count };
             list.addControl(label);
 
-            controls.Add(list);
+            this.addToBack(list);
         }
         private void buttonClick(object sender, EventArgs e) {
-            label.text = dropdown.text;
+            Random r = new Random();
+            count++;
+            label.text = "Clicks: " + count;
+            this.addToBack(new Button { location = new Vector2(r.Next(500), r.Next(500)) });
         }
 
         private void checkChange(object sender, EventArgs e) {

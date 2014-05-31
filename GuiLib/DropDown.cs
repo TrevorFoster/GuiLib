@@ -69,7 +69,7 @@ namespace GuiLib {
 
             if (!isDropOpen) {
                 Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X + itemBoxSize.Width), (int)(location.Y + menuLocation.Y), buttonSize.Width, buttonSize.Height);
-                if (buttonRect.Contains(InputHandler.initialClick) && buttonRect.Contains(InputHandler.releaseClick)) {
+                if (buttonRect.Contains(InputHandler.releaseClick)) {
                     isDropOpen = true;
                     eventTrigger(dropOpen);
                 }

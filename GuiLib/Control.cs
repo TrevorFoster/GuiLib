@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using System.ComponentModel;
 
 namespace GuiLib {
-
     class Control {
+
         private Vector2 Location;
         public Vector2 location {
             get { return Location; }
@@ -23,7 +23,7 @@ namespace GuiLib {
             }
         }
 
-        protected Size realSize;
+        protected Size textSize, controlSize, realSize;
         public Size size {
             get { return realSize; }
             set {
@@ -34,29 +34,23 @@ namespace GuiLib {
             }
         }
 
-        protected Size textSize;
-        protected Size controlSize;
-
-        public event EventHandler selectedChange = null;
-
-        public bool hovering;
+        public bool hovering, initialized;
 
         // Mutual event triggers
-        public event EventHandler mouseOver = null;
-        public event EventHandler mouseOff = null;
-        protected event EventHandler onLocationChanged = null;
-        protected event EventHandler onSizeChanged = null;
+        public event EventHandler mouseOver, mouseOff;
+        protected event EventHandler onLocationChanged, onSizeChanged;
 
-        protected bool initialized = false;
+        // For control groups
+        public event EventHandler selectedChange;
+
+        // Field change events
+        protected virtual void sizeChanged(object sender, EventArgs e) { }
+        protected virtual void locationChanged(object sender, EventArgs e) { }
 
         public virtual void initialize() { initialized = true; }
         public virtual void draw(Vector2 menuLocation) { }
         protected virtual void setSize(int Width, int Height) { }
         public virtual void deselect() { }
-
-        //field changes
-        protected virtual void sizeChanged(object sender, EventArgs e) { }
-        protected virtual void locationChanged(object sender, EventArgs e) { }
 
         // Base constructor
         public Control()
@@ -93,8 +87,9 @@ namespace GuiLib {
         }
 
         public virtual void update(Vector2 menuLocation) {
-            if (mouseOver != null) {
+            if (!hovering) {
                 checkMouseOver(menuLocation);
+            } else {
                 checkMouseOff(menuLocation);
             }
         }
@@ -104,8 +99,6 @@ namespace GuiLib {
         }
 
         private void checkMouseOver(Vector2 menuLocation) {
-            if (hovering) return;
-
             if (new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect)) {
                 eventTrigger(mouseOver);
                 hovering = true;
@@ -113,8 +106,6 @@ namespace GuiLib {
         }
 
         private void checkMouseOff(Vector2 menuLocation) {
-            if (!hovering) return;
-
             if (!(new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect))) {
                 eventTrigger(mouseOff);
                 hovering = false;

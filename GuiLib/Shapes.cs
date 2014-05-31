@@ -39,23 +39,23 @@ namespace GuiLib {
         }
 
         public static void DrawRectangle(float w, float h, Vector2 pos, Color color, float lineWidth) {
-            List<Vector2> vertex = new List<Vector2>();
             if (lineWidth == 0) {
                 GUIRoot.spriteBatch.Draw(blankTexture, pos, null, color, 0, Vector2.Zero, new Vector2(w, h), SpriteEffects.None, 0);
             } else {
+                List<Vector2> vertex = new List<Vector2>();
                 vertex.Add(new Vector2(pos.X, pos.Y));
                 vertex.Add(new Vector2(pos.X + w, pos.Y));
                 vertex.Add(new Vector2(pos.X + w, pos.Y + h));
                 vertex.Add(new Vector2(pos.X, pos.Y + h));
                 DrawPolygon(vertex, color, lineWidth);
             }
-
         }
+
         public static void DrawRectangle(Rectangle s, Color color, int lineWidth) {
-            List<Vector2> vertex = new List<Vector2>();
             if (lineWidth == 0) {
                 GUIRoot.spriteBatch.Draw(blankTexture, new Vector2(s.X, s.Y), null, color, 0, Vector2.Zero, new Vector2(s.Width, s.Height), SpriteEffects.None, 0);
             } else {
+                List<Vector2> vertex = new List<Vector2>();
                 vertex.Add(new Vector2(s.X, s.Y));
                 vertex.Add(new Vector2(s.X + s.Width, s.Y));
                 vertex.Add(new Vector2(s.X + s.Width, s.Y + s.Height));
