@@ -18,7 +18,7 @@ namespace GuiLib {
         private List<Control> controls;
         private ControlGroup controlGroup;
         private Orientation orientation = Orientation.Horizontal;
-        private Justification justification = Justification.Right;
+        private Justification justification = Justification.Left;
 
         public ControlList(Orientation orientation)
             : this() {
@@ -42,10 +42,11 @@ namespace GuiLib {
             changeOrientation();
         }
 
-        protected override void subUpdate(Vector2 menuLocation) {
+        public override void update(Vector2 menuLocation) {
             foreach (Control control in controls) {
                 control.update(menuLocation);
             }
+            base.update(menuLocation);
         }
 
         public override void draw(Vector2 menuLocation) {
@@ -122,10 +123,6 @@ namespace GuiLib {
                 orientation = newOri;
             }
             if (controls == null) return;
-        }
-
-        protected override void locationChanged(object sender, EventArgs e) {
-            changeOrientation();
         }
     }
 }

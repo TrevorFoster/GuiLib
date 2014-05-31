@@ -50,8 +50,8 @@ namespace GuiLib {
         protected bool initialized = false;
 
         public virtual void initialize() { initialized = true; }
-        protected virtual void subUpdate(Vector2 menuLocation) { }
         public virtual void draw(Vector2 menuLocation) { }
+        protected virtual void setSize(int Width, int Height) { }
         public virtual void deselect() { }
 
         //field changes
@@ -92,14 +92,11 @@ namespace GuiLib {
             }
         }
 
-        protected virtual void setSize(int Width, int Height) { }
-
-        public void update(Vector2 menuLocation) {
+        public virtual void update(Vector2 menuLocation) {
             if (mouseOver != null) {
                 checkMouseOver(menuLocation);
                 checkMouseOff(menuLocation);
             }
-            subUpdate(menuLocation);
         }
 
         protected void selectedHasChanged() {

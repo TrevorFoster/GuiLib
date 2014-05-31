@@ -64,7 +64,7 @@ namespace GuiLib {
             sizeStuff();
         }
 
-        protected override void subUpdate(Vector2 menuLocation) {
+        public override void update(Vector2 menuLocation) {
             if (!InputHandler.leftClickRelease()) return;
 
             if (!isDropOpen) {
@@ -90,6 +90,7 @@ namespace GuiLib {
                 isDropOpen = false;
                 eventTrigger(dropClose);
             }
+            base.update(menuLocation);
         }
 
         private void sizeStuff() {
@@ -128,7 +129,7 @@ namespace GuiLib {
 
             buttonStates.draw(drawloc + new Vector2(itemBoxSize.Width, 0));
             itemBoxAnimation.draw(drawloc);
-            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, drawloc + new Vector2(left.frameWidth, 0), Color.Black);
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, drawloc + new Vector2(left.frameWidth, top.frameHeight), Color.Black);
 
             if (!isDropOpen) return;
 
@@ -137,7 +138,7 @@ namespace GuiLib {
                 boxLoc.Y += itemBoxSize.Height;
 
                 itemBoxAnimation.draw(drawloc + boxLoc);
-                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], items[i], drawloc + boxLoc + new Vector2(left.frameWidth, 0), Color.Black);
+                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], items[i], drawloc + boxLoc + new Vector2(left.frameWidth, top.frameHeight), Color.Black);
             }
         }
     }

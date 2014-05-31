@@ -8,7 +8,6 @@ namespace GuiLib {
         public static Rectangle initialClick = new Rectangle(-1, -1, 1, 1);
         public static Rectangle releaseClick = new Rectangle(-1, -1, 1, 1);
         public static Rectangle mouseRect = new Rectangle(-1, -1, 1, 1);
-        public static Vector2 mousePos = Vector2.Zero;
         public static MouseState mouseState;
         public static MouseState lastMouseState;
         public static Keys[] pressedKeys;
@@ -20,9 +19,6 @@ namespace GuiLib {
 
             mouseRect.X = mouseState.X;
             mouseRect.Y = mouseState.Y;
-
-            mousePos.X = mouseState.X;
-            mousePos.Y = mouseState.Y;
 
             if (leftPressed()) {
                 initialClick.X = mouseState.X;

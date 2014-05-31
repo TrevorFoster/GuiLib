@@ -74,6 +74,8 @@ namespace GuiLib {
             top.loadSheet(new Rectangle(3, 112, 96, 8));
             bottom.loadSheet(new Rectangle(3, 121, 96, 8));
 
+            frameSet.setFrames(0);
+
             sizeStuff();
 
             base.initialize();
@@ -107,7 +109,7 @@ namespace GuiLib {
             bottom.offset = new Vector2(0, realSize.Height - bottom.frameHeight);
         }
 
-        protected override void subUpdate(Vector2 menuLocation) {
+        public override void update(Vector2 menuLocation) {
             buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
 
             if (InputHandler.leftClickRelease()
@@ -115,19 +117,16 @@ namespace GuiLib {
                 && buttonRect.Contains(InputHandler.releaseClick)) {
 
                 eventTrigger(onClick);
+                frameSet.setFrames(0);
             } else if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.mouseRect)) {
                 frameSet.setFrames(1);
-                //frameSet.render();
-            } else {
-                frameSet.setFrames(0);
-
             }
+            base.update(menuLocation);
         }
 
         public override void draw(Vector2 menuLocation) {
             Vector2 drawLoc = location + menuLocation;
 
-            //if (frameSet.rendered != null) GUIRoot.spriteBatch.Draw(frameSet.rendered, drawLoc, Color.White);
             frameSet.draw(drawLoc);
 
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,

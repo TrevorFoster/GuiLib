@@ -17,7 +17,7 @@ namespace GuiLib {
             hoverTime = 500;
         }
 
-        protected override void subUpdate(Vector2 menuLocation) {
+        public override void update(Vector2 menuLocation) {
             if (hovering && !drawTip) {
                 if (timeHovered >= hoverTime) {
                     tipLocation = new Vector2(InputHandler.mouseState.X, InputHandler.mouseState.Y + 20);
@@ -26,6 +26,7 @@ namespace GuiLib {
                     timeHovered += Game1.time.ElapsedGameTime.Milliseconds;
                 }
             }
+            base.update(menuLocation);
         }
 
         // Callback function to turn drawing of the tool tip on

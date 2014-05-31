@@ -13,7 +13,7 @@ namespace GuiLib {
             realSize = new Size(150, 30);
         }
 
-        protected override void subUpdate(Vector2 menuLocation) {
+        public override void update(Vector2 menuLocation) {
             Rectangle boxRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
 
             if (InputHandler.leftClickRelease()) {
@@ -50,6 +50,7 @@ namespace GuiLib {
                     }
                 }
             }
+            base.update(menuLocation);
         }
 
         public override void draw(Vector2 menuLocation) {

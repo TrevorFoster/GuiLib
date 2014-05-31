@@ -91,7 +91,7 @@ namespace GuiLib {
             tabContents = newMenu;
         }
 
-        protected override void subUpdate(Vector2 menuLocation) {
+        public override void update(Vector2 menuLocation) {
             buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
             frameSet.update();
             if (InputHandler.leftPressed() && buttonRect.Contains(InputHandler.initialClick)) {
@@ -121,6 +121,7 @@ namespace GuiLib {
                 }
                 tabContents.update(contentOffs);
             }
+            base.update(menuLocation);
         }
 
         public override void deselect() {

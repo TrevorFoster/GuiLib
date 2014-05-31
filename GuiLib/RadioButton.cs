@@ -22,7 +22,7 @@ namespace GuiLib {
             buttonStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
         }
 
-        protected override void subUpdate(Vector2 menuLocation) {
+        public override void update(Vector2 menuLocation) {
             Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), controlSize.Width, controlSize.Height);
 
             if (InputHandler.leftClickRelease() && buttonRect.Contains(InputHandler.initialClick)) {
@@ -31,6 +31,7 @@ namespace GuiLib {
                 selectedHasChanged();
                 eventTrigger(onChange);
             }
+            base.update(menuLocation);
         }
 
         protected override void sizeChanged(object sender, EventArgs e) {
