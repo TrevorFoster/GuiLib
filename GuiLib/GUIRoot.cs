@@ -13,11 +13,11 @@ namespace GuiLib {
             GUIRoot.graphicsDevice = graphicsDevice;
             GUIRoot.content = content;
             spriteBatch = new SpriteBatch(graphicsDevice);
+            menuHandler = new MenuHandler();
             GUIResources.loadContent();
             FontManager.loadFonts();
             Shapes.LoadContent();
-
-            menuHandler = new MenuHandler();
+            menuHandler.initialize();
         }
 
         public static void update() {

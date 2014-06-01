@@ -21,7 +21,6 @@ namespace GuiLib {
 
         public Tab() {
             orientation = Orientation.Horizontal;
-            controlSize = new Size(60, 30);
 
             frameSet = new AnimationSet();
             middle = new Animation(2, 1, Sheet.MainSheet);
@@ -34,6 +33,7 @@ namespace GuiLib {
             top = new Animation(2, 1, Sheet.MainSheet);
 
             frameSet.animations.AddRange(new List<Animation> { middle, topLeft, topRight, left, right, top });
+            this.setSize(120, 30);
         }
 
         public override void initialize() {
@@ -50,7 +50,7 @@ namespace GuiLib {
             top.loadSheet(new Rectangle(156, 112, 96, 8));
             frameSet.setFrames(1);
 
-            if (tabContents != null) {
+            if (tabContents != null && !tabContents.initialized) {
                 tabContents.intialize();
             }
             sizeStuff();
@@ -93,15 +93,15 @@ namespace GuiLib {
 
         public override void update(Vector2 menuLocation) {
             if (hovering && InputHandler.leftPressed()) {
-                    isSelected = true;
-                    if (tabContents != null) {
-                        tabContents.show();
-                    }
+                isSelected = true;
+                if (tabContents != null) {
+                    tabContents.show();
+                }
 
-                    selectedHasChanged();
-                    frameSet.setFrames(0);
-                    eventTrigger(onChange);
-            } else {
+                selectedHasChanged();
+                frameSet.setFrames(0);
+                eventTrigger(onChange);
+            } else if (!isSelected) {
                 frameSet.setFrames(1);
             }
 

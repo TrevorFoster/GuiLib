@@ -11,9 +11,7 @@ namespace GuiLib {
         public Color backgroundColour;
 
         public string title;
-        private bool hidden = false;
-        public bool bordered = false;
-        public bool initialized;
+        public bool initialized, hidden, bordered;
         private int layers;
 
         public Menu()

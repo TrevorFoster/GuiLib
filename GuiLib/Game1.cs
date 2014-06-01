@@ -13,6 +13,7 @@ namespace GuiLib {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
         TestMenu main;
+        TestMenu main2;
         public static GameTime time;
 
         public Game1() {

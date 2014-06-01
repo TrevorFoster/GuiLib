@@ -6,38 +6,30 @@ using System.Runtime.CompilerServices;
 namespace GuiLib {
     class TestMenu : Menu {
         private ControlList list;
-        private Label label;
-        private DropDown dropdown;
-        private int count = 0;
-
+        private Tab tab;
 
         public TestMenu(string name, Vector2 location, int width, int height)
             : base(name, location, width, height) {
+                backgroundColour = Color.Transparent;
         }
 
         public override void setLayout() {
-            list = new ControlList(Orientation.Vertical);
-            list.location = new Vector2(100, 100);
-            list.addControl(new Label { text = "Please Select a Country", size = new Size(160, 200) });
-            dropdown = new DropDown { items = new List<string> { "Canada", "US", "UK", "Russia" }, text = "Country"};
-            list.addControl(dropdown);
-            Button submit = new Button { text = "Ok" };
-            submit.onClick += buttonClick;
-            list.addControl(submit);
-            label = new Label { text = "Clicks: " + count };
-            list.addControl(label);
+            list = new ControlList(Orientation.Horizontal);
+            tab = new Tab();
+            tab.text = "Menu 1";
+            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
+            list.addControl(tab);
+            tab = new Tab();
+            tab.text = "Menu 2";
+            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Red });
+            list.addControl(tab);
+            tab = new Tab();
+            tab.text = "Menu 3";
+            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height));
+            list.addControl(tab);
+            //list.addControl(new Button { text = "Test Button", size = new Size(120,40)});
 
             this.addToBack(list);
-        }
-        private void buttonClick(object sender, EventArgs e) {
-            Random r = new Random();
-            count++;
-            label.text = "Clicks: " + count;
-            this.addToBack(new Button { location = new Vector2(r.Next(500), r.Next(500)) });
-        }
-
-        private void checkChange(object sender, EventArgs e) {
-            ((CheckBox)sender).text = ((CheckBox)sender).isSelected ? "Checked" : "Unchecked";
         }
     }
 }

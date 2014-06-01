@@ -17,27 +17,6 @@ namespace GuiLib {
         // edges
         private Animation left, right, top, bottom;
 
-        private Rectangle buttonRect;
-
-        public Button(string text, Vector2 location, Size size)
-            : base(text, location, size) {
-            frameSet = new AnimationSet();
-
-            middle = new Animation(2, 1, Sheet.MainSheet);
-
-            topLeft = new Animation(2, 1, Sheet.MainSheet);
-            topRight = new Animation(2, 1, Sheet.MainSheet);
-            bottomLeft = new Animation(2, 1, Sheet.MainSheet);
-            bottomRight = new Animation(2, 1, Sheet.MainSheet);
-
-            left = new Animation(2, 1, Sheet.MainSheet);
-            right = new Animation(2, 1, Sheet.MainSheet);
-            bottom = new Animation(2, 1, Sheet.MainSheet);
-            top = new Animation(2, 1, Sheet.MainSheet);
-
-            frameSet.animations.AddRange(new List<Animation> { middle, left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight });
-        }
-
         public Button() {
             frameSet = new AnimationSet();
 
@@ -131,6 +110,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(realSize.Width / 2 - textSize.Width / 2, realSize.Height / 2 - textSize.Height / 2) + drawLoc,
                 Color.Black);
+            base.draw(menuLocation);
         }
     }
 }

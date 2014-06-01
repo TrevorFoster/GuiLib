@@ -34,7 +34,8 @@ namespace GuiLib {
             }
         }
 
-        public bool hovering, initialized;
+        public bool hovering, initialized, hoverable = true;
+        public Color overlayColour = new Color(100, 100, 100, 100);
 
         // Mutual event triggers
         public event EventHandler mouseOver, mouseOff;
@@ -48,7 +49,6 @@ namespace GuiLib {
         protected virtual void locationChanged(object sender, EventArgs e) { }
 
         public virtual void initialize() { initialized = true; }
-        public virtual void draw(Vector2 menuLocation) { }
         protected virtual void setSize(int Width, int Height) { }
         public virtual void deselect() { }
 
@@ -87,12 +87,21 @@ namespace GuiLib {
         }
 
         public virtual void update(Vector2 menuLocation) {
+            if (!hoverable) return;
+
             if (!hovering) {
                 checkMouseOver(menuLocation);
             } else {
                 checkMouseOff(menuLocation);
             }
         }
+
+        public virtual void draw(Vector2 menuLocation) {
+            if (hovering) {
+                Shapes.DrawRectangle(controlSize.Width, controlSize.Height, location + menuLocation, overlayColour, 0);
+            }
+        }
+
 
         protected void selectedHasChanged() {
             eventTrigger(selectedChange);

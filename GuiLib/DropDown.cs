@@ -28,6 +28,7 @@ namespace GuiLib {
 
             itemBoxSize = new Size(200, 28);
             buttonSize = new Size(28, 28);
+            controlSize = buttonSize;
             realSize = new Size(itemBoxSize.Width + buttonSize.Width, Math.Max(itemBoxSize.Height, buttonSize.Height));
 
             itemBoxAnimation = new AnimationSet();
@@ -65,31 +66,32 @@ namespace GuiLib {
         }
 
         public override void update(Vector2 menuLocation) {
-            if (!InputHandler.leftClickRelease()) return;
-
-            if (!isDropOpen) {
-                Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X + itemBoxSize.Width), (int)(location.Y + menuLocation.Y), buttonSize.Width, buttonSize.Height);
-                if (buttonRect.Contains(InputHandler.releaseClick)) {
-                    isDropOpen = true;
-                    eventTrigger(dropOpen);
-                }
-            } else {
-                Vector2 startLoc = location + menuLocation;
-                Rectangle itemBox = new Rectangle((int)(startLoc.X), (int)(startLoc.Y), itemBoxSize.Width, itemBoxSize.Height);
-
-                for (int i = 0; i < items.Count; i++) {
-                    itemBox.Y += itemBoxSize.Height;
-
-                    if (itemBox.Contains(InputHandler.initialClick) && itemBox.Contains(InputHandler.releaseClick)) {
-                        selectedIndex = i;
-                        text = items[i];
-                        eventTrigger(selectedIndexChanged);
-                        break;
+            if (InputHandler.leftClickRelease()) {
+                if (!isDropOpen) {
+                    Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X + itemBoxSize.Width), (int)(location.Y + menuLocation.Y), buttonSize.Width, buttonSize.Height);
+                    if (buttonRect.Contains(InputHandler.releaseClick)) {
+                        isDropOpen = true;
+                        eventTrigger(dropOpen);
                     }
+                } else {
+                    Vector2 startLoc = location + menuLocation;
+                    Rectangle itemBox = new Rectangle((int)(startLoc.X), (int)(startLoc.Y), itemBoxSize.Width, itemBoxSize.Height);
+
+                    for (int i = 0; i < items.Count; i++) {
+                        itemBox.Y += itemBoxSize.Height;
+
+                        if (itemBox.Contains(InputHandler.initialClick) && itemBox.Contains(InputHandler.releaseClick)) {
+                            selectedIndex = i;
+                            text = items[i];
+                            eventTrigger(selectedIndexChanged);
+                            break;
+                        }
+                    }
+                    isDropOpen = false;
+                    eventTrigger(dropClose);
                 }
-                isDropOpen = false;
-                eventTrigger(dropClose);
             }
+
             base.update(menuLocation);
         }
 
@@ -119,6 +121,7 @@ namespace GuiLib {
             realSize = new Size(Width + buttonSize.Width, Height);
             itemBoxSize = new Size(Width, realSize.Height);
             buttonSize = new Size(buttonSize.Width, realSize.Height);
+            controlSize = buttonSize;
 
             sizeStuff();
         }
@@ -131,14 +134,14 @@ namespace GuiLib {
             itemBoxAnimation.draw(drawloc);
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, drawloc + new Vector2(left.frameWidth, top.frameHeight), Color.Black);
 
-            if (!isDropOpen) return;
+            if (isDropOpen) {
+                Vector2 boxLoc = new Vector2(0, 0);
+                for (int i = 0; i < items.Count; i++) {
+                    boxLoc.Y += itemBoxSize.Height;
 
-            Vector2 boxLoc = new Vector2(0, 0);
-            for (int i = 0; i < items.Count; i++) {
-                boxLoc.Y += itemBoxSize.Height;
-
-                itemBoxAnimation.draw(drawloc + boxLoc);
-                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], items[i], drawloc + boxLoc + new Vector2(left.frameWidth, top.frameHeight), Color.Black);
+                    itemBoxAnimation.draw(drawloc + boxLoc);
+                    GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], items[i], drawloc + boxLoc + new Vector2(left.frameWidth, top.frameHeight), Color.Black);
+                }
             }
         }
     }

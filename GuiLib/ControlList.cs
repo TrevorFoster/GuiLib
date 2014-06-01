@@ -23,6 +23,7 @@ namespace GuiLib {
         public ControlList(Orientation orientation)
             : this() {
             this.orientation = orientation;
+            hoverable = false;
         }
 
         public ControlList() {
@@ -37,15 +38,18 @@ namespace GuiLib {
         }
 
         public void addControl(Control newcontrol) {
+            if (!newcontrol.initialized && this.initialized) {
+                newcontrol.initialize();
+            }
             controlGroup.addControl(newcontrol);
             controls.Add(newcontrol);
-            changeOrientation();
         }
 
         public override void update(Vector2 menuLocation) {
-            foreach (Control control in controls) {
-                control.update(menuLocation);
+            for (int i = 0; i < controls.Count; i++) {
+                controls[i].update(menuLocation);
             }
+        
             base.update(menuLocation);
         }
 
@@ -122,7 +126,6 @@ namespace GuiLib {
             if (newOri != Orientation.None) {
                 orientation = newOri;
             }
-            if (controls == null) return;
         }
     }
 }

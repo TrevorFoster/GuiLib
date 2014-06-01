@@ -57,6 +57,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc,
                 Color.Black);
+            base.draw(menuLocation);
         }
     }
 }

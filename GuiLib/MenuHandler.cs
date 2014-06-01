@@ -6,6 +6,7 @@ using System.Text;
 namespace GuiLib {
     class MenuHandler {
         private List<Menu> menus;
+        private bool initialized;
 
         public MenuHandler() {
             menus = new List<Menu>();
@@ -13,7 +14,9 @@ namespace GuiLib {
 
         public void addMenu(Menu newMenu) {
             if (newMenu == null) return;
-            if (!newMenu.initialized) newMenu.intialize();
+            if (this.initialized && !newMenu.initialized) {
+                newMenu.intialize();
+            }
             menus.Add(newMenu);
         }
 
@@ -24,8 +27,11 @@ namespace GuiLib {
 
         public void initialize() {
             foreach (Menu menu in menus) {
-                menu.intialize();
+                if (!menu.initialized) {
+                    menu.intialize();
+                }
             }
+            initialized = true;
         }
 
         public void update() {
