@@ -14,7 +14,7 @@ namespace GuiLib {
         }
 
         public override void setLayout() {
-            list = new ControlList(Orientation.Horizontal);
+            list = new ControlList(Orientation.Horizontal, 0);
             tab = new Tab();
             tab.text = "Menu 1";
             tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
@@ -27,6 +27,15 @@ namespace GuiLib {
             tab.text = "Menu 3";
             tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height));
             list.addControl(tab);
+            tab = new Tab();
+            tab.text = "Menu 4";
+            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
+            list.addControl(tab);
+            tab = new Tab();
+            tab.text = "Menu 5";
+            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
+            list.addControl(tab);
+            //list.changeSelected(0);
             //list.addControl(new Button { text = "Test Button", size = new Size(120,40)});
 
             this.addToBack(list);

@@ -16,13 +16,15 @@ namespace GuiLib {
 
     class ControlList : Control {
         private List<Control> controls;
+        private int selectedIndex = -1;
         private ControlGroup controlGroup;
         private Orientation orientation = Orientation.Horizontal;
         private Justification justification = Justification.Left;
 
-        public ControlList(Orientation orientation)
+        public ControlList(Orientation orientation, int startIndex = -1)
             : this() {
             this.orientation = orientation;
+            this.selectedIndex = startIndex;
             hoverable = false;
         }
 
@@ -32,8 +34,11 @@ namespace GuiLib {
         }
 
         public override void initialize() {
-            foreach (Control control in controls) {
-                control.initialize();
+            for (int i = 0; i < controls.Count; i++) {
+                controls[i].initialize();
+                if (i == selectedIndex) {
+                    controls[i].select();
+                }
             }
         }
 
@@ -48,6 +53,9 @@ namespace GuiLib {
         public override void update(Vector2 menuLocation) {
             for (int i = 0; i < controls.Count; i++) {
                 controls[i].update(menuLocation);
+                if (controls[i].isSelected) {
+                    selectedIndex = i;
+                }
             }
         
             base.update(menuLocation);
@@ -106,25 +114,29 @@ namespace GuiLib {
                 }
             }
 
-            int selectedInd = -1;
             for (int i = controls.Count - 1; i >= 0; i--) {
-                if (controls[i] is Tab) {
-                    Tab tab = (Tab)controls[i];
-                    if (!tab.isSelected)
-                        tab.draw(menuLocation);
-                    else
-                        selectedInd = i;
-                } else {
+                if (i != selectedIndex) {
                     controls[i].draw(menuLocation);
                 }
             }
-            if (selectedInd != -1)
-                controls[selectedInd].draw(menuLocation);
+
+            if (selectedIndex != -1) {
+                controls[selectedIndex].draw(menuLocation);
+            }
         }
 
         public void changeOrientation(Orientation newOri = Orientation.None) {
             if (newOri != Orientation.None) {
                 orientation = newOri;
+            }
+        }
+
+        public void changeSelected(int index) {
+            if (index < 0 || index > controls.Count - 1) {
+                return;
+            } else {
+                selectedIndex = index;
+                controls[index].select();
             }
         }
     }

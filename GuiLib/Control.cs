@@ -35,6 +35,8 @@ namespace GuiLib {
         }
 
         public bool hovering, initialized, hoverable = true;
+        public bool isSelected;
+
         public Color overlayColour = new Color(100, 100, 100, 100);
 
         // Mutual event triggers
@@ -103,7 +105,8 @@ namespace GuiLib {
         }
 
 
-        protected void selectedHasChanged() {
+        public virtual void select() {
+            isSelected = true;
             eventTrigger(selectedChange);
         }
 

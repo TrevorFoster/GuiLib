@@ -26,7 +26,7 @@ namespace GuiLib {
             if (InputHandler.leftClickRelease() && hovering) {
                 isSelected = true;
                 buttonStates.frame = 1;
-                selectedHasChanged();
+                select();
                 eventTrigger(onChange);
             }
             base.update(menuLocation);

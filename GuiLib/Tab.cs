@@ -7,8 +7,7 @@ namespace GuiLib {
         public event EventHandler onChange;
 
         private Menu tabContents;
-        private Rectangle buttonRect;
-        public bool isSelected = false;
+
         public Orientation orientation = Orientation.Horizontal;
 
         private AnimationSet frameSet;
@@ -98,7 +97,7 @@ namespace GuiLib {
                     tabContents.show();
                 }
 
-                selectedHasChanged();
+                select();
                 frameSet.setFrames(0);
                 eventTrigger(onChange);
             } else if (!isSelected) {
@@ -119,7 +118,16 @@ namespace GuiLib {
                 }
                 tabContents.update(contentOffs);
             }
+            
             base.update(menuLocation);
+        }
+
+        public override void select() {
+            frameSet.setFrames(0);
+            if (tabContents != null) {
+                tabContents.show();
+            }
+            base.select();
         }
 
         public override void deselect() {
