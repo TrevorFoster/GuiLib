@@ -7,7 +7,6 @@ namespace GuiLib {
         public event EventHandler onChange;
         private Animation boxStates;
 
-        public bool isSelected = false;
 
         public CheckBox() {
 

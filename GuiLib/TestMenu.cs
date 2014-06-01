@@ -19,6 +19,8 @@ namespace GuiLib {
             tab.text = "Menu 1";
             tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
             list.addControl(tab);
+
+
             tab = new Tab();
             tab.text = "Menu 2";
             tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Red });

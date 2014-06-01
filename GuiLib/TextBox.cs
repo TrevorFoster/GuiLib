@@ -6,7 +6,6 @@ namespace GuiLib {
         private Animation boxStates;
         private int cursor;
 
-        public bool isSelected = false;
 
         public TextBox() {
             cursor = 0;
