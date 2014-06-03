@@ -88,7 +88,7 @@ namespace GuiLib {
             bottom.offset = new Vector2(0, realSize.Height - bottom.frameHeight);
         }
 
-        public override void update(Vector2 menuLocation) {
+        public override void update(Vector2 offset) {
             if (hovering) {
                 if (InputHandler.leftClickRelease() && hovering) {
                     eventTrigger(onClick);
@@ -99,18 +99,18 @@ namespace GuiLib {
             } else if (middle.frame != 0) {
                 frameSet.setFrames(0);
             }
-            base.update(menuLocation);
+            base.update(offset);
         }
 
-        public override void draw(Vector2 menuLocation) {
-            Vector2 drawLoc = location + menuLocation;
+        public override void draw(Vector2 offset) {
+            Vector2 drawLoc = location + offset;
 
             frameSet.draw(drawLoc);
 
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(realSize.Width / 2 - textSize.Width / 2, realSize.Height / 2 - textSize.Height / 2) + drawLoc,
                 Color.Black);
-            base.draw(menuLocation);
+            base.draw(offset);
         }
     }
 }

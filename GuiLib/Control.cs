@@ -88,13 +88,13 @@ namespace GuiLib {
             }
         }
 
-        public virtual void update(Vector2 menuLocation) {
+        public virtual void update(Vector2 offset) {
             if (!hoverable) return;
 
             if (!hovering) {
-                checkMouseOver(menuLocation);
+                checkMouseOver(offset);
             } else {
-                checkMouseOff(menuLocation);
+                checkMouseOff(offset);
             }
         }
 
@@ -110,15 +110,15 @@ namespace GuiLib {
             eventTrigger(selectedChange);
         }
 
-        private void checkMouseOver(Vector2 menuLocation) {
-            if (new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect)) {
+        private void checkMouseOver(Vector2 offset) {
+            if (new Rectangle((int)(location.X + offset.X), (int)(location.Y + offset.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect)) {
                 eventTrigger(mouseOver);
                 hovering = true;
             }
         }
 
-        private void checkMouseOff(Vector2 menuLocation) {
-            if (!(new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect))) {
+        private void checkMouseOff(Vector2 offset) {
+            if (!(new Rectangle((int)(location.X + offset.X), (int)(location.Y + offset.Y), realSize.Width, realSize.Height).Contains(InputHandler.mouseRect))) {
                 eventTrigger(mouseOff);
                 hovering = false;
             }

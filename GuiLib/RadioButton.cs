@@ -20,14 +20,14 @@ namespace GuiLib {
             buttonStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
         }
 
-        public override void update(Vector2 menuLocation) {
+        public override void update(Vector2 offset) {
             if (InputHandler.leftClickRelease() && hovering) {
                 isSelected = true;
                 buttonStates.frame = 1;
                 select();
                 eventTrigger(onChange);
             }
-            base.update(menuLocation);
+            base.update(offset);
         }
 
         protected override void sizeChanged(object sender, EventArgs e) {
@@ -49,13 +49,13 @@ namespace GuiLib {
             eventTrigger(onChange);
         }
 
-        public override void draw(Vector2 menuLocation) {
-            Vector2 drawLoc = location + menuLocation;
+        public override void draw(Vector2 offset) {
+            Vector2 drawLoc = location + offset;
             buttonStates.draw(drawLoc);
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc,
                 Color.Black);
-            base.draw(menuLocation);
+            base.draw(offset);
         }
     }
 }

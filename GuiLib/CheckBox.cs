@@ -20,15 +20,15 @@ namespace GuiLib {
             boxStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
         }
 
-        public override void update(Vector2 menuLocation) {
-            Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
+        public override void update(Vector2 offset) {
+            Rectangle buttonRect = new Rectangle((int)(location.X + offset.X), (int)(location.Y + offset.Y), realSize.Width, realSize.Height);
 
             if (InputHandler.leftClickRelease() && hovering) {
                 isSelected = !isSelected;
                 boxStates.frame = isSelected ? 1 : 0;
                 eventTrigger(onChange);
             }
-            base.update(menuLocation);
+            base.update(offset);
         }
 
         protected override void setSize(int Width, int Height) {
@@ -47,9 +47,9 @@ namespace GuiLib {
             eventTrigger(onChange);
         }
 
-        public override void draw(Vector2 menuLocation) {
+        public override void draw(Vector2 offset) {
             // top left corner of check box
-            Vector2 drawLoc = location + menuLocation;
+            Vector2 drawLoc = location + offset;
 
             // draw the check box
             boxStates.draw(drawLoc);
@@ -57,7 +57,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc, Color.Black);
 
-            base.draw(menuLocation);
+            base.draw(offset);
         }
     }
 }

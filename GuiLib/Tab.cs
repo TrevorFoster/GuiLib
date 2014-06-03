@@ -90,7 +90,7 @@ namespace GuiLib {
             tabContents = newMenu;
         }
 
-        public override void update(Vector2 menuLocation) {
+        public override void update(Vector2 offset) {
             if (hovering && InputHandler.leftPressed()) {
                 isSelected = true;
                 if (tabContents != null) {
@@ -105,7 +105,7 @@ namespace GuiLib {
             }
 
             if (isSelected && tabContents != null) {
-                Vector2 contentOffs = new Vector2(menuLocation.X, menuLocation.Y);
+                Vector2 contentOffs = new Vector2(offset.X, offset.Y);
 
                 switch (orientation) {
                     case Orientation.Horizontal:
@@ -119,7 +119,7 @@ namespace GuiLib {
                 tabContents.update(contentOffs);
             }
             
-            base.update(menuLocation);
+            base.update(offset);
         }
 
         public override void select() {
@@ -140,8 +140,8 @@ namespace GuiLib {
             eventTrigger(onChange);
         }
 
-        public override void draw(Vector2 menuLocation) {
-            Vector2 drawLoc = location + menuLocation;
+        public override void draw(Vector2 offset) {
+            Vector2 drawLoc = location + offset;
 
             frameSet.draw(drawLoc);
 
@@ -149,7 +149,7 @@ namespace GuiLib {
                 new Vector2(realSize.Width / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).X / 2, realSize.Height / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).Y / 2) + drawLoc, Color.Black);
 
             if (tabContents != null) {
-                Vector2 contentOffs = new Vector2(menuLocation.X, menuLocation.Y);
+                Vector2 contentOffs = new Vector2(offset.X, offset.Y);
 
                 switch (orientation) {
                     case Orientation.Horizontal:
@@ -162,6 +162,7 @@ namespace GuiLib {
                 }
                 tabContents.draw(contentOffs);
             }
+            base.draw(offset);
         }
     }
 }

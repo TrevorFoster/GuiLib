@@ -12,8 +12,8 @@ namespace GuiLib {
             realSize = new Size(textSize.Width, textSize.Height);
         }
 
-        public override void draw(Vector2 menuLocation) {
-            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
+        public override void draw(Vector2 offset) {
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, new Vector2(location.X + offset.X, location.Y + offset.Y), Color.Black);
         }
     }
 }

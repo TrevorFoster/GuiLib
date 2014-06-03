@@ -16,29 +16,36 @@ namespace GuiLib {
         public override void setLayout() {
             list = new ControlList(Orientation.Horizontal, 0);
             tab = new Tab();
-            tab.text = "Menu 1";
-            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
+            tab.text = "Tiles";
+            tab.setMenu(new Menu("Tiles", Vector2.Zero, 260, 300));
             list.addControl(tab);
 
+            tab = new Tab();
+            tab.text = "Collision Masks";
+            tab.size = new Size(150, 30);
+            tab.setMenu(new Menu("Collision Masks", Vector2.Zero, 260, 300));
+            list.addControl(tab);
 
-            tab = new Tab();
-            tab.text = "Menu 2";
-            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Red });
-            list.addControl(tab);
-            tab = new Tab();
-            tab.text = "Menu 3";
-            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height));
-            list.addControl(tab);
-            tab = new Tab();
-            tab.text = "Menu 4";
-            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
-            list.addControl(tab);
-            tab = new Tab();
-            tab.text = "Menu 5";
-            tab.setMenu(new Menu(this.title, this.location, this.size.Width, this.size.Height) { backgroundColour = Color.Blue });
-            list.addControl(tab);
-            //list.changeSelected(0);
-            //list.addControl(new Button { text = "Test Button", size = new Size(120,40)});
+            Table table = new Table();
+            table.size = new Size(600, 400);
+
+            table.setColumnData(0, 0, new Button { text = "Button1" });
+            table.setColumnData(1, 1, new Button { text = "Button2" });
+            table.setColumnData(2, 2, new Button { text = "Button3" });
+            table.setColumnData(3, 3, new Button { text = "Button4" });
+            table.setColumnData(4, 4, new Button { text = "Button5" });
+
+
+            table.setColumnData(0, 4, new Button { text = "Button1" });
+            table.setColumnData(1, 3, new Button { text = "Button2" });
+            table.setColumnData(2, 2, new Button { text = "Button3" });
+            table.setColumnData(3, 1, new Button { text = "Button4" });
+            table.setColumnData(4, 0, new Button { text = "Button5" });
+
+
+            controls.Add(table);
+
+            
 
             this.addToBack(list);
         }

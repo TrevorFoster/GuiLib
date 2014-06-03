@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GuiLib {
     class TextBox : Control {
-        private Animation boxStates;
         private int cursor;
 
 
@@ -12,8 +11,8 @@ namespace GuiLib {
             realSize = new Size(150, 30);
         }
 
-        public override void update(Vector2 menuLocation) {
-            Rectangle boxRect = new Rectangle((int)(location.X + menuLocation.X), (int)(location.Y + menuLocation.Y), realSize.Width, realSize.Height);
+        public override void update(Vector2 offset) {
+            Rectangle boxRect = new Rectangle((int)(location.X + offset.X), (int)(location.Y + offset.Y), realSize.Width, realSize.Height);
 
             if (InputHandler.leftClickRelease()) {
                 isSelected = hovering ? true : false;
@@ -45,14 +44,14 @@ namespace GuiLib {
                     }
                 }
             }
-            base.update(menuLocation);
+            base.update(offset);
         }
 
-        public override void draw(Vector2 menuLocation) {
+        public override void draw(Vector2 offset) {
 
-            Shapes.DrawRectangle(realSize.Width, realSize.Height, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.White, 0);
+            Shapes.DrawRectangle(realSize.Width, realSize.Height, new Vector2(location.X + offset.X, location.Y + offset.Y), Color.White, 0);
             if (text != null) {
-                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y), Color.Black);
+                GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text, new Vector2(location.X + offset.X, location.Y + offset.Y), Color.Black);
             }
         }
     }

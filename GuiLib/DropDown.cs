@@ -65,16 +65,16 @@ namespace GuiLib {
             sizeStuff();
         }
 
-        public override void update(Vector2 menuLocation) {
+        public override void update(Vector2 offset) {
             if (InputHandler.leftClickRelease()) {
                 if (!isDropOpen) {
-                    Rectangle buttonRect = new Rectangle((int)(location.X + menuLocation.X + itemBoxSize.Width), (int)(location.Y + menuLocation.Y), buttonSize.Width, buttonSize.Height);
+                    Rectangle buttonRect = new Rectangle((int)(location.X + offset.X + itemBoxSize.Width), (int)(location.Y + offset.Y), buttonSize.Width, buttonSize.Height);
                     if (buttonRect.Contains(InputHandler.releaseClick)) {
                         isDropOpen = true;
                         eventTrigger(dropOpen);
                     }
                 } else {
-                    Vector2 startLoc = location + menuLocation;
+                    Vector2 startLoc = location + offset;
                     Rectangle itemBox = new Rectangle((int)(startLoc.X), (int)(startLoc.Y), itemBoxSize.Width, itemBoxSize.Height);
 
                     for (int i = 0; i < items.Count; i++) {
@@ -92,7 +92,7 @@ namespace GuiLib {
                 }
             }
 
-            base.update(menuLocation);
+            base.update(offset);
         }
 
         private void sizeStuff() {
@@ -126,8 +126,8 @@ namespace GuiLib {
             sizeStuff();
         }
 
-        public override void draw(Vector2 menuLocation) {
-            Vector2 drawloc = new Vector2(location.X + menuLocation.X, location.Y + menuLocation.Y);
+        public override void draw(Vector2 offset) {
+            Vector2 drawloc = new Vector2(location.X + offset.X, location.Y + offset.Y);
 
 
             buttonStates.draw(drawloc + new Vector2(itemBoxSize.Width, 0));

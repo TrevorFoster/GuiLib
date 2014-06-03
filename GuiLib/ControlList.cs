@@ -50,21 +50,20 @@ namespace GuiLib {
             controls.Add(newcontrol);
         }
 
-        public override void update(Vector2 menuLocation) {
+        public override void update(Vector2 offset) {
             for (int i = 0; i < controls.Count; i++) {
-                controls[i].update(menuLocation);
+                controls[i].update(offset);
                 if (controls[i].isSelected) {
                     selectedIndex = i;
                 }
             }
         
-            base.update(menuLocation);
+            base.update(offset);
         }
 
-        public override void draw(Vector2 menuLocation) {
+        public override void draw(Vector2 offset) {
             
-            int maxHeight = 0;
-            int maxWidth = 0;
+            int maxHeight = 0, maxWidth = 0;
 
             foreach (Control control in controls) {
                 switch (orientation) {
@@ -116,12 +115,12 @@ namespace GuiLib {
 
             for (int i = controls.Count - 1; i >= 0; i--) {
                 if (i != selectedIndex) {
-                    controls[i].draw(menuLocation);
+                    controls[i].draw(offset);
                 }
             }
 
             if (selectedIndex != -1) {
-                controls[selectedIndex].draw(menuLocation);
+                controls[selectedIndex].draw(offset);
             }
         }
 
