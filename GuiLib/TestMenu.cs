@@ -29,8 +29,8 @@ namespace GuiLib {
             table.setColumnData(3, 1, new CheckBox { text = "CheckBox4" });
             table.setColumnData(4, 0, new CheckBox { text = "CheckBox5" });
 
-
             this.addToBack(table);
+            this.addToFront(new Tab { text = "Test tab", location = new Vector2(100, 100) });
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GuiLib {
     class Tab : Control {
-        public event EventHandler onChange;
+        public event EventHandler onSelected;
 
         private Menu tabContents;
 
@@ -53,6 +53,7 @@ namespace GuiLib {
                 tabContents.intialize();
             }
             sizeStuff();
+            base.initialize();
         }
 
         protected override void setSize(int Width, int Height) {
@@ -96,10 +97,10 @@ namespace GuiLib {
                 if (tabContents != null) {
                     tabContents.show();
                 }
-
+                renderer.render(realSize);
                 select();
                 frameSet.setFrames(0);
-                eventTrigger(onChange);
+                eventTrigger(onSelected);
             } else if (!isSelected) {
                 frameSet.setFrames(1);
             }
@@ -127,6 +128,7 @@ namespace GuiLib {
             if (tabContents != null) {
                 tabContents.show();
             }
+            frameSet.setFrames(1);
             base.select();
         }
 
@@ -137,19 +139,19 @@ namespace GuiLib {
             if (tabContents != null) tabContents.hide();
 
             frameSet.setFrames(1);
-            eventTrigger(onChange);
+            renderer.render(realSize);
+            eventTrigger(onSelected);
+        }
+
+        public override void render() {
+            frameSet.draw();
+            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
+                new Vector2(realSize.Width / 2 - textSize.Width / 2, realSize.Height / 2 - textSize.Height / 2), Color.Black);
         }
 
         public override void draw(Vector2 offset) {
-            Vector2 drawLoc = location + offset;
-
-            frameSet.draw(drawLoc);
-
-            GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
-                new Vector2(realSize.Width / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).X / 2, realSize.Height / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).Y / 2) + drawLoc, Color.Black);
-
             if (isSelected && tabContents != null) {
-                Vector2 contentOffs = new Vector2(offset.X, offset.Y);
+                Vector2 contentOffs = offset;
 
                 switch (orientation) {
                     case Orientation.Horizontal:
