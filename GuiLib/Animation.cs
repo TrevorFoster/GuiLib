@@ -93,6 +93,10 @@ namespace GuiLib {
             GUIRoot.spriteBatch.Draw(GUIResources.sheets[sheet], origin + offset, currentFrame(), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
         }
 
+        public void draw() {
+            GUIRoot.spriteBatch.Draw(GUIResources.sheets[sheet], offset, currentFrame(), Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
+        }
+
         /// <summary>
         /// Loads in a sprite from a given source rectangle.
         /// </summary>

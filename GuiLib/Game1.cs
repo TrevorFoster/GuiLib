@@ -24,15 +24,15 @@ namespace GuiLib {
             Content.RootDirectory = "Content";
             menus = new List<Menu>();
             Random r = new Random();
-            for (int i = 0; i < 100; i++) {
-                menus.Add(new TestMenu("test", new Vector2(r.Next(0,800), r.Next(0,600)), 600, 500));
+            for (int i = 0; i < 1; i++) {
+                menus.Add(new TestMenu("test", new Vector2(0, 0), 600, 500));
             }
         }
 
         protected override void Initialize() {
             base.Initialize();
             GUIRoot.initialize(GraphicsDevice, Content);
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 1; i++) {
                 GUIRoot.menuHandler.addMenu(menus[i]);
             }
         }

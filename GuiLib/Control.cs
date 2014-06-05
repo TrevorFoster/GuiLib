@@ -47,7 +47,7 @@ namespace GuiLib {
         // For control groups
         public event EventHandler selectedChange;
 
-        private Renderer renderer;
+        protected Renderer renderer;
 
         // Field change events
         

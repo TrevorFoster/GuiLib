@@ -7,7 +7,6 @@ namespace GuiLib {
         public event EventHandler onChange;
         private Animation boxStates;
 
-
         public CheckBox() {
 
             controlSize = new Size(24, 24);
@@ -18,6 +17,8 @@ namespace GuiLib {
             boxStates.loadSheet(new Rectangle(2, 2, 98, 48));
             realSize = new Size(controlSize.Width + textSize.Width, controlSize.Height);
             boxStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
+
+            base.initialize();
         }
 
         public override void update(Vector2 offset) {
@@ -26,6 +27,7 @@ namespace GuiLib {
             if (InputHandler.leftClickRelease() && hovering) {
                 isSelected = !isSelected;
                 boxStates.frame = isSelected ? 1 : 0;
+                renderer.render(realSize);
                 eventTrigger(onChange);
             }
             base.update(offset);
@@ -47,17 +49,12 @@ namespace GuiLib {
             eventTrigger(onChange);
         }
 
-        public override void draw(Vector2 offset) {
-            // top left corner of check box
-            Vector2 drawLoc = location + offset;
-
+        public override void render() {
             // draw the check box
-            boxStates.draw(drawLoc);
+            boxStates.draw();
             // draw the text for the check box
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
-                new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc, Color.Black);
-
-            base.draw(offset);
+                new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2), Color.Black);
         }
     }
 }
