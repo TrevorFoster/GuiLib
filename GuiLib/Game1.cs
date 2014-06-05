@@ -25,7 +25,7 @@ namespace GuiLib {
             menus = new List<Menu>();
             Random r = new Random();
             for (int i = 0; i < 1; i++) {
-                menus.Add(new TestMenu("test", new Vector2(0, 0), 600, 500));
+                menus.Add(new TestMenu("test", new Vector2(0, 0), 800, 600));
             }
         }
 

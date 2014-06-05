@@ -17,20 +17,13 @@ namespace GuiLib {
             Table table = new Table();
             table.size = new Size(600, 400);
 
-            table.setColumnData(0, 0, new CheckBox { text = "CheckBox1" });
-            table.setColumnData(1, 1, new CheckBox { text = "CheckBox2" });
-            table.setColumnData(2, 2, new CheckBox { text = "CheckBox3" });
-            table.setColumnData(3, 3, new CheckBox { text = "CheckBox4" });
-            table.setColumnData(4, 4, new CheckBox { text = "CheckBox5" });
-
-            table.setColumnData(0, 4, new CheckBox { text = "CheckBox1" });
-            table.setColumnData(1, 3, new CheckBox { text = "CheckBox2" });
-            table.setColumnData(2, 2, new CheckBox { text = "CheckBox3" });
-            table.setColumnData(3, 1, new CheckBox { text = "CheckBox4" });
-            table.setColumnData(4, 0, new CheckBox { text = "CheckBox5" });
+            for (int i = 0; i < 800 / 10; i++) {
+                for (int j = 0; j < 600 / 10; j++) {
+                    table.setColumnData(j, i, new RadioButton());
+                }
+            }
 
             this.addToBack(table);
-            this.addToFront(new Tab { text = "Test tab", location = new Vector2(100, 100) });
         }
     }
 }

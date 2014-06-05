@@ -18,6 +18,8 @@ namespace GuiLib {
         public override void initialize() {
             buttonStates.loadSheet(new Rectangle(2, 52, 98, 48));
             buttonStates.updateScale(new Vector2(controlSize.Width, controlSize.Height));
+
+            base.initialize();
         }
 
         public override void update(Vector2 offset) {
@@ -25,6 +27,7 @@ namespace GuiLib {
                 isSelected = true;
                 buttonStates.frame = 1;
                 select();
+                renderer.render(realSize);
                 eventTrigger(onChange);
             }
             base.update(offset);
@@ -49,13 +52,10 @@ namespace GuiLib {
             eventTrigger(onChange);
         }
 
-        public override void draw(Vector2 offset) {
-            Vector2 drawLoc = location + offset;
-            buttonStates.draw(drawLoc);
+        public override void render() {
+            buttonStates.draw();
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
-                new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2) + drawLoc,
-                Color.Black);
-            base.draw(offset);
+                new Vector2(controlSize.Width + 2, controlSize.Height / 2 - textSize.Height / 2), Color.Black);
         }
     }
 }
