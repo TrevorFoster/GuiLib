@@ -148,7 +148,7 @@ namespace GuiLib {
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
                 new Vector2(realSize.Width / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).X / 2, realSize.Height / 2 - FontManager.fonts[Font.Verdana].MeasureString(text).Y / 2) + drawLoc, Color.Black);
 
-            if (tabContents != null) {
+            if (isSelected && tabContents != null) {
                 Vector2 contentOffs = new Vector2(offset.X, offset.Y);
 
                 switch (orientation) {

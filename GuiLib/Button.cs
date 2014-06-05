@@ -60,16 +60,13 @@ namespace GuiLib {
             base.initialize();
         }
 
-        protected override void sizeChanged(object sender, EventArgs e) {
-            sizeStuff();
-        }
-
         protected override void setSize(int Width, int Height) {
             realSize = new Size(Width, Height);
             controlSize = realSize;
-            
-            if(initialized)
+
+            if (initialized) {
                 sizeStuff();
+            }
         }
 
         private void sizeStuff() {
@@ -102,15 +99,11 @@ namespace GuiLib {
             base.update(offset);
         }
 
-        public override void draw(Vector2 offset) {
-            Vector2 drawLoc = location + offset;
-
-            frameSet.draw(drawLoc);
+        public override void render() {
+            frameSet.draw();
 
             GUIRoot.spriteBatch.DrawString(FontManager.fonts[Font.Verdana], text,
-                new Vector2(realSize.Width / 2 - textSize.Width / 2, realSize.Height / 2 - textSize.Height / 2) + drawLoc,
-                Color.Black);
-            base.draw(offset);
+                new Vector2(realSize.Width / 2 - textSize.Width / 2, realSize.Height / 2 - textSize.Height / 2), Color.Black);
         }
     }
 }

@@ -13,12 +13,13 @@ namespace GuiLib {
         public Table() {
             tableDimensions = new Size();
             table = new List<List<Control>>();
+            hoverable = false;
         }
 
         public override void initialize() {
             foreach (List<Control> row in table) {
                 foreach (Control element in row) {
-                    if (!element.initialized) {
+                    if (element != null && !element.initialized) {
                         element.initialize();
                     }
                 }
@@ -36,7 +37,7 @@ namespace GuiLib {
             if (row < 0 || row > table.Count - 1) {
                 return;
             }
-            table[row].Add(new Control());
+            table[row].Add(null);
             if (table[row].Count > tableDimensions.Width) {
                 tableDimensions.Width = table[row].Count;
             }
@@ -56,6 +57,7 @@ namespace GuiLib {
             if (this.initialized && !data.initialized) {
                 data.initialize();
             }
+
             table[row][column] = data;
         }
 
@@ -69,29 +71,35 @@ namespace GuiLib {
 
             for (int row = 0; row < tableDimensions.Height; row++) {
                 for (int column = 0; column < table[row].Count; column++) {
-                    if (table[row][column].size.Width > columnWidth)
-                        columnWidth = table[row][column].size.Width;
-                    if (table[row][column].size.Height > rowHeight)
-                        rowHeight = table[row][column].size.Height;
+                    if (table[row][column] != null) {
+                        if (table[row][column].size.Width > columnWidth)
+                            columnWidth = table[row][column].size.Width;
+                        if (table[row][column].size.Height > rowHeight)
+                            rowHeight = table[row][column].size.Height;
+                    }
                 }
             }
 
             for (int row = 0; row < tableDimensions.Height; row++) {
                 for (int column = 0; column < table[row].Count; column++) {
-                    table[row][column].update(offset + new Vector2(column * columnWidth, row * rowHeight));
+                    if (table[row][column] != null) {
+                        table[row][column].update(offset + new Vector2(column * columnWidth, row * rowHeight));
+                    }
                 }
             }
             base.update(offset);
         }
 
         public override void draw(Vector2 offset) {
-            for (int row = 0; row < tableDimensions.Height; row++) {
-                for (int column = 0; column < table[row].Count; column++) {
-                    table[row][column].draw(offset + new Vector2(column * columnWidth, row * rowHeight));
+            int rowBound = tableDimensions.Height;
+            for (int row = 0; row < rowBound; row++) {
+                int colBound = table[row].Count;
+                for (int column = 0; column < colBound; column++) {
+                    if (table[row][column] != null) {
+                        table[row][column].draw(offset + new Vector2(column * columnWidth, row * rowHeight));
+                    }
                 }
             }
         }
-
-        
     }
 }

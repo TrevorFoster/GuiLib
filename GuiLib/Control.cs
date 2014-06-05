@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using System.ComponentModel;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GuiLib {
     class Control {
@@ -46,17 +47,19 @@ namespace GuiLib {
         // For control groups
         public event EventHandler selectedChange;
 
-        // Field change events
-        protected virtual void sizeChanged(object sender, EventArgs e) { }
-        protected virtual void locationChanged(object sender, EventArgs e) { }
+        private Renderer renderer;
 
-        public virtual void initialize() { initialized = true; }
+        // Field change events
+        
+
+       
         protected virtual void setSize(int Width, int Height) { }
         public virtual void deselect() { }
 
         // Base constructor
         public Control()
             : base() {
+            renderer = new Renderer();
             text = "";
             location = new Vector2();
             realSize = new Size();
@@ -65,9 +68,11 @@ namespace GuiLib {
 
             onSizeChanged += sizeChanged;
             onLocationChanged += locationChanged;
+            renderer.setStrategy((Renderer.RenderStrategy)render);
         }
 
         public Control(string text, Vector2 location, Size size) {
+            renderer = new Renderer();
             this.text = text;
             this.location = new Vector2(location.X, location.Y);
             realSize = size;
@@ -78,6 +83,13 @@ namespace GuiLib {
 
             onSizeChanged += sizeChanged;
             onLocationChanged += locationChanged;
+            renderer.setStrategy((Renderer.RenderStrategy)render);
+        } 
+        
+        public virtual void initialize() {
+            initialized = true;
+            renderer.initialize();
+            renderer.render(realSize);
         }
 
         private void measureText() {
@@ -86,6 +98,13 @@ namespace GuiLib {
                 textSize = new Size((int)measure.X, (int)measure.Y);
                 eventTrigger(onSizeChanged);
             }
+        }
+        protected virtual void locationChanged(object sender, EventArgs e) {
+        }
+
+        protected virtual void sizeChanged(object sender, EventArgs e) {
+            renderer.render(realSize);
+            
         }
 
         public virtual void update(Vector2 offset) {
@@ -98,12 +117,16 @@ namespace GuiLib {
             }
         }
 
+        public virtual void render() {
+
+        }
+
         public virtual void draw(Vector2 menuLocation) {
+            GUIRoot.spriteBatch.Draw(renderer.image, location + menuLocation, Color.White);
             if (hovering) {
                 Shapes.DrawRectangle(controlSize.Width, controlSize.Height, location + menuLocation, overlayColour, 0);
             }
         }
-
 
         public virtual void select() {
             isSelected = true;

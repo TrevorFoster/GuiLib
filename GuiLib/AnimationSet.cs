@@ -70,6 +70,12 @@ namespace GuiLib {
             }
         }
 
+        public void draw() {
+            foreach (Animation animation in animations) {
+                animation.draw(origin);
+            }
+        }
+
         public void setFrames(int frame) {
             foreach (Animation animation in animations) {
                 if (frame <= animation.frames.Count - 1 && frame >= 0) {

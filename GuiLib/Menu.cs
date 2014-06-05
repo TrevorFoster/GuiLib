@@ -71,7 +71,9 @@ namespace GuiLib {
             layers = controls.Count;
             setLayout();
             foreach (Control item in controls) {
-                item.initialize();
+                if (!item.initialized) {
+                    item.initialize();
+                }
             }
             initialized = true;
         }

@@ -12,8 +12,7 @@ using Microsoft.Xna.Framework.GamerServices;
 namespace GuiLib {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
-        TestMenu main;
-        TestMenu main2;
+        List<Menu> menus;
         public static GameTime time;
 
         public Game1() {
@@ -23,13 +22,19 @@ namespace GuiLib {
             this.IsMouseVisible = true;
 
             Content.RootDirectory = "Content";
-            main = new TestMenu("test", new Vector2(20, 20), 600, 500);
+            menus = new List<Menu>();
+            Random r = new Random();
+            for (int i = 0; i < 100; i++) {
+                menus.Add(new TestMenu("test", new Vector2(r.Next(0,800), r.Next(0,600)), 600, 500));
+            }
         }
 
         protected override void Initialize() {
             base.Initialize();
             GUIRoot.initialize(GraphicsDevice, Content);
-            GUIRoot.menuHandler.addMenu(main);
+            for (int i = 0; i < 10; i++) {
+                GUIRoot.menuHandler.addMenu(menus[i]);
+            }
         }
 
         protected override void LoadContent() {
