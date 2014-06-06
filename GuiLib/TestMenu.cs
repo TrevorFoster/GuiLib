@@ -17,9 +17,9 @@ namespace GuiLib {
             Table table = new Table();
             table.size = new Size(600, 400);
 
-            for (int i = 0; i < 800 / 10; i++) {
-                for (int j = 0; j < 600 / 10; j++) {
-                    table.setColumnData(j, i, new RadioButton());
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
+                    table.setColumnData(j, i, new CheckBox { size = new Size(20,20) });
                 }
             }
 
